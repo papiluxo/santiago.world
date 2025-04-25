@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
+    <title>toolbox - santiago martínez-oropeza</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        :root {
+            /* Light theme (default) */
+            --background: #ffffff;
+            --text: #000000;
+            --accent: #ff0000;
+            --border: #000000;
+            --hover: #f5f5f5;
+            --card: #ffffff;
+        }
+        
+        /* Dark theme */
+        [data-theme="dark"] {
+            --background: #000000;
+            --text: #ffffff;
+            --accent: #ff0000;
+            --border: #ffffff;
+            --hover: #1a1a1a;
+            --card: #000000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            height: 100%;
+            min-height: 3rem;
+            position: relative;
+        }
+        
+        .search-input {
+            border: none;
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 0;
+            outline: none;
+            width: 200px;
+            height: 100%;
+        }
+        
+        .search-button {
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-button:hover {
+            color: var(--accent);
+        }
+        
+        .nav-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: var(--text);
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-button:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .nav-button.active {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .clock {
+            font-size: 1rem;
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+        
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .active-filter {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            color: var(--background);
+            background-color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+        }
+        
+        .active-filter button {
+            background: none;
+            border: none;
+            color: var(--background);
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1;
+        }
+        
+        .tool-item {
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            transition: all 0.2s ease;
+            margin: 0 -1rem;
+            position: relative;
+        }
+        
+        .tool-item:hover {
+            box-shadow: none;
+            background: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tool-item:hover .tool-name::after {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+        
+        .tool-title-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .tool-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag:hover, .tag.active {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+        
+        .toggle-button {
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .toggle-button:hover {
+            color: var(--accent);
+        }
+        
+        .tool-content {
+            display: none;
+            padding: 1rem 0;
+        }
+        
+        .tool-content.active {
+            display: block;
+        }
+        
+        .tool-description {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .tool-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .tool-button:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .code-preview {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            white-space: pre;
+            overflow-x: auto;
+            max-height: 400px;
+        }
+        
+        .loading {
+            margin-top: 1rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-actions {
+                flex-direction: column;
+            }
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: none;
+            z-index: 1000;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: var(--hover);
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-tags {
+            font-size: 0.8rem;
+            color: var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        
+        .highlight {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 0.2em 0.4em;
+            border-radius: 2px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+    <style>
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            height: 3rem;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            min-width: 110px;
+        }
+        
+        .theme-option {
+            padding: 0.5rem 0;
+            font-size: 1.25rem;
+            cursor: pointer;
+            z-index: 1;
+            position: relative;
+            flex: 1;
+            text-align: center;
+            transition: color 0.3s ease;
+            width: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-option.active {
+            color: var(--background);
+        }
+        
+        .theme-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            width: 50px;
+            background-color: var(--accent);
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-slider.dark {
+            transform: translateX(52px);
+        }
+    </style>
+    <div class="nav-container">
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-button">home</a><a href="archive.html" class="nav-button">archive</a><a href="toolbox.html" class="nav-button active">toolbox</a>
+        </div>
+        <div class="nav-right">
+            <div class="theme-toggle">
+                <div class="theme-option light active" onclick="toggleTheme('light')">☀</div>
+                <div class="theme-option dark" onclick="toggleTheme('dark')">☾</div>
+                <div class="theme-slider"></div>
+            </div>
+            <div id="clock" class="clock"></div>
+        </div>
+    </div>
+        <h1>toolbox</h1>
+        <div class="active-filters" id="activeFilters"></div>
+        <div class="tool-list">
+            
+            <div class="tool-item" data-tool="illinois_institute_of_technology_truss_system">
+                <div class="tool-header" onclick="toggleTool('illinois_institute_of_technology_truss_system')">
+                    <div class="tool-title-container">
+                    <h2 class="tool-name">illinois_institute_of_technology_truss_system</h2>
+                        <div class="tool-tags">
+                            <span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="kangaroo">kangaroo</span>
+                </div>
+                </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="tool-content" id="content-illinois_institute_of_technology_truss_system">
+                    <div class="tool-description">parametric structural truss system for a proposed student housing project in iit.</div>
+                <div class="tool-actions">
+                        <button class="tool-button" onclick="toggleCode('illinois_institute_of_technology_truss_system')">
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                        </svg>
+                            view code
+                    </button>
+                    
+                    <a href="toolbox/illinois_institute_of_technology_truss_system.ghx" class="tool-button" download>
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M7.47 10.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L8.75 8.44V1.75a.75.75 0 00-1.5 0v6.69L4.78 5.97a.75.75 0 00-1.06 1.06l3.75 3.75zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"/>
+                        </svg>
+                            download .ghx
+                    </a>
+                </div>
+                    <pre id="code-illinois_institute_of_technology_truss_system" class="code-preview"></pre>
+                    <div id="loading-illinois_institute_of_technology_truss_system" class="loading" style="display: none;">Loading...</div>
+                </div>
+            </div>
+            <div class="tool-item" data-tool="lego_bridge_aggregation">
+                <div class="tool-header" onclick="toggleTool('lego_bridge_aggregation')">
+                    <div class="tool-title-container">
+                    <h2 class="tool-name">lego_bridge_aggregation</h2>
+                        <div class="tool-tags">
+                            <span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="wasp">wasp</span>
+                </div>
+                </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="tool-content" id="content-lego_bridge_aggregation">
+                    <div class="tool-description">lego block aggregation using wasp plugin to form bridge across lake osceola in university of miami campus.</div>
+                <div class="tool-actions">
+                        <button class="tool-button" onclick="toggleCode('lego_bridge_aggregation')">
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                        </svg>
+                            view code
+                    </button>
+                    
+                    <a href="toolbox/lego_bridge_aggregation.ghx" class="tool-button" download>
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M7.47 10.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L8.75 8.44V1.75a.75.75 0 00-1.5 0v6.69L4.78 5.97a.75.75 0 00-1.06 1.06l3.75 3.75zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"/>
+                        </svg>
+                            download .ghx
+                    </a>
+                </div>
+                    <pre id="code-lego_bridge_aggregation" class="code-preview"></pre>
+                    <div id="loading-lego_bridge_aggregation" class="loading" style="display: none;">Loading...</div>
+                </div>
+            </div>
+            <div class="tool-item" data-tool="nervi_dome">
+                <div class="tool-header" onclick="toggleTool('nervi_dome')">
+                    <div class="tool-title-container">
+                    <h2 class="tool-name">nervi_dome</h2>
+                        <div class="tool-tags">
+                            <span class="tag" data-tag="grasshopper">grasshopper</span>
+                </div>
+                </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="tool-content" id="content-nervi_dome">
+                    <div class="tool-description">form definition of pier luigi nervi's palazzetto dello sport.</div>
+                <div class="tool-actions">
+                        <button class="tool-button" onclick="toggleCode('nervi_dome')">
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                        </svg>
+                            view code
+                    </button>
+                    
+                    <a href="toolbox/nervi_dome.ghx" class="tool-button" download>
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M7.47 10.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L8.75 8.44V1.75a.75.75 0 00-1.5 0v6.69L4.78 5.97a.75.75 0 00-1.06 1.06l3.75 3.75zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"/>
+                        </svg>
+                            download .ghx
+                    </a>
+                </div>
+                    <pre id="code-nervi_dome" class="code-preview"></pre>
+                    <div id="loading-nervi_dome" class="loading" style="display: none;">Loading...</div>
+                </div>
+            </div>
+            <div class="tool-item" data-tool="parametric_cup">
+                <div class="tool-header" onclick="toggleTool('parametric_cup')">
+                    <div class="tool-title-container">
+                    <h2 class="tool-name">parametric_cup</h2>
+                        <div class="tool-tags">
+                            <span class="tag" data-tag="grasshopper">grasshopper</span>
+                </div>
+                </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="tool-content" id="content-parametric_cup">
+                    <div class="tool-description">cup formed along set of lines defined by points.</div>
+                <div class="tool-actions">
+                        <button class="tool-button" onclick="toggleCode('parametric_cup')">
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                        </svg>
+                            view code
+                    </button>
+                    
+                    <a href="toolbox/parametric_cup.ghx" class="tool-button" download>
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M7.47 10.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L8.75 8.44V1.75a.75.75 0 00-1.5 0v6.69L4.78 5.97a.75.75 0 00-1.06 1.06l3.75 3.75zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"/>
+                        </svg>
+                            download .ghx
+                    </a>
+                </div>
+                    <pre id="code-parametric_cup" class="code-preview"></pre>
+                    <div id="loading-parametric_cup" class="loading" style="display: none;">Loading...</div>
+                </div>
+            </div>
+            <div class="tool-item" data-tool="parametric_remapping">
+                <div class="tool-header" onclick="toggleTool('parametric_remapping')">
+                    <div class="tool-title-container">
+                    <h2 class="tool-name">parametric_remapping</h2>
+                        <div class="tool-tags">
+                            <span class="tag" data-tag="grasshopper">grasshopper</span>
+                </div>
+                </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="tool-content" id="content-parametric_remapping">
+                    <div class="tool-description">numeric range (circle radius) resized proportional to the circle's distance to a moving point.</div>
+                <div class="tool-actions">
+                        <button class="tool-button" onclick="toggleCode('parametric_remapping')">
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                        </svg>
+                            view code
+                    </button>
+                    
+                    <a href="toolbox/parametric_remapping.ghx" class="tool-button" download>
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M7.47 10.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L8.75 8.44V1.75a.75.75 0 00-1.5 0v6.69L4.78 5.97a.75.75 0 00-1.06 1.06l3.75 3.75zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"/>
+                        </svg>
+                            download .ghx
+                    </a>
+                </div>
+                    <pre id="code-parametric_remapping" class="code-preview"></pre>
+                    <div id="loading-parametric_remapping" class="loading" style="display: none;">Loading...</div>
+                </div>
+            </div>
+            <div class="tool-item" data-tool="parametric_stop">
+                <div class="tool-header" onclick="toggleTool('parametric_stop')">
+                    <div class="tool-title-container">
+                    <h2 class="tool-name">parametric_stop</h2>
+                        <div class="tool-tags">
+                            <span class="tag" data-tag="grasshopper">grasshopper</span>
+                </div>
+                </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="tool-content" id="content-parametric_stop">
+                    <div class="tool-description">bus stop proposal for the university of miami wth parametric form.</div>
+                <div class="tool-actions">
+                        <button class="tool-button" onclick="toggleCode('parametric_stop')">
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                        </svg>
+                            view code
+                    </button>
+                    
+                    <a href="toolbox/parametric_stop.ghx" class="tool-button" download>
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M7.47 10.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L8.75 8.44V1.75a.75.75 0 00-1.5 0v6.69L4.78 5.97a.75.75 0 00-1.06 1.06l3.75 3.75zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"/>
+                        </svg>
+                            download .ghx
+                    </a>
+                </div>
+                    <pre id="code-parametric_stop" class="code-preview"></pre>
+                    <div id="loading-parametric_stop" class="loading" style="display: none;">Loading...</div>
+                </div>
+            </div>
+            <div class="tool-item" data-tool="thermal_study">
+                <div class="tool-header" onclick="toggleTool('thermal_study')">
+                    <div class="tool-title-container">
+                    <h2 class="tool-name">thermal_study</h2>
+                        <div class="tool-tags">
+                            <span class="tag" data-tag="grasshopper">grasshopper</span>
+                </div>
+                </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="tool-content" id="content-thermal_study">
+                    <div class="tool-description">wind and temperature analysis on façade of building based on coordinate location.</div>
+                <div class="tool-actions">
+                        <button class="tool-button" onclick="toggleCode('thermal_study')">
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                        </svg>
+                            view code
+                    </button>
+                    
+                    <a href="toolbox/thermal_study.ghx" class="tool-button" download>
+                        <svg width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M7.47 10.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L8.75 8.44V1.75a.75.75 0 00-1.5 0v6.69L4.78 5.97a.75.75 0 00-1.06 1.06l3.75 3.75zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"/>
+                        </svg>
+                            download .ghx
+                    </a>
+                </div>
+                    <pre id="code-thermal_study" class="code-preview"></pre>
+                    <div id="loading-thermal_study" class="loading" style="display: none;">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const projects = {'ad_barnes_nature_reserve': {'tags': ['team', 'rhino', "fall '23", 'miami, fl', 'arc604'], 'description': 'nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).'}, 'cannabis_farm': {'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'arc605'], 'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.'}, 'chil_bookshelf': {'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'chil'], 'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. comprised of 13 aluminum pieces.'}, 'icosahedron_explosion': {'tags': ['individual', 'rhino', "fall '23", 'arc611'], 'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.'}, 'illinois_institute_of_technology_dorms': {'tags': ['individual', 'rhino', 'grasshopper', 'kangaroo', "fall '24", 'chicago, il'], 'link': 'grasshopper', 'description': 'residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.'}, 'janus_house': {'tags': ['individual', 'rhino', "spring '24", 'precedent', 'arc605'], 'description': "precedent study of studio sean canty's conceptual janus house."}, 'lego_bridge': {'tags': ['individual', 'rhino', 'grasshopper', 'wasp', "fall '24", 'miami, fl', 'arc656'], 'link': 'grasshopper', 'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.'}, 'moca_playhouse': {'tags': ['team', 'rhino', "summer '24", 'miami, fl', 'chil'], 'description': "community activation with temporary install of a lumber house, in moca (museum of contemporary art, miami), inspired by miami's shotgun house vernacular."}, 'nervi_dome': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'turin, it', 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.'}, 'parametric_cup': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.'}, 'parametric_remapping': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.'}, 'parametric_stop': {'tags': ['individual', 'rhino', 'grasshopper', "spring '24", 'arc613'], 'link': 'grasshopper', 'description': 'bus stop proposal for university of miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.'}, 'remote_research_center': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'la tortuga, venezuela', 'arc662'], 'link': 'thermal_study', 'description': 'off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.'}, 'renault_center': {'tags': ['individual', 'rhino', "fall '24", 'swindon, uk', 'precedent', 'arc607'], 'description': "precedent study of foster + partners' renault center, in swindon, uk."}, 'rome_artist_residence': {'tags': ['team', 'rhino', "summer '24", 'rome, it', 'arc606'], 'description': 'adaptive reuse proposal for post-office in rome, italy to be adapted to a residential building for artists.'}};  // Make projects data available
+        const tools = {'lego_bridge_aggregation': {'description': 'lego block aggregation using wasp plugin to form bridge across lake osceola in university of miami campus', 'tags': ['grasshopper', 'wasp']}, 'parametric_remapping': {'description': "numeric range (circle radius) resized proportional to the circle's distance to a moving point", 'tags': ['grasshopper']}, 'parametric_cup': {'description': 'cup formed along set of lines defined by points', 'tags': ['grasshopper']}, 'thermal_study': {'description': 'wind and temperature analysis on façade of building based on coordinate location', 'tags': ['grasshopper']}, 'nervi_dome': {'description': "form definition of pier luigi nervi's palazzetto dello sport", 'tags': ['grasshopper']}, 'illinois_institute_of_technology_truss_system': {'description': 'parametric structural truss system for a proposed student housing project in iit', 'tags': ['grasshopper', 'kangaroo']}, 'parametric_stop': {'description': 'bus stop proposal for the university of miami wth parametric form', 'tags': ['grasshopper']}};  // Make tools data available
+        
+        // Initialize the set for active tags
+        const activeTags = new Set();
+        
+        
+    // Check if user has a preferred theme stored
+    let currentTheme = localStorage.getItem('theme') || 'light';
+    
+    // Apply the theme on page load
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    // Update the toggle to match the current theme
+    updateThemeToggle(currentTheme);
+    
+    function toggleTheme(theme) {
+        // Update theme
+        currentTheme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        // Update the toggle UI
+        updateThemeToggle(theme);
+    }
+    
+    function updateThemeToggle(theme) {
+        // Update toggle buttons
+        document.querySelector('.theme-option.light').classList.toggle('active', theme === 'light');
+        document.querySelector('.theme-option.dark').classList.toggle('active', theme === 'dark');
+        
+        // Update slider position
+        document.querySelector('.theme-slider').classList.toggle('dark', theme === 'dark');
+    }
+    
+        
+        function toggleTag(tag) {
+            if (activeTags.has(tag)) {
+                activeTags.delete(tag);
+            } else {
+                activeTags.add(tag);
+            }
+            updateActiveFilters();
+            filterTools();
+        }
+        
+        function updateActiveFilters() {
+            const activeFiltersContainer = document.getElementById('activeFilters');
+            if (activeFiltersContainer) {
+                activeFiltersContainer.innerHTML = '';
+                
+                if (activeTags.size > 0) {
+                    activeTags.forEach(tag => {
+                        const filterElement = document.createElement('div');
+                        filterElement.className = 'active-filter';
+                        const removeButton = document.createElement('button');
+                        removeButton.textContent = '×';
+                        removeButton.onclick = (e) => {
+                            e.stopPropagation();
+                            removeFilter(tag);
+                        };
+                        filterElement.appendChild(document.createTextNode(tag));
+                        filterElement.appendChild(removeButton);
+                        activeFiltersContainer.appendChild(filterElement);
+                    });
+                }
+            }
+        }
+        
+        function removeFilter(tag) {
+            activeTags.delete(tag);
+            updateActiveFilters();
+            filterTools();
+        }
+        
+        function filterTools() {
+            const toolItems = document.querySelectorAll('.tool-item');
+            toolItems.forEach(item => {
+                const toolName = item.dataset.tool;
+                const toolData = tools[toolName];
+                if (toolData) {
+                    const toolTags = new Set(toolData.tags);
+                    const hasActiveTags = activeTags.size === 0 || 
+                        Array.from(activeTags).every(tag => toolTags.has(tag));
+                    item.style.display = hasActiveTags ? 'block' : 'none';
+                }
+            });
+        }
+        
+        async function toggleTool(toolName) {
+            const content = document.getElementById(`content-${toolName}`);
+            const button = content.previousElementSibling.querySelector('.toggle-button');
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                button.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.display = 'block';
+                button.style.transform = 'rotate(45deg)';
+            }
+        }
+        
+        async function toggleCode(toolName) {
+            const codePreview = document.getElementById(`code-${toolName}`);
+            const loadingElement = document.getElementById(`loading-${toolName}`);
+            const viewCodeButton = document.querySelector(`#content-${toolName} .tool-button[onclick="toggleCode('${toolName}')"]`);
+            const isVisible = codePreview.style.display === 'block';
+            
+            if (isVisible) {
+                codePreview.style.display = 'none';
+                viewCodeButton.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                    </svg>
+                    view code
+                `;
+                return;
+            }
+            
+            viewCodeButton.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                    <path fill="currentColor" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                </svg>
+                close
+            `;
+            
+            try {
+                loadingElement.style.display = 'block';
+                const response = await fetch(`ghx_content/${toolName}.ghx`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const content = await response.text();
+                codePreview.textContent = content;
+                codePreview.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading code:', error);
+                codePreview.textContent = 'Error loading code content.';
+                codePreview.style.display = 'block';
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
+        
+        function updateClock() {
+            const now = new Date();
+            const options = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                timeZoneName: 'short',
+                hour12: false
+            };
+            const timeString = new Intl.DateTimeFormat(undefined, options).format(now);
+            document.getElementById('clock').textContent = timeString.toLowerCase();
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+        
+        
+        // Safely escape special regex characters in a string
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\\/]/g, '\\$&');
+        }
+        
+        function highlightSearchResults() {
+            // Get search query from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+            
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                const hash = window.location.hash.substring(1); // Remove the # from the hash
+                
+                console.log('Search query:', searchQuery);
+                console.log('Hash:', hash);
+                
+                // Find the project or tool content
+                const projectContent = document.querySelector(`#content-${hash}`);
+                console.log('Found content:', projectContent);
+                
+                if (projectContent) {
+                    // Expand the content
+                    projectContent.style.display = 'block';
+                    const button = projectContent.previousElementSibling.querySelector('.toggle-button');
+                    if (button) {
+                        button.style.transform = 'rotate(45deg)';
+                    }
+                    
+                    // Get the description element
+                    const description = projectContent.querySelector('.project-description, .tool-description');
+                    if (description) {
+                        // Create a temporary container to highlight text while preserving HTML
+                        const container = document.createElement('div');
+                        container.innerHTML = description.innerHTML;
+                        
+                        // Find and highlight text nodes only (preserve HTML)
+                        const safeQuery = escapeRegExp(query);
+                        const regex = new RegExp(safeQuery, 'gi');
+                        
+                        function highlightTextNodes(node) {
+                            if (node.nodeType === Node.TEXT_NODE) {
+                                // Only process text nodes
+                                if (node.textContent.toLowerCase().includes(query)) {
+                                    const span = document.createElement('span');
+                                    span.innerHTML = node.textContent.replace(
+                                        regex, 
+                                        match => `<span class="highlight">${match}</span>`
+                                    );
+                                    node.parentNode.replaceChild(span, node);
+                                }
+                            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                                // Recursively process child nodes
+                                Array.from(node.childNodes).forEach(highlightTextNodes);
+                            }
+                        }
+                        
+                        // Highlight inside the temporary container
+                        Array.from(container.childNodes).forEach(highlightTextNodes);
+                        
+                        // Only update if we found matches
+                        if (container.innerHTML.includes('highlight')) {
+                            description.innerHTML = container.innerHTML;
+                        }
+                    }
+                    
+                    // Scroll to the content
+                    projectContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    console.log('No content found for hash:', hash);
+                }
+            }
+        }
+        
+        // Call this function when the page loads and when the hash changes
+        document.addEventListener('DOMContentLoaded', highlightSearchResults);
+        window.addEventListener('hashchange', highlightSearchResults);
+    
+        
+        // Function to expand a tool when the page loads with a hash or expand parameter
+        function expandToolOnLoad() {
+            // Get hash from URL (without the #)
+            const hash = window.location.hash.substring(1);
+            // Check if we have a tool to expand
+            if (hash) {
+                const toolContent = document.getElementById(`content-${hash}`);
+                if (toolContent) {
+                    // Expand the content
+                    toolContent.style.display = 'block';
+                    const button = toolContent.previousElementSibling.querySelector('.toggle-button');
+                    if (button) {
+                        button.style.transform = 'rotate(45deg)';
+                    }
+                    // Scroll to the tool
+                    toolContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+        
+        // Call this function when the page loads
+        document.addEventListener('DOMContentLoaded', expandToolOnLoad);
+        
+        // Add event delegation for tag clicks
+        document.querySelector('.tool-list').addEventListener('click', function(event) {
+            if (event.target.classList.contains('tag')) {
+                event.stopPropagation(); // Prevent toggling the project when clicking tags
+                const tag = event.target.getAttribute('data-tag');
+                if (tag) {
+                    toggleTag(tag);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+This GH definition bends geometry to your will — elegantly and efficiently.

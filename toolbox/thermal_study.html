@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thermal_study - Santiago Martínez-Oropeza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        :root {
+            --background: #1a1a1a;
+            --text: #ffffff;
+            --accent: #ff3333;
+            --border: #333333;
+            --hover: #222222;
+            --card: #222222;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .view-code-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .view-code-button:hover {
+            background: var(--hover);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .code-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .code-modal-content {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .code-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .code-modal-close:hover {
+            color: var(--accent);
+        }
+
+        .code-content {
+            background: #0d1117;
+            border-radius: 6px;
+            padding: 1.5rem;
+            font-family: "SF Mono", "Menlo", monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-top: 1rem;
+            color: #c9d1d9;
+        }
+
+        .download-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: var(--card);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .download-link:hover {
+            background: var(--hover);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .code-modal-content {
+                padding: 1rem;
+                margin: 1rem;
+            }
+            
+            .download-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="toolbox.html" class="back-link">← Back to Toolbox</a>
+        <h1>Thermal Study</h1>
+        <button class="view-code-button" onclick="showCode('thermal_study')">View Code</button>
+        <div id="codeModal" class="code-modal">
+            <div class="code-modal-content">
+                <button class="code-modal-close" onclick="closeCodeModal()">×</button>
+                <h2>Thermal Study</h2>
+                <div class="download-links">
+                    <a href="thermal_study.gh" class="download-link" download>Download .gh file</a>
+                    <a href="thermal_study.ghx" class="download-link" download>Download .ghx file</a>
+                </div>
+                <pre class="code-content"><code id="modalCode"></code></pre>
+            </div>
+        </div>
+        <div class="download-links">
+            <a href="thermal_study.gh" class="download-link" download>Download .gh file</a>
+            <a href="thermal_study.ghx" class="download-link" download>Download .ghx file</a>
+        </div>
+    </div>
+    <script>
+        function showCode(projectName) {
+            console.log('Showing code for:', projectName);
+            const modal = document.getElementById('codeModal');
+            const modalCode = document.getElementById('modalCode');
+            const url = `toolbox/${projectName}.ghx`;
+            console.log('Fetching from URL:', url);
+
+            // Fetch and display the code
+            fetch(url)
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(code => {
+                    console.log('Code received, length:', code.length);
+                    modalCode.textContent = code;
+                    hljs.highlightElement(modalCode);
+                    modal.style.display = 'block';
+                    console.log('Modal displayed');
+                })
+                .catch(error => {
+                    console.error('Error loading code:', error);
+                    modalCode.textContent = 'Error loading code. Please try again.';
+                    modal.style.display = 'block';
+                });
+        }
+
+        function closeCodeModal() {
+            document.getElementById('codeModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('codeModal');
+            if (event.target === modal) {
+                closeCodeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeCodeModal();
+            }
+        });
+    </script>
+</body>
+</html>

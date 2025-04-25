@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>icosahedron_explosion - Santiago Martínez-Oropeza</title>
+    <style>
+        :root {
+            --apple-gray: #f5f5f7;
+            --apple-dark: #1d1d1f;
+            --apple-blue: #0066cc;
+            --apple-hover: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: var(--apple-gray);
+            margin: 0;
+            padding: 0;
+            color: var(--apple-dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--apple-blue);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .gallery-item a {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--apple-blue);
+            font-size: 0.9rem;
+        }
+        
+        .gallery-item a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../archive.html" class="back-link">← Back to Archive</a>
+        <h1>icosahedron_explosion</h1>
+        <div class="gallery">
+            
+            
+            <div class="gallery-item">
+                <img src="archive/icosahedron_explosion/icosahedron_explosion.png" alt="icosahedron_explosion">
+                <a href="archive/icosahedron_explosion/icosahedron_explosion.pdf">Download PDF</a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

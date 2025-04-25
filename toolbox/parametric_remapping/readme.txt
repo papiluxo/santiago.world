@@ -1,0 +1,1 @@
+numeric range (circle radius) resized proportional to the circle's distance to a moving point 

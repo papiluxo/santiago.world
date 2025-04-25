@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
+    <title>archive - santiago martínez-oropeza</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        :root {
+            --background: #ffffff;
+            --text: #000000;
+            --accent: #ff0000;
+            --border: #000000;
+            --hover: #f5f5f5;
+            --card: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            height: 100%;
+            min-height: 3rem;
+            position: relative;
+        }
+        
+        .search-input {
+            border: none;
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 0;
+            outline: none;
+            width: 200px;
+            height: 100%;
+        }
+        
+        .search-button {
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-button:hover {
+            color: var(--accent);
+        }
+        
+        .nav-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: var(--text);
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-button:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .nav-button.active {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .clock {
+            font-size: 1rem;
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+        
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .active-filter {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            color: var(--background);
+            background-color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+        }
+        
+        .active-filter button {
+            background: none;
+            border: none;
+            color: var(--background);
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1;
+        }
+        
+        .project-item {
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            transition: all 0.2s ease;
+            margin: 0 -1rem;
+            position: relative;
+        }
+        
+        .project-item:hover {
+            box-shadow: none;
+            background: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-item:hover .project-title::after {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            gap: 1rem;
+        }
+        
+        .project-title-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 1;
+        }
+        
+        .project-thumbnail {
+            width: 120px;
+            height: 80px;
+            flex-shrink: 0;
+            border: 1px solid var(--text);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        
+        .project-thumbnail:hover {
+            border-color: var(--accent);
+        }
+        
+        .project-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag:hover {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+        
+        .toggle-button {
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .toggle-button:hover {
+            color: var(--accent);
+        }
+        
+        .project-content {
+            display: none;
+            padding: 1rem 0;
+        }
+        
+        .project-content.active {
+            display: block;
+        }
+        
+        .project-description {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .project-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease;
+        }
+        
+        .project-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-link {
+            color: var(--accent);
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        
+        .project-link:hover {
+            color: var(--text);
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 1rem;
+            transition: color 0.2s;
+            font-family: inherit;
+        }
+        
+        .modal-nav:hover {
+            color: var(--accent);
+        }
+        
+        .modal-prev {
+            left: 2rem;
+        }
+        
+        .modal-next {
+            right: 2rem;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 1rem;
+            transition: color 0.2s;
+            font-family: inherit;
+        }
+        
+        .modal-close:hover {
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .project-images {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: none;
+            z-index: 1000;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: var(--hover);
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-tags {
+            font-size: 0.8rem;
+            color: var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        
+        .highlight {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 0.2em 0.4em;
+            border-radius: 2px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+    <style>
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: none;
+            z-index: 1000;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: var(--hover);
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-tags {
+            font-size: 0.8rem;
+            color: var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <div class="nav-container">
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-button">home</a><a href="archive.html" class="nav-button active">archive</a><a href="toolbox.html" class="nav-button">toolbox</a>
+        </div>
+        <div class="nav-right">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="search..." class="search-input">
+                <button class="search-button" onclick="performSearch()">
+                    <svg width="16" height="16" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M10.68 11.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04zM11.5 7a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"/>
+                    </svg>
+                </button>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+            <div id="clock" class="clock"></div>
+        </div>
+    </div>
+        <h1>archive</h1>
+        <div class="active-filters" id="activeFilters"></div>
+        <div class="project-list">
+            
+                <div class="project-item" data-project="ad_barnes_nature_reserve">
+                    <div class="project-header" onclick="toggleProject('ad_barnes_nature_reserve')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">ad_barnes_nature_reserve</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="team">team</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="fall '23">fall '23</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="arc604">arc604</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/ad_barnes_nature_reserve/render.jpg" alt="ad_barnes_nature_reserve thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-ad_barnes_nature_reserve">
+                        <div class="project-description">
+                            nature reserve proposal for public park, A.D. (Doug) Barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/ad_barnes_nature_reserve/site_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/floor_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/structural_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/exploded_iso_diagram.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/render.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="cannabis_farm">
+                    <div class="project-header" onclick="toggleProject('cannabis_farm')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">cannabis_farm</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="arc605">arc605</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/cannabis_farm/cover.jpg" alt="cannabis_farm thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-cannabis_farm">
+                        <div class="project-description">
+                            cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/cannabis_farm/cover.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/site_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/program_diagram.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/harvesting_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/flowering_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/extraction_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/public_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/pavilion.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/typical_structure.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/flexbrick_composition_diagram.jpg" alt="cannabis_farm image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="chil_bookshelf">
+                    <div class="project-header" onclick="toggleProject('chil_bookshelf')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">chil_bookshelf</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="chil">chil</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/chil_bookshelf/render.jpg" alt="chil_bookshelf thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-chil_bookshelf">
+                        <div class="project-description">
+                            modular bookshelf for CHIL (Community, Housing and Identity Lab) studio space. comprised of 13 aluminum pieces.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/chil_bookshelf/con_doc.jpg?t=1745534250" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/render.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/diagram.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/view_2.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/built.JPG" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/view_1.jpeg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/compositions.GIF" alt="chil_bookshelf image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="icosahedron_explosion">
+                    <div class="project-header" onclick="toggleProject('icosahedron_explosion')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">icosahedron_explosion</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="fall '23">fall '23</span><span class="tag" data-tag="arc611">arc611</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/icosahedron_explosion/previews/icosahedron_explosion_001.png" alt="icosahedron_explosion thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-icosahedron_explosion">
+                        <div class="project-description">
+                            geometrical exploration of an icosahedron, a 20 face polyhedron.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/icosahedron_explosion/previews/icosahedron_explosion_001.png" alt="icosahedron_explosion image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="illinois_institute_of_technology_dorms">
+                    <div class="project-header" onclick="toggleProject('illinois_institute_of_technology_dorms')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">illinois_institute_of_technology_dorms</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="kangaroo">kangaroo</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="chicago, il">chicago, il</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_001.png" alt="illinois_institute_of_technology_dorms thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-illinois_institute_of_technology_dorms">
+                        <div class="project-description">
+                            residential college building proposal for IIT campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, 'illinois_institute_of_technology_truss_system')">parametric truss system</a>.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_001.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_002.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_003.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_004.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_005.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_006.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_007.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_008.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="janus_house">
+                    <div class="project-header" onclick="toggleProject('janus_house')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">janus_house</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="precedent">precedent</span><span class="tag" data-tag="arc605">arc605</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/janus_house/cover.jpeg" alt="janus_house thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-janus_house">
+                        <div class="project-description">
+                            precedent study of Studio Sean Canty's conceptual Janus House.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/janus_house/cover.jpeg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/dogtrot_diagram.jpg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/form_diagram.jpeg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/unrolled_diagram.jpg?t=1745534250" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/floor_plan.jpg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/section.jpg" alt="janus_house image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="lego_bridge">
+                    <div class="project-header" onclick="toggleProject('lego_bridge')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">lego_bridge</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="wasp">wasp</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="arc656">arc656</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/lego_bridge/previews/lego_bridge_presentation_001.png" alt="lego_bridge thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-lego_bridge">
+                        <div class="project-description">
+                            bridge proposal, only using Lego blocks, to go over Lake Osceola in the University of Miami's campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, 'lego_bridge_aggregation')">computational aggregation</a> used to develop form and path.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/lego_bridge/previews/lego_bridge_presentation_001.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_002.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_003.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_004.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_005.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_006.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_007.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_008.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_009.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_010.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_011.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_012.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_013.png" alt="lego_bridge image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="moca_playhouse">
+                    <div class="project-header" onclick="toggleProject('moca_playhouse')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">moca_playhouse</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="team">team</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="summer '24">summer '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="chil">chil</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/moca_playhouse/view_2.JPG" alt="moca_playhouse thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-moca_playhouse">
+                        <div class="project-description">
+                            community activation with temporary install of a lumber house, in MOCA (Museum of Contemporary Art, Miami), inspired by Miami's shotgun house vernacular.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/moca_playhouse/Floor Plan_001.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_001.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_002.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_010.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_012.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_014.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/view_4.jpg" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/view_2.JPG" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/view_3.JPG" alt="moca_playhouse image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="nervi_dome">
+                    <div class="project-header" onclick="toggleProject('nervi_dome')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">nervi_dome</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="turin, it">turin, it</span><span class="tag" data-tag="arc656">arc656</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/nervi_dome/previews/nervi_dome_001.png" alt="nervi_dome thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-nervi_dome">
+                        <div class="project-description">
+                            <a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, 'nervi_dome')">form study</a> of Pier Luigi Nervi's Palazzetto dello Sport, in Turin, Italy.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/nervi_dome/previews/nervi_dome_001.png" alt="nervi_dome image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="parametric_cup">
+                    <div class="project-header" onclick="toggleProject('parametric_cup')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">parametric_cup</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="arc656">arc656</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/parametric_cup/previews/diagram_001.png" alt="parametric_cup thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-parametric_cup">
+                        <div class="project-description">
+                            <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, 'parametric_cup')">form exploration</a> of a cup/glass.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/parametric_cup/previews/diagram_001.png" alt="parametric_cup image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="parametric_remapping">
+                    <div class="project-header" onclick="toggleProject('parametric_remapping')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">parametric_remapping</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="arc656">arc656</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/parametric_remapping/diagram.gif" alt="parametric_remapping thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-parametric_remapping">
+                        <div class="project-description">
+                            automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, 'parametric_remapping')">remapping exercise</a>.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/parametric_remapping/diagram.gif" alt="parametric_remapping image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="parametric_stop">
+                    <div class="project-header" onclick="toggleProject('parametric_stop')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">parametric_stop</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="arc613">arc613</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/parametric_stop/cover.jpeg" alt="parametric_stop thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-parametric_stop">
+                        <div class="project-description">
+                            bus stop proposal for University of Miami's campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, 'parametric_cup')">scripted form definition</a>.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/parametric_stop/index_diagram.jpeg" alt="parametric_stop image" class="project-image" loading="lazy"><img src="archive/parametric_stop/site_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy"><img src="archive/parametric_stop/floor_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy"><img src="archive/parametric_stop/section.jpeg" alt="parametric_stop image" class="project-image" loading="lazy"><img src="archive/parametric_stop/perspective.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="remote_research_center">
+                    <div class="project-header" onclick="toggleProject('remote_research_center')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">remote_research_center</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="la tortuga, venezuela">la tortuga, venezuela</span><span class="tag" data-tag="arc662">arc662</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/remote_research_center/previews/remote_research_center_presentation_001.png" alt="remote_research_center thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-remote_research_center">
+                        <div class="project-description">
+                            off-grid marine biology research center proposal located in Isla La Tortuga, Venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, 'thermal_study')">thermal study</a> and passive systems.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/remote_research_center/previews/remote_research_center_presentation_001.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_002.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_003.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_004.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_005.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_006.png" alt="remote_research_center image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="renault_center">
+                    <div class="project-header" onclick="toggleProject('renault_center')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">renault_center</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="swindon, uk">swindon, uk</span><span class="tag" data-tag="precedent">precedent</span><span class="tag" data-tag="arc607">arc607</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/renault_center/previews/renault_presentation_001.png" alt="renault_center thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-renault_center">
+                        <div class="project-description">
+                            precedent study of Foster + Partners' Renault Center, in Swindon, UK.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/renault_center/previews/renault_presentation_001.png" alt="renault_center image" class="project-image" loading="lazy"><img src="archive/renault_center/previews/renault_presentation_002.png" alt="renault_center image" class="project-image" loading="lazy"><img src="archive/renault_center/previews/renault_presentation_003.png" alt="renault_center image" class="project-image" loading="lazy"><img src="archive/renault_center/previews/renault_presentation_004.png" alt="renault_center image" class="project-image" loading="lazy"><img src="archive/renault_center/previews/renault_presentation_005.png" alt="renault_center image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+                <div class="project-item" data-project="rome_artist_residence">
+                    <div class="project-header" onclick="toggleProject('rome_artist_residence')">
+                        <div class="project-title-container">
+                            <h2 class="project-title">rome_artist_residence</h2>
+                            <div class="project-tags">
+                                <span class="tag" data-tag="team">team</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="summer '24">summer '24</span><span class="tag" data-tag="rome, it">rome, it</span><span class="tag" data-tag="arc606">arc606</span>
+                            </div>
+                        </div>
+                        <div class="project-thumbnail">
+                            <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-01.png" alt="rome_artist_residence thumbnail">
+                        </div>
+                        <button class="toggle-button">
+                            <svg width="24" height="24" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-content" id="content-rome_artist_residence">
+                        <div class="project-description">
+                            adaptive reuse proposal for post-office in Rome, Italy to be adapted to a residential building for artists.
+                        </div>
+                        <div class="project-images">
+                            <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-01.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-02.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-03.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-04.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-05.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-06.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-07.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-08.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-09.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-10.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-11.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-12.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-13.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-14.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-15.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-16.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-17.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-18.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-19.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-20.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-21.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-22.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-23.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-24.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-25.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-26.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-27.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-28.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-29.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-30.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-31.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-32.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-33.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-34.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-35.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-36.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-37.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for expanded images -->
+    <div class="modal" id="imageModal">
+        <button class="modal-close" id="modalClose">×</button>
+        <button class="modal-nav modal-prev" id="modalPrev"><</button>
+        <img class="modal-content" id="modalImage">
+        <button class="modal-nav modal-next" id="modalNext">></button>
+    </div>
+    
+    <script>
+        const projects = {'ad_barnes_nature_reserve': {'tags': ['team', 'rhino', "fall '23", 'miami, fl', 'arc604'], 'description': 'nature reserve proposal for public park, A.D. (Doug) Barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).'}, 'cannabis_farm': {'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'arc605'], 'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.'}, 'chil_bookshelf': {'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'chil'], 'description': 'modular bookshelf for CHIL (Community, Housing and Identity Lab) studio space. comprised of 13 aluminum pieces.'}, 'icosahedron_explosion': {'tags': ['individual', 'rhino', "fall '23", 'arc611'], 'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.'}, 'illinois_institute_of_technology_dorms': {'tags': ['individual', 'rhino', 'grasshopper', 'kangaroo', "fall '24", 'chicago, il'], 'link': 'grasshopper', 'description': 'residential college building proposal for IIT campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.'}, 'janus_house': {'tags': ['individual', 'rhino', "spring '24", 'precedent', 'arc605'], 'description': "precedent study of Studio Sean Canty's conceptual Janus House."}, 'lego_bridge': {'tags': ['individual', 'rhino', 'grasshopper', 'wasp', "fall '24", 'miami, fl', 'arc656'], 'link': 'grasshopper', 'description': 'bridge proposal, only using Lego blocks, to go over Lake Osceola in the University of Miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.'}, 'moca_playhouse': {'tags': ['team', 'rhino', "summer '24", 'miami, fl', 'chil'], 'description': "community activation with temporary install of a lumber house, in MOCA (Museum of Contemporary Art, Miami), inspired by Miami's shotgun house vernacular."}, 'nervi_dome': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'turin, it', 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of Pier Luigi Nervi\'s Palazzetto dello Sport, in Turin, Italy.'}, 'parametric_cup': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.'}, 'parametric_remapping': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.'}, 'parametric_stop': {'tags': ['individual', 'rhino', 'grasshopper', "spring '24", 'arc613'], 'link': 'grasshopper', 'description': 'bus stop proposal for University of Miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.'}, 'remote_research_center': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'la tortuga, venezuela', 'arc662'], 'link': 'thermal_study', 'description': 'off-grid marine biology research center proposal located in Isla La Tortuga, Venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.'}, 'renault_center': {'tags': ['individual', 'rhino', "fall '24", 'swindon, uk', 'precedent', 'arc607'], 'description': "precedent study of Foster + Partners' Renault Center, in Swindon, UK."}, 'rome_artist_residence': {'tags': ['team', 'rhino', "summer '24", 'rome, it', 'arc606'], 'description': 'adaptive reuse proposal for post-office in Rome, Italy to be adapted to a residential building for artists.'}};  // Make projects data available
+        const tools = {'lego_bridge_aggregation': {'description': 'lego block aggregation using wasp plugin to form bridge across Lake Osceola in University of Miami campus', 'tags': ['grasshopper', 'wasp']}, 'parametric_remapping': {'description': "numeric range (circle radius) resized proportional to the circle's distance to a moving point", 'tags': ['grasshopper']}, 'parametric_cup': {'description': 'cup formed along set of lines defined by points', 'tags': ['grasshopper']}, 'thermal_study': {'description': 'wind and temperature analysis on façade of building based on coordinate location', 'tags': ['grasshopper']}, 'nervi_dome': {'description': "form definition of Pier Luigi Nervi's Palazzetto dello Sport", 'tags': ['grasshopper']}, 'illinois_institute_of_technology_truss_system': {'description': 'parametric structural truss system for a proposed student housing project in IIT', 'tags': ['grasshopper', 'kangaroo']}, 'parametric_stop': {'description': 'bus stop proposal for the University of Miami wth parametric form', 'tags': ['grasshopper']}};  // Make tools data available
+        
+        // Initialize the set for active tags
+        const activeTags = new Set();
+        
+        
+    function performSearch() {
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        const resultsContainer = document.getElementById('searchResults');
+        
+        // Clear previous results
+        resultsContainer.innerHTML = '';
+        
+        // If query is empty, hide results
+        if (!query) {
+            resultsContainer.classList.remove('active');
+            return;
+        }
+        
+        // Search in all projects
+        const results = [];
+        for (const [projectName, projectData] of Object.entries(projects)) {
+            const searchText = (projectName + ' ' + 
+                projectData.description + ' ' + 
+                projectData.tags.join(' ')).toLowerCase();
+            
+            if (searchText.includes(query)) {
+                results.push({
+                    title: projectName,
+                    type: 'project',
+                    url: 'archive.html?expand=' + encodeURIComponent(projectName)
+                });
+            }
+        }
+        
+        // Search in tools
+        for (const [toolName, toolData] of Object.entries(tools)) {
+            const searchText = (toolName + ' ' + 
+                toolData.description + ' ' + 
+                toolData.tags.join(' ')).toLowerCase();
+            
+            if (searchText.includes(query)) {
+                results.push({
+                    title: toolName,
+                    type: 'tool',
+                    url: 'toolbox.html?expand=' + encodeURIComponent(toolName)
+                });
+            }
+        }
+        
+        // Display results
+        if (results.length > 0) {
+            results.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.innerHTML = 
+                    '<div class="search-result-title">' + result.title + '</div>' +
+                    '<div class="search-result-tags">' + result.type + '</div>';
+                resultItem.addEventListener('click', () => {
+                    window.location.href = result.url;
+                });
+                resultsContainer.appendChild(resultItem);
+            });
+            resultsContainer.classList.add('active');
+        } else {
+            resultsContainer.classList.remove('active');
+        }
+    }
+    
+    // Add search input handler with debounce
+    let searchTimeout;
+    document.getElementById('searchInput').addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(performSearch, 300);
+    });
+    
+    // Add search input handler for Enter key
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+        
+        function toggleProject(projectName) {
+            const content = document.getElementById(`content-${projectName}`);
+            const button = content.previousElementSibling.querySelector('.toggle-button');
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                button.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.display = 'block';
+                button.style.transform = 'rotate(45deg)';
+            }
+        }
+        
+        function toggleTag(tag) {
+            if (activeTags.has(tag)) {
+                activeTags.delete(tag);
+            } else {
+                activeTags.add(tag);
+            }
+            updateActiveFilters();
+            filterProjects();
+        }
+        
+        function updateActiveFilters() {
+            const activeFiltersContainer = document.getElementById('activeFilters');
+            activeFiltersContainer.innerHTML = '';
+            
+            if (activeTags.size > 0) {
+                activeTags.forEach(tag => {
+                    const filterElement = document.createElement('div');
+                    filterElement.className = 'active-filter';
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = '×';
+                    removeButton.onclick = (e) => {
+                        e.stopPropagation();
+                        removeFilter(tag);
+                    };
+                    filterElement.appendChild(document.createTextNode(tag));
+                    filterElement.appendChild(removeButton);
+                    activeFiltersContainer.appendChild(filterElement);
+                });
+            }
+        }
+        
+        function removeFilter(tag) {
+            activeTags.delete(tag);
+            updateActiveFilters();
+            filterProjects();
+        }
+        
+        function filterProjects() {
+            const projectItems = document.querySelectorAll('.project-item');
+            projectItems.forEach(item => {
+                const projectName = item.dataset.project;
+                const projectData = projects[projectName];
+                if (projectData) {
+                    const projectTags = new Set(projectData.tags);
+                    const hasActiveTags = activeTags.size === 0 || 
+                        Array.from(activeTags).every(tag => projectTags.has(tag));
+                    item.style.display = hasActiveTags ? 'block' : 'none';
+                }
+            });
+        }
+        
+        function updateClock() {
+            const now = new Date();
+            const options = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                timeZoneName: 'short',
+                hour12: false
+            };
+            const timeString = new Intl.DateTimeFormat(undefined, options).format(now);
+            document.getElementById('clock').textContent = timeString.toLowerCase();
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+        
+        // Add image modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        let currentProjectImages = [];
+        let currentImageIndex = 0;
+        
+        // Add click handlers to all project images
+        document.querySelectorAll('.project-image').forEach(img => {
+            img.addEventListener('click', () => {
+                // Get all images in the current project
+                const projectItem = img.closest('.project-item');
+                currentProjectImages = Array.from(projectItem.querySelectorAll('.project-image'));
+                currentImageIndex = currentProjectImages.indexOf(img);
+                
+                modalImg.src = img.src;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        function showImage(index) {
+            if (index >= 0 && index < currentProjectImages.length) {
+                currentImageIndex = index;
+                modalImg.src = currentProjectImages[index].src;
+            }
+        }
+        
+        // Navigation handlers
+        modalPrev.addEventListener('click', () => {
+            showImage(currentImageIndex - 1);
+        });
+        
+        modalNext.addEventListener('click', () => {
+            showImage(currentImageIndex + 1);
+        });
+        
+        // Close modal when clicking the close button
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                } else if (e.key === 'ArrowLeft') {
+                    showImage(currentImageIndex - 1);
+                } else if (e.key === 'ArrowRight') {
+                    showImage(currentImageIndex + 1);
+                }
+            }
+        });
+        
+        // Function to expand toolbox project
+        function expandToolboxProject(event, projectName) {
+            event.preventDefault();
+            const url = new URL(event.target.href);
+            const hash = url.hash.substring(1);  // Remove the # from the hash
+            window.location.href = url.pathname + '#' + hash;
+        }
+        
+        // Add this to both archive.html and toolbox.html
+        function highlightSearchResults() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+            const expandProject = urlParams.get('expand');
+            
+            // Handle expand parameter
+            if(expandProject) {
+                const content = document.getElementById("content-"+expandProject);
+                if(content) {
+                    content.style.display = "block";
+                    const button = content.previousElementSibling.querySelector(".toggle-button");
+                    if(button) button.style.transform = "rotate(45deg)";
+                    content.scrollIntoView({behavior:"smooth"});
+                }
+            }
+            
+            // Handle search parameter with hash
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                const hash = window.location.hash.substring(1); // Remove the # from the hash
+                
+                console.log('Search query:', searchQuery);
+                console.log('Hash:', hash);
+                
+                if (hash) {
+                    // Find the project or tool content
+                    const projectContent = document.getElementById(`content-${hash}`);
+                    console.log('Found content:', projectContent);
+                    
+                    if (projectContent) {
+                        // Expand the content
+                        projectContent.style.display = 'block';
+                        const button = projectContent.previousElementSibling.querySelector('.toggle-button');
+                        if (button) {
+                            button.style.transform = 'rotate(45deg)';
+                        }
+                        
+                        // Get the description element
+                        const description = projectContent.querySelector('.project-description, .tool-description');
+                        if (description) {
+                            const text = description.textContent;
+                            const lowerText = text.toLowerCase();
+                            
+                            if (lowerText.includes(query)) {
+                                // Create a new span with highlighted text
+                                const highlightedText = text.replace(
+                                    new RegExp(query, 'gi'),
+                                    match => `<span class="highlight">${match}</span>`
+                                );
+                                description.innerHTML = highlightedText;
+                            }
+                        }
+                        
+                        // Scroll to the content
+                        projectContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        console.log('No content found for hash:', hash);
+                    }
+                }
+            }
+        }
+        
+        // Call this function when the page loads 
+        document.addEventListener('DOMContentLoaded', function() {
+            highlightSearchResults();
+            
+            // Check URL parameters for 'expand'
+            const urlParams = new URLSearchParams(window.location.search);
+            const expandProject = urlParams.get('expand');
+            
+            if (expandProject) {
+                console.log("Found project to expand:", expandProject);
+                
+                // Find the project content
+                const projectContent = document.getElementById(`content-${expandProject}`);
+                if (projectContent) {
+                    // Expand the content
+                    projectContent.style.display = 'block';
+                    const button = projectContent.previousElementSibling.querySelector('.toggle-button');
+                    if (button) {
+                        button.style.transform = 'rotate(45deg)';
+                    }
+                    
+                    // Scroll to the content
+                    setTimeout(() => {
+                        projectContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            }
+        });
+
+        window.addEventListener('hashchange', function() {
+            highlightSearchResults();
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                console.log("Hash changed to:", hash);
+                
+                // Try to find the project content 
+                const projectContent = document.getElementById(`content-${hash}`);
+                if (projectContent) {
+                    expandProject(hash);
+                }
+            }
+        });
+
+        // Function to expand project and scroll to it
+        function expandProject(projectName) {
+            const projectContent = document.getElementById(`content-${projectName}`);
+            if (projectContent) {
+                // Expand the content
+                projectContent.style.display = 'block';
+                const button = projectContent.previousElementSibling.querySelector('.toggle-button');
+                if (button) {
+                    button.style.transform = 'rotate(45deg)';
+                }
+                
+                // Scroll to the content
+                setTimeout(() => {
+                    projectContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // Add event delegation for tag clicks
+        document.querySelector('.project-list').addEventListener('click', function(event) {
+            if (event.target.classList.contains('tag')) {
+                event.stopPropagation(); // Prevent toggling the project when clicking tags
+                const tag = event.target.getAttribute('data-tag');
+                if (tag) {
+                    toggleTag(tag);
+                }
+            }
+        });
+
+        // Add this to both archive.html and toolbox.html
+        document.addEventListener('DOMContentLoaded', highlightSearchResults);
+            console.log("DOM loaded on archive page");
+            
+            // Check for the hash in the URL
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                console.log("Found hash in URL:", hash);
+                
+                // Look for the project/tool content element
+                const projectContent = document.getElementById(`content-${hash}`);
+                if (projectContent) {
+                    console.log("Found project content, expanding");
+                    projectContent.style.display = 'block';
+                    const button = projectContent.previousElementSibling.querySelector('.toggle-button');
+                    if (button) {
+                        button.style.transform = 'rotate(45deg)';
+                    }
+                    
+                    // Check localStorage for search query and item to expand
+                    const searchQuery = localStorage.getItem('searchQuery');
+                    const expandItem = localStorage.getItem('expandItem');
+                    const expandType = localStorage.getItem('expandType');
+                    const lastClick = localStorage.getItem('lastClick');
+                    
+                    // Only process if there's data and it's recent (within last 5 seconds)
+                    if (searchQuery && expandItem && expandType === 'project' && 
+                        lastClick && Date.now() - parseInt(lastClick) < 5000) {
+                        // Expand the project
+                        expandProject(expandItem);
+                    }
+                }
+            }
+        });
+
+        window.addEventListener('hashchange', function() {
+            highlightSearchResults();
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                console.log("Hash changed to:", hash);
+                
+                // Try to find the project content 
+                const projectContent = document.getElementById(`content-${hash}`);
+                if (projectContent) {
+                    expandProject(hash);
+                }
+            }
+        });
+
+        // Function to expand project and scroll to it
+        function expandProject(projectName) {
+            const projectContent = document.getElementById(`content-${projectName}`);
+            if (projectContent) {
+                // Expand the content
+                projectContent.style.display = 'block';
+                const button = projectContent.previousElementSibling.querySelector('.toggle-button');
+                if (button) {
+                    button.style.transform = 'rotate(45deg)';
+                }
+                
+                // Scroll to the content
+                setTimeout(() => {
+                    projectContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // Add event delegation for tag clicks
+        document.querySelector('.project-list').addEventListener('click', function(event) {
+            if (event.target.classList.contains('tag')) {
+                event.stopPropagation(); // Prevent toggling the project when clicking tags
+                const tag = event.target.getAttribute('data-tag');
+                if (tag) {
+                    toggleTag(tag);
+                }
+            }
+        });
+
+        // Add this to both archive.html and toolbox.html
+        document.addEventListener('DOMContentLoaded', highlightSearchResults);
+    </script>
+</body>
+</html>
