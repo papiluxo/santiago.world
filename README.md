@@ -1,6 +1,6 @@
 # Santiago Martínez-Oropeza Portfolio
 
-This is the source code for my personal architecture portfolio website at [santiago.world](https://santiago.world).
+This is the source code for my personal design portfolio website at [santiago.world](https://santiago.world).
 
 ## About
 
@@ -8,7 +8,7 @@ Architecture and design portfolio showcasing projects and tools from my academic
 
 ## Features
 
-- Clean, minimalist design inspired by Apple's design language
+- Clean, minimalist design
 - Dark/light mode toggle
 - Project archive with filtering by tags
 - Interactive toolbox showcasing parametric designs
