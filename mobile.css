@@ -9,7 +9,7 @@
         align-items: flex-start;
     }
     
-    /* Project and tool items restructuring - card style */
+    /* Project and tool items restructuring - Instagram style */
     .project-header, .tool-header {
         display: flex;
         flex-direction: column;
@@ -18,14 +18,26 @@
         padding: 0.5rem 0;
     }
     
-    /* Project title at top */
-    .project-title-container, .tool-title-container {
+    /* Project thumbnail as center piece */
+    .project-thumbnail {
         width: 100%;
+        margin: 0 0 0.75rem;
+        position: relative;
+        flex-shrink: 0;
+        max-height: none;
         order: 1;
-        display: flex;
-        flex-direction: column;
-        padding-right: 30px;
-        margin-bottom: 0.75rem;
+    }
+    
+    /* Project title overlay on thumbnail */
+    .project-title-container, .tool-title-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+        order: 2;
     }
     
     .project-title, .tool-name {
@@ -34,15 +46,8 @@
         word-break: break-word;
         overflow-wrap: break-word;
         text-align: center;
-    }
-    
-    /* Project thumbnail large and centered */
-    .project-thumbnail {
-        order: 2;
-        width: 75%;
-        margin: 0 auto 0.75rem;
-        flex-shrink: 0;
-        max-height: none;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
     
     /* Project tags at bottom */
@@ -51,6 +56,7 @@
         flex-wrap: wrap;
         width: 100%;
         justify-content: center;
+        margin-top: 5px;
     }
     
     .tag {
@@ -62,9 +68,12 @@
     /* Toggle button position */
     .toggle-button {
         position: absolute;
-        top: 0.5rem;
-        right: 0;
+        top: 10px;
+        right: 10px;
         padding: 0.35rem;
+        z-index: 3;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
     }
     
     /* Toolbox page specific adjustments */
@@ -73,8 +82,14 @@
     }
     
     .tool-title-container {
-        width: 100%;
+        position: relative;
+        background: none;
         padding-right: 30px;
+    }
+    
+    .tool-name {
+        color: var(--text-color);
+        text-shadow: none;
     }
     
     .nav-buttons {
@@ -230,21 +245,13 @@
     }
     
     .project-title, .tool-name {
-        font-size: 1rem;
-    }
-    
-    .project-thumbnail {
-        width: 85%;
-    }
-    
-    .tag {
-        font-size: 0.65rem;
-        padding: 0.1rem 0.25rem;
+        font-size: 0.9rem;
     }
     
     .toggle-button {
         transform: scale(0.75);
-        top: 0.25rem;
+        top: 5px;
+        right: 5px;
     }
     
     .tool-button, .project-button {
