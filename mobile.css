@@ -1,1 +1,269 @@
-/* Mobile styles */ @media (max-width: 768px) { .container { padding: 1rem; } .nav-container { flex-direction: column; align-items: flex-start; } /* Project and tool items restructuring - catalog style */ .project-header, .tool-header { display: flex; flex-direction: row; align-items: flex-start; position: relative; gap: 0.75rem; padding: 0.5rem 0; } /* Project thumbnail on left */ .project-thumbnail { order: 1; width: 40%; margin: 0; flex-shrink: 0; max-height: none; } /* Project title and tags on right */ .project-title-container, .tool-title-container { width: 60%; order: 2; display: flex; flex-direction: column; padding-right: 30px; } .project-title, .tool-name { font-size: 1rem; line-height: 1.2; word-break: break-word; overflow-wrap: break-word; margin-bottom: 0.5rem; } .project-tags, .tool-tags { flex-wrap: wrap; width: 100%; } .tag { font-size: 0.7rem; padding: 0.1rem 0.3rem; margin: 0 0.15rem 0.15rem 0; } /* Toggle button position */ .toggle-button { position: absolute; top: 0.5rem; right: 0; padding: 0.35rem; } /* Toolbox page specific adjustments */ .tool-header { flex-direction: column; } .tool-title-container { width: 100%; padding-right: 30px; } } @media (max-width: 480px) { .container { padding: 0.75rem; } h1 { font-size: 2.5rem; } .project-thumbnail { width: 35%; } .project-title-container { width: 65%; } .project-title, .tool-name { font-size: 0.9rem; } .tag { font-size: 0.65rem; padding: 0.1rem 0.25rem; } .toggle-button { transform: scale(0.75); top: 0.25rem; } }
+/* Mobile styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    /* Project and tool items restructuring - card style */
+    .project-header, .tool-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        padding: 0.5rem 0;
+    }
+    
+    /* Project title at top */
+    .project-title-container, .tool-title-container {
+        width: 100%;
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        padding-right: 30px;
+        margin-bottom: 0.75rem;
+    }
+    
+    .project-title, .tool-name {
+        font-size: 1.1rem;
+        line-height: 1.2;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        text-align: center;
+    }
+    
+    /* Project thumbnail large and centered */
+    .project-thumbnail {
+        order: 2;
+        width: 75%;
+        margin: 0 auto 0.75rem;
+        flex-shrink: 0;
+        max-height: none;
+    }
+    
+    /* Project tags at bottom */
+    .project-tags, .tool-tags {
+        order: 3;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .tag {
+        font-size: 0.7rem;
+        padding: 0.1rem 0.3rem;
+        margin: 0 0.15rem 0.15rem 0;
+    }
+    
+    /* Toggle button position */
+    .toggle-button {
+        position: absolute;
+        top: 0.5rem;
+        right: 0;
+        padding: 0.35rem;
+    }
+    
+    /* Toolbox page specific adjustments */
+    .tool-header {
+        flex-direction: column;
+    }
+    
+    .tool-title-container {
+        width: 100%;
+        padding-right: 30px;
+    }
+    
+    .nav-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .nav-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .nav-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        height: 2.5rem;
+    }
+    
+    .clock {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        height: 2.5rem;
+    }
+    
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    .revealing-text {
+        font-size: 1rem;
+    }
+    
+    .theme-toggle {
+        height: 2.5rem;
+        min-width: 90px;
+    }
+    
+    .theme-option {
+        font-size: 1rem;
+        width: 45px;
+    }
+    
+    .theme-slider {
+        width: 41px;
+    }
+    
+    .theme-slider.dark {
+        transform: translateX(43px);
+    }
+    
+    /* Archive and Toolbox page specific */
+    .project-item, .tool-item {
+        padding: 0.75rem 0;
+        margin: 0;
+    }
+    
+    .search-container {
+        padding: 0.5rem 1rem;
+        min-height: 2.5rem;
+    }
+    
+    .search-input {
+        width: 150px;
+        font-size: 0.9rem;
+    }
+    
+    .active-filter {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem;
+    }
+    
+    .tool-code-container {
+        padding: 0.75rem;
+    }
+    
+    .tool-code {
+        font-size: 0.8rem;
+    }
+    
+    .project-description, .tool-description {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+    .container {
+        padding: 0.75rem;
+    }
+    
+    .nav-buttons {
+        gap: 0.5rem;
+    }
+    
+    .nav-right {
+        gap: 0.5rem;
+    }
+    
+    .nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        height: 2.2rem;
+    }
+    
+    .clock {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        height: 2.2rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.1rem;
+    }
+    
+    .theme-toggle {
+        height: 2.2rem;
+        min-width: 80px;
+    }
+    
+    .theme-option {
+        font-size: 0.9rem;
+        width: 40px;
+    }
+    
+    .theme-slider {
+        width: 36px;
+    }
+    
+    .theme-slider.dark {
+        transform: translateX(38px);
+    }
+    
+    /* Archive and Toolbox page specific */
+    .search-container {
+        padding: 0.4rem 0.8rem;
+        min-height: 2.2rem;
+    }
+    
+    .search-input {
+        width: 120px;
+        font-size: 0.8rem;
+    }
+    
+    .project-title, .tool-name {
+        font-size: 1rem;
+    }
+    
+    .project-thumbnail {
+        width: 85%;
+    }
+    
+    .tag {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.25rem;
+    }
+    
+    .toggle-button {
+        transform: scale(0.75);
+        top: 0.25rem;
+    }
+    
+    .tool-button, .project-button {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Fix for long titles and text overlap across all sizes */
+.project-name, .tool-name {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.project-tags, .tool-tags {
+    flex-wrap: wrap;
+}
+
+.project-content, .tool-content {
+    overflow-x: hidden;
+}
