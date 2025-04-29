@@ -113,7 +113,7 @@
         z-index: 2 !important;
         line-height: 1 !important;
         position: relative !important;
-        transform: translate(-0.15rem, 0.1rem) !important;
+        transform: translate(-0.12rem, 0.1rem) !important;
     }
     
     .theme-option:first-child {
@@ -121,7 +121,7 @@
     }
     
     .theme-option:last-child {
-        transform: translate(-0.2rem, 0.1rem) !important;
+        transform: translate(-0.25rem, 0.1rem) !important;
         margin-right: 0.4rem !important;
     }
     
@@ -317,7 +317,7 @@
         font-size: 0.65rem !important;
         width: 0.9rem !important;
         height: 0.9rem !important;
-        transform: translate(-0.15rem, 0.1rem) !important;
+        transform: translate(-0.12rem, 0.1rem) !important;
     }
     
     .theme-option:first-child {
@@ -325,7 +325,7 @@
     }
     
     .theme-option:last-child {
-        transform: translate(-0.2rem, 0.1rem) !important;
+        transform: translate(-0.25rem, 0.1rem) !important;
     }
     
     .theme-slider {
