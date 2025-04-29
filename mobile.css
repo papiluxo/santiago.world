@@ -121,7 +121,7 @@
     }
     
     .theme-option:last-child {
-        right: 0.6rem !important;
+        left: 1.8rem !important;
     }
     
     .theme-slider {
@@ -321,7 +321,7 @@
     }
     
     .theme-option:last-child {
-        right: 0.55rem !important;
+        left: 1.55rem !important;
     }
     
     .theme-slider {
