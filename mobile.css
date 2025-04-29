@@ -82,7 +82,7 @@
     
     /* Override theme toggle styles to match clock height exactly */
     .theme-toggle {
-        padding: 0.4rem 0.6rem !important;
+        padding: 0.4rem !important;
         font-size: 0.8rem !important;
         line-height: 1 !important;
         height: 1.8rem !important;
@@ -90,7 +90,7 @@
         min-width: 3rem !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: flex-start !important;
+        justify-content: space-between !important;
         border-radius: 4px !important;
         flex-shrink: 0 !important;
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
@@ -99,6 +99,8 @@
         overflow: hidden !important;
         box-sizing: border-box !important;
         margin: 0 !important;
+        padding-left: 0.6rem !important;
+        padding-right: 0.6rem !important;
     }
     
     .theme-option {
@@ -111,9 +113,7 @@
         padding: 0 !important;
         z-index: 2 !important;
         line-height: 1 !important;
-        position: absolute !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
+        position: relative !important;
     }
     
     .theme-option:first-child {
@@ -303,11 +303,13 @@
     }
     
     .theme-toggle {
-        padding: 0.3rem 0.5rem !important;
+        padding: 0.3rem !important;
         font-size: 0.75rem !important;
         min-width: 2.8rem !important;
         height: 1.5rem !important;
         min-height: 1.5rem !important;
+        padding-left: 0.55rem !important;
+        padding-right: 0.55rem !important;
     }
     
     .theme-option {
