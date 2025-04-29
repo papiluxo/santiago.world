@@ -508,7 +508,7 @@
                 <div class="tool-actions">
                         <button class="tool-button" onclick="toggleCode('illinois_institute_of_technology_truss_system')">
                         <svg width="16" height="16" viewBox="0 0 16 16">
-                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                            <path fill="currentColor" d="M5.28 3.22a.75.75 0 00-1.06 1.06L7.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06L5.28 3.22zm5.44 0a.75.75 0 011.06 1.06L8.06 8l3.72 3.72a.75.75 0 11-1.06 1.06l-4.25-4.25a.75.75 0 010-1.06l4.25-4.25z"/>
                         </svg>
                             view code
                     </button>
@@ -850,7 +850,7 @@
                 codePreview.style.display = 'none';
                 viewCodeButton.innerHTML = `
                     <svg width="16" height="16" viewBox="0 0 16 16">
-                        <path fill="currentColor" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                        <path fill="currentColor" d="M5.28 3.22a.75.75 0 00-1.06 1.06L7.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06L5.28 3.22zm5.44 0a.75.75 0 011.06 1.06L8.06 8l3.72 3.72a.75.75 0 11-1.06 1.06l-4.25-4.25a.75.75 0 010-1.06l4.25-4.25z"/>
                     </svg>
                     view code
                 `;
@@ -859,7 +859,7 @@
             
             viewCodeButton.innerHTML = `
                 <svg width="16" height="16" viewBox="0 0 16 16">
-                    <path fill="currentColor" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                    <path fill="currentColor" d="M5.28 3.22a.75.75 0 00-1.06 1.06L7.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06L5.28 3.22zm5.44 0a.75.75 0 011.06 1.06L8.06 8l3.72 3.72a.75.75 0 11-1.06 1.06l-4.25-4.25a.75.75 0 010-1.06l4.25-4.25z"/>
                 </svg>
                 close
             `;
@@ -1006,6 +1006,18 @@
                 if (tag) {
                     toggleTag(tag);
                 }
+            }
+        });
+
+        // Replace all view code button SVGs
+        document.querySelectorAll('.tool-button').forEach(button => {
+            if (button.textContent.includes('view code')) {
+                button.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M5.28 3.22a.75.75 0 00-1.06 1.06L7.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06L5.28 3.22zm5.44 0a.75.75 0 011.06 1.06L8.06 8l3.72 3.72a.75.75 0 11-1.06 1.06l-4.25-4.25a.75.75 0 010-1.06l4.25-4.25z"/>
+                    </svg>
+                    view code
+                `;
             }
         });
     </script>
