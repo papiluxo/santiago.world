@@ -12,14 +12,15 @@
         flex-direction: row !important;
         justify-content: flex-start !important;
         align-items: center !important;
-        padding: 0.5rem 1rem !important;
-        width: 100% !important;
+        padding: 0.5rem 0.8rem !important;
+        width: calc(100% - 1.6rem) !important;
         gap: 0.5rem !important;
         flex-wrap: nowrap !important;
         max-width: 100% !important;
         border-bottom: 1px solid rgba(128, 128, 128, 0.2) !important;
         margin: 0 auto !important;
         margin-bottom: 1rem !important;
+        box-sizing: border-box !important;
     }
     
     .nav-buttons {
@@ -281,15 +282,16 @@
     }
     
     .nav-container {
-        padding: 0.3rem 0.8rem !important;
+        padding: 0.3rem 0.6rem !important;
+        width: calc(100% - 1.2rem) !important;
         gap: 0.3rem !important;
         justify-content: flex-start !important;
         flex-direction: row !important;
         align-items: center !important;
-        width: 100% !important;
         flex-wrap: nowrap !important;
         max-width: 100% !important;
         margin: 0 auto !important;
+        box-sizing: border-box !important;
     }
     
     .nav-buttons {
