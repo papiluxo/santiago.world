@@ -5,8 +5,70 @@
     }
     
     .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+        width: 100%;
+    }
+    
+    .nav-buttons {
+        display: flex;
+        gap: 0.5rem;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-right {
+        display: flex;
+        gap: 0.5rem;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-button {
+        padding: 0.15rem 0.3rem;
+        font-size: 0.6rem;
+        height: 1.2rem;
+        min-width: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .clock {
+        padding: 0.15rem 0.3rem;
+        font-size: 0.6rem;
+        height: 1.2rem;
+        min-width: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .theme-toggle {
+        height: 1.2rem;
+        min-width: 2.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .theme-option {
+        font-size: 0.6rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .theme-slider {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+    
+    .theme-slider.dark {
+        transform: translateX(1.2rem);
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -83,28 +145,6 @@
         padding-right: 30px;
     }
     
-    .nav-buttons {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .nav-right {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .nav-button {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.7rem;
-        height: 1.5rem;
-    }
-    
-    .clock {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.7rem;
-        height: 1.5rem;
-    }
-    
     h1 {
         font-size: 3rem;
         margin-bottom: 1.5rem;
@@ -116,24 +156,6 @@
     
     .revealing-text {
         font-size: 1rem;
-    }
-    
-    .theme-toggle {
-        height: 1.5rem;
-        min-width: 60px;
-    }
-    
-    .theme-option {
-        font-size: 0.7rem;
-        width: 30px;
-    }
-    
-    .theme-slider {
-        width: 26px;
-    }
-    
-    .theme-slider.dark {
-        transform: translateX(28px);
     }
     
     /* Archive and Toolbox page specific */
@@ -197,15 +219,17 @@
     }
     
     .nav-button {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.65rem;
-        height: 1.3rem;
+        padding: 0.1rem 0.25rem;
+        font-size: 0.55rem;
+        height: 1rem;
+        min-width: 2rem;
     }
     
     .clock {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.65rem;
-        height: 1.3rem;
+        padding: 0.1rem 0.25rem;
+        font-size: 0.55rem;
+        height: 1rem;
+        min-width: 2.5rem;
     }
     
     h1 {
@@ -218,21 +242,23 @@
     }
     
     .theme-toggle {
-        height: 1.3rem;
-        min-width: 55px;
+        height: 1rem;
+        min-width: 2rem;
     }
     
     .theme-option {
-        font-size: 0.65rem;
-        width: 27px;
+        font-size: 0.55rem;
+        width: 1rem;
+        height: 1rem;
     }
     
     .theme-slider {
-        width: 23px;
+        width: 1rem;
+        height: 1rem;
     }
     
     .theme-slider.dark {
-        transform: translateX(25px);
+        transform: translateX(1rem);
     }
     
     /* Archive and Toolbox page specific */
