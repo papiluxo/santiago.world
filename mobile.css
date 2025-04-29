@@ -90,7 +90,7 @@
         min-width: 3rem !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: space-between !important;
+        justify-content: flex-start !important;
         border-radius: 4px !important;
         flex-shrink: 0 !important;
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
@@ -115,11 +115,12 @@
     }
     
     .theme-option:first-child {
-        margin-left: 0.6rem !important;  /* Match initial dot position */
+        margin-left: 0.6rem !important;
     }
     
     .theme-option:last-child {
-        margin-right: 0.6rem !important;  /* Match final dot position */
+        margin-left: auto !important;
+        margin-right: 0.6rem !important;
     }
     
     .theme-slider {
