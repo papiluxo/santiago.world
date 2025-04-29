@@ -99,8 +99,8 @@
         overflow: hidden !important;
         box-sizing: border-box !important;
         margin: 0 !important;
-        padding-left: 0.6rem !important;
-        padding-right: 0.6rem !important;
+        padding-left: 0.4rem !important;
+        padding-right: 0.4rem !important;
     }
     
     .theme-option {
@@ -131,13 +131,14 @@
         background: var(--accent-color, #ff0000) !important;
         position: absolute !important;
         top: 50% !important;
-        left: 0.6rem !important;
+        left: 0.4rem !important;
         transform: translateY(-50%) !important;
         transition: transform 0.3s ease !important;
     }
     
     .theme-slider.dark {
-        transform: translate(1.2rem, -50%) !important;
+        left: auto !important;
+        right: 0.4rem !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -308,8 +309,8 @@
         min-width: 2.8rem !important;
         height: 1.5rem !important;
         min-height: 1.5rem !important;
-        padding-left: 0.55rem !important;
-        padding-right: 0.55rem !important;
+        padding-left: 0.3rem !important;
+        padding-right: 0.3rem !important;
     }
     
     .theme-option {
@@ -329,11 +330,12 @@
     .theme-slider {
         width: 0.8rem !important;
         height: 0.8rem !important;
-        left: 0.55rem !important;
+        left: 0.3rem !important;
     }
     
     .theme-slider.dark {
-        transform: translate(1rem, -50%) !important;
+        left: auto !important;
+        right: 0.3rem !important;
     }
     
     /* Archive and Toolbox page specific */
