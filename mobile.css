@@ -277,9 +277,14 @@
     }
     
     .tool-button {
-        padding: 0.35rem 0.5rem !important;
-        font-size: 0.8rem !important;
-        gap: 0.4rem !important;
+        padding: 0.35rem 0.6rem;
+        font-size: 0.85rem;
+        gap: 0.4rem;
+    }
+    
+    .tool-button svg {
+        width: 14px;
+        height: 14px;
     }
 }
 
@@ -380,8 +385,9 @@
     }
     
     .tool-button {
-        padding: 0.35rem 0.5rem;
-        font-size: 0.85rem;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.8rem;
+        gap: 0.3rem;
     }
 }
 
@@ -402,7 +408,7 @@
 
 /* Base styles for tool-button (outside media queries) */
 .tool-button {
-    padding: 0.4rem 0.6rem;
+    padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1;
@@ -410,6 +416,7 @@
     min-width: auto;
     display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
     justify-content: center;
     border-radius: 4px;
     white-space: nowrap;
@@ -421,6 +428,12 @@
     box-sizing: border-box;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+.tool-button svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
 }
 
 .tool-button:hover {
