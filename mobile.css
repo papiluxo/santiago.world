@@ -88,7 +88,7 @@
         height: 1.8rem !important;
         min-height: 1.8rem !important;
         min-width: 3rem !important;
-        display: inline-flex !important;
+        display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
         border-radius: 4px !important;
@@ -111,15 +111,15 @@
         padding: 0 !important;
         z-index: 2 !important;
         line-height: 1 !important;
-        position: absolute !important;
+        position: relative !important;
     }
     
     .theme-option:first-child {
-        left: 0.6rem !important;  /* Align with initial dot position */
+        margin-left: 0.6rem !important;  /* Match initial dot position */
     }
     
     .theme-option:last-child {
-        right: 0.6rem !important;  /* Align with final dot position */
+        margin-right: 0.6rem !important;  /* Match final dot position */
     }
     
     .theme-slider {
@@ -315,11 +315,11 @@
     }
     
     .theme-option:first-child {
-        left: 0.55rem !important;
+        margin-left: 0.55rem !important;
     }
     
     .theme-option:last-child {
-        right: 0.55rem !important;
+        margin-right: 0.55rem !important;
     }
     
     .theme-slider {
