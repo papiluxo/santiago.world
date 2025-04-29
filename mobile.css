@@ -99,7 +99,6 @@
         overflow: hidden !important;
         box-sizing: border-box !important;
         margin: 0 !important;
-        gap: 0.6rem !important;
     }
     
     .theme-option {
@@ -112,7 +111,15 @@
         padding: 0 !important;
         z-index: 2 !important;
         line-height: 1 !important;
-        position: relative !important;
+        position: absolute !important;
+    }
+    
+    .theme-option:first-child {
+        left: 0.6rem !important;  /* Align with initial dot position */
+    }
+    
+    .theme-option:last-child {
+        right: 0.6rem !important;  /* Align with final dot position */
     }
     
     .theme-slider {
@@ -299,13 +306,20 @@
         min-width: 2.8rem !important;
         height: 1.5rem !important;
         min-height: 1.5rem !important;
-        gap: 0.5rem !important;
     }
     
     .theme-option {
         font-size: 0.65rem !important;
         width: 0.65rem !important;
         height: 0.65rem !important;
+    }
+    
+    .theme-option:first-child {
+        left: 0.55rem !important;
+    }
+    
+    .theme-option:last-child {
+        right: 0.55rem !important;
     }
     
     .theme-slider {
