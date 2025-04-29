@@ -85,8 +85,8 @@
         padding: 0.4rem 0.6rem !important;
         font-size: 0.8rem !important;
         line-height: 1 !important;
-        height: 1.8rem !important;  /* Match clock height exactly */
-        min-height: 1.8rem !important;  /* Ensure minimum height */
+        height: 1.8rem !important;
+        min-height: 1.8rem !important;
         min-width: 3rem !important;
         display: inline-flex !important;
         align-items: center !important;
@@ -295,8 +295,8 @@
         padding: 0.3rem 0.5rem !important;
         font-size: 0.75rem !important;
         min-width: 2.8rem !important;
-        height: 1.6rem !important;  /* Match clock height exactly */
-        min-height: 1.6rem !important;  /* Ensure minimum height */
+        height: 1.5rem !important;
+        min-height: 1.5rem !important;
     }
     
     .theme-option {
