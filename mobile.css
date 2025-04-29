@@ -90,7 +90,7 @@
         min-width: 3rem !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: flex-start !important;
+        justify-content: space-between !important;
         border-radius: 4px !important;
         flex-shrink: 0 !important;
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
@@ -112,18 +112,15 @@
         margin: 0 !important;
         z-index: 2 !important;
         line-height: 1 !important;
-        position: absolute !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        box-sizing: content-box !important;
+        position: relative !important;
     }
     
     .theme-option:first-child {
-        left: 0.6rem !important;
+        margin-left: 0.6rem !important;
     }
     
     .theme-option:last-child {
-        left: 1.8rem !important;
+        margin-right: 0.6rem !important;
     }
     
     .theme-slider {
@@ -321,11 +318,11 @@
     }
     
     .theme-option:first-child {
-        left: 0.55rem !important;
+        margin-left: 0.55rem !important;
     }
     
     .theme-option:last-child {
-        left: 1.55rem !important;
+        margin-right: 0.55rem !important;
     }
     
     .theme-slider {
