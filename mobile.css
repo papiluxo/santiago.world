@@ -94,15 +94,15 @@
     }
     
     .nav-button {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-        height: 2.5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+        height: 1.5rem;
     }
     
     .clock {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-        height: 2.5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+        height: 1.5rem;
     }
     
     h1 {
@@ -119,21 +119,21 @@
     }
     
     .theme-toggle {
-        height: 2.5rem;
-        min-width: 90px;
+        height: 1.5rem;
+        min-width: 60px;
     }
     
     .theme-option {
-        font-size: 1rem;
-        width: 45px;
+        font-size: 0.7rem;
+        width: 30px;
     }
     
     .theme-slider {
-        width: 41px;
+        width: 26px;
     }
     
     .theme-slider.dark {
-        transform: translateX(43px);
+        transform: translateX(28px);
     }
     
     /* Archive and Toolbox page specific */
@@ -197,15 +197,15 @@
     }
     
     .nav-button {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-        height: 2.2rem;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.65rem;
+        height: 1.3rem;
     }
     
     .clock {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-        height: 2.2rem;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.65rem;
+        height: 1.3rem;
     }
     
     h1 {
@@ -218,21 +218,21 @@
     }
     
     .theme-toggle {
-        height: 2.2rem;
-        min-width: 80px;
+        height: 1.3rem;
+        min-width: 55px;
     }
     
     .theme-option {
-        font-size: 0.9rem;
-        width: 40px;
+        font-size: 0.65rem;
+        width: 27px;
     }
     
     .theme-slider {
-        width: 36px;
+        width: 23px;
     }
     
     .theme-slider.dark {
-        transform: translateX(38px);
+        transform: translateX(25px);
     }
     
     /* Archive and Toolbox page specific */
