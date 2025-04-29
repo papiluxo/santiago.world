@@ -1,4 +1,4 @@
-/* Mobile styles v1.6 */
+/* Mobile styles v1.7 */
 @media (max-width: 768px) {
     .container {
         padding: 0.5rem;
@@ -7,108 +7,119 @@
         margin: 0;
     }
     
-    /* Mobile-specific navigation styles */
+    /* Override base navigation styles */
     .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem;
-        width: 100%;
-        gap: 0.5rem;
-        flex-wrap: nowrap;
-        max-width: 100%;
-        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-        margin-bottom: 1rem;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0.5rem !important;
+        width: 100% !important;
+        gap: 0.5rem !important;
+        flex-wrap: nowrap !important;
+        max-width: 100% !important;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2) !important;
+        margin-bottom: 1rem !important;
     }
     
     .nav-buttons {
-        display: flex;
-        gap: 0.5rem;
-        margin: 0;
-        padding: 0;
-        flex-shrink: 0;
-        max-width: 65%;
+        display: flex !important;
+        gap: 0.5rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+        max-width: 65% !important;
     }
     
     .nav-right {
-        display: flex;
-        gap: 0.5rem;
-        margin: 0;
-        padding: 0;
-        flex-shrink: 0;
-        max-width: 35%;
+        display: flex !important;
+        gap: 0.5rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+        max-width: 35% !important;
     }
     
-    /* Mobile navigation elements styled like tags */
+    /* Override base button styles */
     .nav-button {
-        padding: 0.4rem 0.6rem;
-        font-size: 0.8rem;
-        line-height: 1;
-        height: auto;
-        min-width: auto;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        white-space: nowrap;
-        flex-shrink: 0;
-        border: 1px solid rgba(128, 128, 128, 0.3);
-        background: transparent;
-        color: inherit;
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.8rem !important;
+        line-height: 1 !important;
+        height: auto !important;
+        min-width: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 4px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        background: transparent !important;
+        color: inherit !important;
+        text-decoration: none !important;
     }
     
     .nav-button.active {
-        border-color: var(--accent-color, #ff0000);
-        color: var(--accent-color, #ff0000);
+        border-color: var(--accent-color, #ff0000) !important;
+        color: var(--accent-color, #ff0000) !important;
     }
     
     .clock {
-        padding: 0.4rem 0.6rem;
-        font-size: 0.8rem;
-        line-height: 1;
-        height: auto;
-        min-width: auto;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        flex-shrink: 0;
-        border: 1px solid rgba(128, 128, 128, 0.3);
-        background: transparent;
-        color: inherit;
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.8rem !important;
+        line-height: 1 !important;
+        height: auto !important;
+        min-width: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 4px !important;
+        flex-shrink: 0 !important;
+        border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        background: transparent !important;
+        color: inherit !important;
     }
     
+    /* Override theme toggle styles */
     .theme-toggle {
-        height: auto;
-        padding: 0.4rem;
-        min-width: 3rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: space-between;
-        border-radius: 4px;
-        flex-shrink: 0;
-        border: 1px solid rgba(128, 128, 128, 0.3);
-        background: transparent;
+        height: auto !important;
+        padding: 0.4rem !important;
+        min-width: 3rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        border-radius: 4px !important;
+        flex-shrink: 0 !important;
+        border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        background: transparent !important;
+        position: relative !important;
+        overflow: hidden !important;
     }
     
     .theme-option {
-        font-size: 0.8rem;
-        width: 1.2rem;
-        height: 1.2rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        font-size: 0.8rem !important;
+        width: 1.2rem !important;
+        height: 1.2rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        z-index: 2 !important;
     }
     
     .theme-slider {
-        width: 1.2rem;
-        height: 1.2rem;
-        border-radius: 50%;
-        background: var(--accent-color, #ff0000);
+        width: 1.2rem !important;
+        height: 1.2rem !important;
+        border-radius: 50% !important;
+        background: var(--accent-color, #ff0000) !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 0.4rem !important;
+        transform: translateY(-50%) !important;
+        transition: transform 0.3s ease !important;
     }
     
     .theme-slider.dark {
-        transform: translateX(1.2rem);
+        transform: translate(1.2rem, -50%) !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -247,50 +258,50 @@
 /* Small mobile styles */
 @media (max-width: 480px) {
     .container {
-        padding: 0.3rem;
+        padding: 0.3rem !important;
     }
     
     .nav-container {
-        padding: 0.3rem;
-        gap: 0.3rem;
+        padding: 0.3rem !important;
+        gap: 0.3rem !important;
     }
     
     .nav-buttons {
-        gap: 0.3rem;
+        gap: 0.3rem !important;
     }
     
     .nav-right {
-        gap: 0.3rem;
+        gap: 0.3rem !important;
     }
     
     .nav-button {
-        padding: 0.3rem 0.5rem;
-        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem !important;
+        font-size: 0.75rem !important;
     }
     
     .clock {
-        padding: 0.3rem 0.5rem;
-        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem !important;
+        font-size: 0.75rem !important;
     }
     
     .theme-toggle {
-        padding: 0.3rem;
-        min-width: 2.8rem;
+        padding: 0.3rem !important;
+        min-width: 2.8rem !important;
     }
     
     .theme-option {
-        font-size: 0.75rem;
-        width: 1rem;
-        height: 1rem;
+        font-size: 0.75rem !important;
+        width: 1rem !important;
+        height: 1rem !important;
     }
     
     .theme-slider {
-        width: 1rem;
-        height: 1rem;
+        width: 1rem !important;
+        height: 1rem !important;
     }
     
     .theme-slider.dark {
-        transform: translateX(1rem);
+        transform: translate(1rem, -50%) !important;
     }
     
     /* Archive and Toolbox page specific */
