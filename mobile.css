@@ -10,7 +10,7 @@
     /* Override base navigation styles */
     .nav-container {
         flex-direction: row !important;
-        justify-content: space-between !important;
+        justify-content: flex-start !important;
         align-items: center !important;
         padding: 0.5rem !important;
         width: 100% !important;
@@ -37,7 +37,6 @@
         padding: 0 !important;
         flex-shrink: 0 !important;
         max-width: 35% !important;
-        margin-right: -0.2rem !important;
     }
     
     /* Override base button styles */
@@ -283,19 +282,32 @@
     .nav-container {
         padding: 0.3rem !important;
         gap: 0.3rem !important;
+        justify-content: flex-start !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        max-width: 100% !important;
     }
     
     .nav-buttons {
-        gap: 0.3rem !important;
+        gap: 0.25rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+        display: flex !important;
     }
     
     .nav-right {
         gap: 0.25rem !important;
-        margin-right: -0.2rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+        display: flex !important;
     }
     
     .nav-button {
-        padding: 0.3rem 0.5rem !important;
+        padding: 0.3rem 0.4rem !important;
         font-size: 0.75rem !important;
     }
     
