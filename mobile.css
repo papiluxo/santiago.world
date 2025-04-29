@@ -113,6 +113,7 @@
         z-index: 2 !important;
         line-height: 1 !important;
         position: relative !important;
+        transform: translate(-0.1rem, 0.1rem) !important;
     }
     
     .theme-option:first-child {
@@ -315,6 +316,7 @@
         font-size: 0.65rem !important;
         width: 0.9rem !important;
         height: 0.9rem !important;
+        transform: translate(-0.1rem, 0.1rem) !important;
     }
     
     .theme-option:first-child {
