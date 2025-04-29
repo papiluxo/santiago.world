@@ -80,12 +80,13 @@
         color: inherit !important;
     }
     
-    /* Override theme toggle styles to match nav button height exactly */
+    /* Override theme toggle styles to match clock height exactly */
     .theme-toggle {
         padding: 0.4rem 0.6rem !important;
         font-size: 0.8rem !important;
         line-height: 1 !important;
-        height: auto !important;
+        height: 1.8rem !important;  /* Match clock height exactly */
+        min-height: 1.8rem !important;  /* Ensure minimum height */
         min-width: 3rem !important;
         display: inline-flex !important;
         align-items: center !important;
@@ -294,6 +295,8 @@
         padding: 0.3rem 0.5rem !important;
         font-size: 0.75rem !important;
         min-width: 2.8rem !important;
+        height: 1.6rem !important;  /* Match clock height exactly */
+        min-height: 1.6rem !important;  /* Ensure minimum height */
     }
     
     .theme-option {
