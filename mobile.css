@@ -90,7 +90,7 @@
         min-width: 3rem !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: space-between !important;
+        justify-content: center !important;
         border-radius: 4px !important;
         flex-shrink: 0 !important;
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
@@ -103,8 +103,8 @@
     
     .theme-option {
         font-size: 0.7rem !important;
-        width: 0.7rem !important;
-        height: 0.7rem !important;
+        width: 1rem !important;
+        height: 1rem !important;
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -116,21 +116,21 @@
     }
     
     .theme-option:first-child {
-        margin-left: 0.6rem !important;
+        margin-left: 0.4rem !important;
     }
     
     .theme-option:last-child {
-        margin-right: 0.6rem !important;
+        margin-right: 0.4rem !important;
     }
     
     .theme-slider {
-        width: 0.85rem !important;
-        height: 0.85rem !important;
+        width: 1rem !important;
+        height: 1rem !important;
         border-radius: 50% !important;
         background: var(--accent-color, #ff0000) !important;
         position: absolute !important;
         top: 50% !important;
-        left: 0.6rem !important;
+        left: 0.4rem !important;
         transform: translateY(-50%) !important;
         transition: transform 0.3s ease !important;
         margin: 0 !important;
@@ -313,26 +313,26 @@
     
     .theme-option {
         font-size: 0.65rem !important;
-        width: 0.65rem !important;
-        height: 0.65rem !important;
+        width: 0.9rem !important;
+        height: 0.9rem !important;
     }
     
     .theme-option:first-child {
-        margin-left: 0.55rem !important;
+        margin-left: 0.35rem !important;
     }
     
     .theme-option:last-child {
-        margin-right: 0.55rem !important;
+        margin-right: 0.35rem !important;
     }
     
     .theme-slider {
-        width: 0.8rem !important;
-        height: 0.8rem !important;
-        left: 0.55rem !important;
+        width: 0.9rem !important;
+        height: 0.9rem !important;
+        left: 0.35rem !important;
     }
     
     .theme-slider.dark {
-        transform: translate(1rem, -50%) !important;
+        transform: translate(1.1rem, -50%) !important;
     }
     
     /* Archive and Toolbox page specific */
