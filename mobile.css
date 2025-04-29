@@ -1,7 +1,7 @@
-/* Mobile styles v1.5 */
+/* Mobile styles v1.6 */
 @media (max-width: 768px) {
     .container {
-        padding: 0.15rem;
+        padding: 0.5rem;
         max-width: 100vw;
         overflow-x: hidden;
         margin: 0;
@@ -12,96 +12,99 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 0.1rem;
+        padding: 0.5rem;
         width: 100%;
-        gap: 0.1rem;
+        gap: 0.5rem;
         flex-wrap: nowrap;
         max-width: 100%;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+        margin-bottom: 1rem;
     }
     
     .nav-buttons {
         display: flex;
-        gap: 0.1rem;
+        gap: 0.5rem;
         margin: 0;
         padding: 0;
         flex-shrink: 0;
-        max-width: 60%;
+        max-width: 65%;
     }
     
     .nav-right {
         display: flex;
-        gap: 0.1rem;
+        gap: 0.5rem;
         margin: 0;
         padding: 0;
         flex-shrink: 0;
-        max-width: 40%;
+        max-width: 35%;
     }
     
     /* Mobile navigation elements styled like tags */
     .nav-button {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
         line-height: 1;
         height: auto;
         min-width: auto;
-        max-width: none;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         border-radius: 4px;
         white-space: nowrap;
         flex-shrink: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        background: var(--tag-bg, rgba(128, 128, 128, 0.1));
-        color: var(--tag-color, inherit);
+        border: 1px solid rgba(128, 128, 128, 0.3);
+        background: transparent;
+        color: inherit;
+    }
+    
+    .nav-button.active {
+        border-color: var(--accent-color, #ff0000);
+        color: var(--accent-color, #ff0000);
     }
     
     .clock {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
         line-height: 1;
         height: auto;
         min-width: auto;
-        max-width: none;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         border-radius: 4px;
         flex-shrink: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        background: var(--tag-bg, rgba(128, 128, 128, 0.1));
-        color: var(--tag-color, inherit);
+        border: 1px solid rgba(128, 128, 128, 0.3);
+        background: transparent;
+        color: inherit;
     }
     
     .theme-toggle {
         height: auto;
-        min-width: auto;
-        max-width: none;
+        padding: 0.4rem;
+        min-width: 3rem;
         display: inline-flex;
         align-items: center;
+        justify-content: space-between;
         border-radius: 4px;
         flex-shrink: 0;
-        background: var(--tag-bg, rgba(128, 128, 128, 0.1));
-        padding: 0.2rem;
+        border: 1px solid rgba(128, 128, 128, 0.3);
+        background: transparent;
     }
     
     .theme-option {
-        font-size: 0.75rem;
-        width: auto;
-        height: auto;
+        font-size: 0.8rem;
+        width: 1.2rem;
+        height: 1.2rem;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.2rem;
     }
     
     .theme-slider {
         width: 1.2rem;
         height: 1.2rem;
         border-radius: 50%;
-        background: var(--tag-color, inherit);
+        background: var(--accent-color, #ff0000);
     }
     
     .theme-slider.dark {
@@ -244,42 +247,41 @@
 /* Small mobile styles */
 @media (max-width: 480px) {
     .container {
-        padding: 0.1rem;
+        padding: 0.3rem;
     }
     
     .nav-container {
-        padding: 0.08rem;
-        gap: 0.08rem;
+        padding: 0.3rem;
+        gap: 0.3rem;
     }
     
     .nav-buttons {
-        gap: 0.08rem;
-        max-width: 55%;
+        gap: 0.3rem;
     }
     
     .nav-right {
-        gap: 0.08rem;
-        max-width: 45%;
+        gap: 0.3rem;
     }
     
-    /* Smaller mobile navigation elements */
     .nav-button {
-        padding: 0.15rem 0.35rem;
-        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.75rem;
     }
     
     .clock {
-        padding: 0.15rem 0.35rem;
-        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.75rem;
     }
     
     .theme-toggle {
-        padding: 0.15rem;
+        padding: 0.3rem;
+        min-width: 2.8rem;
     }
     
     .theme-option {
-        font-size: 0.7rem;
-        padding: 0.15rem;
+        font-size: 0.75rem;
+        width: 1rem;
+        height: 1rem;
     }
     
     .theme-slider {
