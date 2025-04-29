@@ -121,7 +121,7 @@
     }
     
     .theme-option:last-child {
-        transform: translate(-0.25rem, 0.1rem) !important;
+        transform: translate(-0.28rem, 0.1rem) !important;
         margin-right: 0.4rem !important;
     }
     
@@ -325,7 +325,7 @@
     }
     
     .theme-option:last-child {
-        transform: translate(-0.25rem, 0.1rem) !important;
+        transform: translate(-0.28rem, 0.1rem) !important;
     }
     
     .theme-slider {
