@@ -126,7 +126,7 @@
     
     .theme-option:last-child {
         margin: 0 !important;
-        transform: translateX(-0.1rem) !important;
+        transform: translateX(-0.3rem) !important;
     }
     
     .theme-slider {
@@ -348,7 +348,7 @@
     
     .theme-option:last-child {
         margin: 0 !important;
-        transform: translateX(-0.1rem) !important;
+        transform: translateX(-0.3rem) !important;
     }
     
     .theme-slider {
@@ -444,7 +444,7 @@
     
     .theme-option:last-child {
         margin: 0 !important;
-        transform: translateX(-0.1rem) !important;
+        transform: translateX(-0.3rem) !important;
     }
     
     .theme-slider {
