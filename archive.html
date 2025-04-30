@@ -186,7 +186,7 @@
             border-radius: 8px;
             padding: 0;
             transition: all 0.2s ease;
-            margin: 0 0 1.5rem 0;
+            margin: 0;
             position: relative;
             overflow: hidden;
             background: var(--background);
@@ -203,7 +203,7 @@
 
         .project-thumbnail {
             width: 100%;
-            height: 240px;
+            height: 180px;
             flex-shrink: 0;
             overflow: hidden;
             position: relative;
@@ -228,7 +228,7 @@
         }
         
         .project-title {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 500;
             margin: 0;
             color: var(--text);
@@ -238,6 +238,10 @@
             display: none;
             padding: 0;
             border-top: 1px solid var(--border);
+            grid-column: 1 / -1;
+            margin-top: -0.75rem;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
         }
 
         .project-content.active {
@@ -247,7 +251,7 @@
         .project-slider {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 360px;
             overflow: hidden;
         }
 
@@ -260,12 +264,14 @@
         .slider-image {
             flex: 0 0 100%;
             height: 100%;
+            padding: 0 1.5rem;
         }
 
         .slider-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background: var(--background);
         }
 
         .slider-nav {
@@ -276,6 +282,9 @@
             display: flex;
             gap: 0.5rem;
             z-index: 2;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            border-radius: 1rem;
         }
 
         .slider-dot {
@@ -307,6 +316,7 @@
             justify-content: center;
             z-index: 2;
             transition: all 0.2s ease;
+            font-size: 1.2rem;
         }
 
         .slider-button:hover {
@@ -314,59 +324,57 @@
         }
 
         .slider-prev {
-            left: 1rem;
+            left: 0.5rem;
         }
 
         .slider-next {
-            right: 1rem;
+            right: 0.5rem;
         }
 
         .project-description {
             padding: 1.5rem;
             line-height: 1.6;
             border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
         }
 
         .project-tags {
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
 
-        .tag {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.8rem;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .tag:hover {
-            background-color: var(--accent);
-            color: var(--background);
-        }
-
         @media (max-width: 768px) {
-            .project-thumbnail {
-                height: 180px;
+            .project-list {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
-            .project-slider {
-                height: 300px;
-            }
-        }
-
-        @media (max-width: 480px) {
             .project-thumbnail {
                 height: 160px;
             }
 
             .project-slider {
+                height: 280px;
+            }
+
+            .slider-image {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-thumbnail {
+                height: 140px;
+            }
+
+            .project-slider {
                 height: 240px;
+            }
+
+            .slider-image {
+                padding: 0 0.75rem;
             }
         }
         
@@ -598,6 +606,275 @@
         <h1>archive</h1>
         <div class="active-filters" id="activeFilters"></div>
         <div class="project-list">
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        </div>
+        <div class="project-item" data-project="ad_barnes_nature_reserve">
+            <div class="project-card" onclick="toggleProject('ad_barnes_nature_reserve')">
+                <div class="project-thumbnail">
+                    <img src="archive/ad_barnes_nature_reserve/thumbnail.jpg" alt="A.D. Barnes Nature Reserve">
+                </div>
+                <div class="project-title-container">
+                    <h2 class="project-title">ad_barnes_nature_reserve</h2>
+                </div>
+            </div>
+            <div class="project-content" id="content-ad_barnes_nature_reserve">
+                <div class="project-slider">
+                    <div class="slider-container" id="slider-ad_barnes_nature_reserve">
+                        <div class="slider-image">
+                            <img src="archive/ad_barnes_nature_reserve/01.jpg" alt="A.D. Barnes Nature Reserve">
+                        </div>
+                        <div class="slider-image">
+                            <img src="archive/ad_barnes_nature_reserve/02.jpg" alt="A.D. Barnes Nature Reserve">
+                        </div>
+                        <div class="slider-image">
+                            <img src="archive/ad_barnes_nature_reserve/03.jpg" alt="A.D. Barnes Nature Reserve">
+                        </div>
+                    </div>
+                    <button class="slider-button slider-prev" onclick="prevSlide('ad_barnes_nature_reserve')">←</button>
+                    <button class="slider-button slider-next" onclick="nextSlide('ad_barnes_nature_reserve')">→</button>
+                    <div class="slider-nav" id="slider-nav-ad_barnes_nature_reserve"></div>
+                </div>
+                <div class="project-description">
+                    nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).
+                </div>
+                <div class="project-tags">
+                    <span class="tag" data-tag="team">team</span>
+                    <span class="tag" data-tag="rhino">rhino</span>
+                    <span class="tag" data-tag="fall '23">fall '23</span>
+                    <span class="tag" data-tag="miami, fl">miami, fl</span>
+                    <span class="tag" data-tag="arc604">arc604</span>
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="cannabis_farm">
+            <div class="project-header" onclick="toggleProject('cannabis_farm')">
+                <div class="project-title-container">
+                    <h2 class="project-title">cannabis_farm</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="arc605">arc605</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/cannabis_farm/cover.jpg" alt="cannabis_farm thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-cannabis_farm">
+                <div class="project-description">
+                    cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.
+                </div>
+                <div class="project-images">
+                    <img src="archive/cannabis_farm/cover.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/site_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/program_diagram.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/harvesting_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/flowering_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/extraction_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/public_plan.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/pavilion.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/typical_structure.jpg" alt="cannabis_farm image" class="project-image" loading="lazy"><img src="archive/cannabis_farm/flexbrick_composition_diagram.jpg" alt="cannabis_farm image" class="project-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="chil_bookshelf">
+            <div class="project-header" onclick="toggleProject('chil_bookshelf')">
+                <div class="project-title-container">
+                    <h2 class="project-title">chil_bookshelf</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="chil">chil</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/chil_bookshelf/render.jpg" alt="chil_bookshelf thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-chil_bookshelf">
+                <div class="project-description">
+                    modular bookshelf for chil (community, housing and identity lab) studio space. comprised of 13 aluminum pieces.
+                </div>
+                <div class="project-images">
+                    <img src="archive/chil_bookshelf/con_doc.jpg?t=1745608482" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/render.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/diagram.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/view_2.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/built.JPG" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/view_1.jpeg?t=1745608482" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/compositions.GIF" alt="chil_bookshelf image" class="project-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="icosahedron_explosion">
+            <div class="project-header" onclick="toggleProject('icosahedron_explosion')">
+                <div class="project-title-container">
+                    <h2 class="project-title">icosahedron_explosion</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="fall '23">fall '23</span><span class="tag" data-tag="arc611">arc611</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/icosahedron_explosion/previews/icosahedron_explosion_001.png" alt="icosahedron_explosion thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-icosahedron_explosion">
+                <div class="project-description">
+                    geometrical exploration of an icosahedron, a 20 face polyhedron.
+                </div>
+                <div class="project-images">
+                    <img src="archive/icosahedron_explosion/previews/icosahedron_explosion_001.png" alt="icosahedron_explosion image" class="project-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="illinois_institute_of_technology_dorms">
+            <div class="project-header" onclick="toggleProject('illinois_institute_of_technology_dorms')">
+                <div class="project-title-container">
+                    <h2 class="project-title">illinois_institute_of_technology_dorms</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="kangaroo">kangaroo</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="chicago, il">chicago, il</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_001.png" alt="illinois_institute_of_technology_dorms thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-illinois_institute_of_technology_dorms">
+                <div class="project-description">
+                    residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, 'illinois_institute_of_technology_truss_system')">parametric truss system</a>.
+                </div>
+                <div class="project-images">
+                    <img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_001.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_002.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_003.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_004.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_005.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_006.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_007.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_008.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="janus_house">
+            <div class="project-header" onclick="toggleProject('janus_house')">
+                <div class="project-title-container">
+                    <h2 class="project-title">janus_house</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="precedent">precedent</span><span class="tag" data-tag="arc605">arc605</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/janus_house/cover.jpeg" alt="janus_house thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-janus_house">
+                <div class="project-description">
+                    precedent study of studio sean canty's conceptual janus house.
+                </div>
+                <div class="project-images">
+                    <img src="archive/janus_house/cover.jpeg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/dogtrot_diagram.jpg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/form_diagram.jpeg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/unrolled_diagram.jpg?t=1745608482" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/floor_plan.jpg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/section.jpg" alt="janus_house image" class="project-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="lego_bridge">
+            <div class="project-header" onclick="toggleProject('lego_bridge')">
+                <div class="project-title-container">
+                    <h2 class="project-title">lego_bridge</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="wasp">wasp</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="arc656">arc656</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/lego_bridge/previews/lego_bridge_presentation_001.png" alt="lego_bridge thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-lego_bridge">
+                <div class="project-description">
+                    bridge proposal, only using lego blocks, to go over lake osceola in the university of miami's campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, 'lego_bridge_aggregation')">computational aggregation</a> used to develop form and path.
+                </div>
+                <div class="project-images">
+                    <img src="archive/lego_bridge/previews/lego_bridge_presentation_001.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_002.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_003.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_004.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_005.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_006.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_007.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_008.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_009.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_010.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_011.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_012.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_013.png" alt="lego_bridge image" class="project-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="moca_playhouse">
+            <div class="project-header" onclick="toggleProject('moca_playhouse')">
+                <div class="project-title-container">
+                    <h2 class="project-title">moca_playhouse</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="team">team</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="summer '24">summer '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="chil">chil</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/moca_playhouse/view_2.JPG" alt="moca_playhouse thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-moca_playhouse">
+                <div class="project-description">
+                    community activation with temporary install of a lumber house, in moca (museum of contemporary art, miami), inspired by miami's shotgun house vernacular.
+                </div>
+                <div class="project-images">
+                    <img src="archive/moca_playhouse/Floor Plan_001.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_001.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_002.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_010.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_012.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/tech_drawings_014.png" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/view_4.jpg" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/view_2.JPG" alt="moca_playhouse image" class="project-image" loading="lazy"><img src="archive/moca_playhouse/view_3.JPG" alt="moca_playhouse image" class="project-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="nervi_dome">
+            <div class="project-header" onclick="toggleProject('nervi_dome')">
+                <div class="project-title-container">
+                    <h2 class="project-title">nervi_dome</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="turin, it">turin, it</span><span class="tag" data-tag="arc656">arc656</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/nervi_dome/previews/nervi_dome_001.png" alt="nervi_dome thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-nervi_dome">
+                <div class="project-description">
+                    <a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, 'nervi_dome')">form study</a> of pier luigi nervi's palazzetto dello sport, in turin, italy.
+                </div>
+                <div class="project-images">
+                    <img src="archive/nervi_dome/previews/nervi_dome_001.png" alt="nervi_dome image" class="project-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="project-item" data-project="parametric_cup">
+            <div class="project-header" onclick="toggleProject('parametric_cup')">
+                <div class="project-title-container">
+                    <h2 class="project-title">parametric_cup</h2>
+                    <div class="project-tags">
+                        <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="arc656">arc656</span>
+                    </div>
+                </div>
+                <div class="project-thumbnail">
+                    <img src="archive/parametric_cup/previews/diagram_001.png" alt="parametric_cup thumbnail">
+                </div>
+                <button class="toggle-button">
+                    <svg width="24" height="24" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content" id="content-parametric_cup">
+                <div class="project-description">
             
                 <div class="project-item" data-project="ad_barnes_nature_reserve">
                     <div class="project-card" onclick="toggleProject('ad_barnes_nature_reserve')">
