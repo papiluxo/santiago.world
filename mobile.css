@@ -403,7 +403,7 @@
 /* Extra small mobile styles - for very narrow screens like iPhone 13 mini */
 @media (max-width: 375px) {
     .nav-container {
-        padding: 0.4rem 1rem !important;
+        padding: 0.4rem 1.2rem !important;
         gap: 0.3rem !important;
         justify-content: space-between !important;
     }
