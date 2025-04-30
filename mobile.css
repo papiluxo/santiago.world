@@ -1,7 +1,7 @@
 /* Mobile styles v1.7 */
 @media (max-width: 768px) {
     .container {
-        padding: 0 !important;
+        padding: 0 1.2rem !important;
         max-width: 100vw !important;
         overflow-x: hidden !important;
         margin: 0 !important;
@@ -219,8 +219,9 @@
     }
     
     h1 {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
+        font-size: 2.5rem !important;
+        margin: 1rem 0.5rem 1.5rem !important;
+        line-height: 1.2 !important;
     }
     
     h2 {
@@ -228,7 +229,10 @@
     }
     
     .revealing-text {
-        font-size: 1rem;
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        margin: 0 0.5rem !important;
+        max-width: calc(100% - 1rem) !important;
     }
     
     /* Archive and Toolbox page specific */
@@ -291,7 +295,7 @@
 /* Small mobile styles */
 @media (max-width: 480px) {
     .container {
-        padding: 0 !important;
+        padding: 0 1rem !important;
     }
     
     .nav-container {
@@ -388,6 +392,17 @@
         padding: 0.3rem 0.5rem;
         font-size: 0.8rem;
         gap: 0.3rem;
+    }
+
+    .revealing-text {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        margin: 0 0.3rem !important;
+    }
+
+    h1 {
+        font-size: 2.2rem !important;
+        margin: 0.8rem 0.3rem 1.2rem !important;
     }
 }
 
