@@ -297,7 +297,7 @@
 
     /* Main content container padding */
     .main-content {
-        padding: 0 1.2rem !important;
+        padding: 0 !important;
     }
 }
 
@@ -406,7 +406,7 @@
 
     /* Main content container padding */
     .main-content {
-        padding: 0 1rem !important;
+        padding: 0 !important;
     }
 }
 
@@ -461,6 +461,11 @@
         font-size: 2.2rem !important;
         margin: 0.8rem 0.3rem 1.2rem !important;
         padding: 0 0rem !important;
+    }
+
+    /* Main content container padding */
+    .main-content {
+        padding: 0 !important;
     }
 }
 
