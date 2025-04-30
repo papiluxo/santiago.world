@@ -221,7 +221,7 @@
         padding-right: 30px;
     }
     
-    h1 {
+    h1, .archive-title, .toolbox-title {
         font-size: 2.5rem !important;
         margin: 1rem 0.5rem 1.5rem !important;
         line-height: 1.2 !important;
@@ -398,7 +398,7 @@
         margin: 0 0.3rem !important;
     }
 
-    h1 {
+    h1, .archive-title, .toolbox-title {
         font-size: 2.2rem !important;
         margin: 0.8rem 0.3rem 1.2rem !important;
         padding: 0 0rem !important;
@@ -457,7 +457,7 @@
         transform: translate(1.2rem, -50%) !important;
     }
 
-    h1 {
+    h1, .archive-title, .toolbox-title {
         font-size: 2.2rem !important;
         margin: 0.8rem 0.3rem 1.2rem !important;
         padding: 0 0rem !important;
