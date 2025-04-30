@@ -13,7 +13,7 @@
         flex-direction: row !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding: 0.5rem 1rem !important;
+        padding: 0.5rem 1.5rem !important;
         width: 100% !important;
         gap: 0.6rem !important;
         flex-wrap: nowrap !important;
@@ -303,7 +303,7 @@
     }
     
     .nav-container {
-        padding: 0.4rem 0.8rem !important;
+        padding: 0.4rem 1rem !important;
         gap: 0.4rem !important;
         justify-content: space-between !important;
     }
@@ -403,7 +403,7 @@
 /* Extra small mobile styles - for very narrow screens like iPhone 13 mini */
 @media (max-width: 375px) {
     .nav-container {
-        padding: 0.4rem 0.8rem !important;
+        padding: 0.4rem 1rem !important;
         gap: 0.3rem !important;
         justify-content: space-between !important;
     }
