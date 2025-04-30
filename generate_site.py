@@ -544,7 +544,7 @@ def generate_index_html():
         <h1>santiago</h1>
         <div class="revealing-text">
             born in caracas, venezuela in 1999<br>
-            bs. finance 2021<br>
+            bs.finance in 2021<br>
             m.arch loading<span class="loading-dots"></span>
         </div>
     </div>
