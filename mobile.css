@@ -11,7 +11,7 @@
     /* Override base navigation styles */
     .nav-container {
         flex-direction: row !important;
-        justify-content: center !important;
+        justify-content: space-between !important;
         align-items: center !important;
         padding: 0.5rem 0.8rem !important;
         width: 100% !important;
@@ -50,6 +50,7 @@
         padding: 0 !important;
         flex-shrink: 0 !important;
         margin-left: auto !important;
+        justify-content: flex-end !important;
     }
     
     /* Override base button styles */
@@ -81,67 +82,64 @@
         display: none !important;
     }
     
-    /* Theme toggle - simplified implementation */
+    /* Override theme toggle styles to match clock height exactly */
     .theme-toggle {
-        position: fixed !important;
-        bottom: 1.5rem !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        z-index: 1000 !important;
-        background: var(--background-color, #ffffff) !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-        border-radius: 20px !important;
-        padding: 0 !important;
-        width: 5rem !important;
-        height: 2.5rem !important;
-        margin: 0 !important;
+        padding: 0 0.5rem !important;
+        font-size: 0.8rem !important;
+        line-height: 1 !important;
+        height: 1.8rem !important;
+        min-height: 1.8rem !important;
+        min-width: 3rem !important;
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
-        border: 1px solid rgba(128, 128, 128, 0.2) !important;
+        border-radius: 4px !important;
+        flex-shrink: 0 !important;
+        border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        background: transparent !important;
+        position: relative !important;
         overflow: hidden !important;
-        backdrop-filter: blur(8px) !important;
-        -webkit-backdrop-filter: blur(8px) !important;
-        background-color: rgba(255, 255, 255, 0.9) !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        gap: 0.5rem !important;
     }
     
-    [data-theme="dark"] .theme-toggle {
-        background-color: rgba(0, 0, 0, 0.9) !important;
-    }
-    
-    /* Center each symbol in its container with no padding */
     .theme-option {
-        font-size: 1rem !important;
-        width: 2.5rem !important; /* Exactly half the toggle width */
-        height: 2.5rem !important;
-        display: flex !important;
+        font-size: 0.7rem !important;
+        width: 1rem !important;
+        height: 1rem !important;
+        display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
         padding: 0 !important;
         margin: 0 !important;
         z-index: 2 !important;
+        line-height: 1 !important;
         position: relative !important;
-        text-align: center !important;
+        transform: translateY(0.1rem) !important;
     }
     
-    /* Red dot positioned exactly at the center of each half */
+    .theme-option:first-child,
+    .theme-option:last-child {
+        margin: 0 !important;
+    }
+    
     .theme-slider {
-        width: 1.8rem !important;
-        height: 1.8rem !important;
+        width: 1rem !important;
+        height: 1rem !important;
         border-radius: 50% !important;
         background: var(--accent-color, #ff0000) !important;
         position: absolute !important;
+        top: 50% !important;
+        left: 0.5rem !important;
+        transform: translateY(-50%) !important;
         transition: transform 0.3s ease !important;
         margin: 0 !important;
         padding: 0 !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-125%, -50%) !important; /* Center of left half */
     }
     
-    /* Move precisely to center of right half */
     .theme-slider.dark {
-        transform: translate(25%, -50%) !important; /* Center of right half */
+        transform: translate(1.5rem, -50%) !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -295,7 +293,6 @@
     /* Main content container padding */
     .main-content {
         padding: 0 1.2rem !important;
-        padding-bottom: 5rem !important;
     }
 }
 
@@ -308,6 +305,7 @@
     .nav-container {
         padding: 0.4rem 0.6rem !important;
         gap: 0.4rem !important;
+        justify-content: space-between !important;
     }
     
     .nav-buttons {
@@ -316,6 +314,7 @@
     
     .nav-right {
         gap: 0.4rem !important;
+        justify-content: flex-end !important;
     }
     
     .nav-button {
@@ -328,25 +327,28 @@
     }
     
     .theme-toggle {
-        bottom: 1.2rem !important;
-        width: 4.5rem !important;
-        height: 2.2rem !important;
+        padding: 0 0.4rem !important;
+        gap: 0.4rem !important;
+        min-width: 2.8rem !important;
+        height: 1.5rem !important;
+        min-height: 1.5rem !important;
     }
     
     .theme-option {
-        font-size: 0.9rem !important;
-        width: 2.25rem !important;
-        height: 2.2rem !important;
+        font-size: 0.65rem !important;
+        width: 0.9rem !important;
+        height: 0.9rem !important;
+        transform: translateY(0.1rem) !important;
     }
     
     .theme-slider {
-        width: 1.6rem !important;
-        height: 1.6rem !important;
-        transform: translate(-125%, -50%) !important; /* Center of left half */
+        width: 0.9rem !important;
+        height: 0.9rem !important;
+        left: 0.4rem !important;
     }
     
     .theme-slider.dark {
-        transform: translate(25%, -50%) !important; /* Center of right half */
+        transform: translate(1.3rem, -50%) !important;
     }
     
     /* Archive and Toolbox page specific */
@@ -395,7 +397,6 @@
     /* Main content container padding */
     .main-content {
         padding: 0 1rem !important;
-        padding-bottom: 5rem !important;
     }
 }
 
@@ -404,6 +405,7 @@
     .nav-container {
         padding: 0.4rem 0.4rem !important;
         gap: 0.3rem !important;
+        justify-content: space-between !important;
     }
     
     .nav-buttons {
@@ -412,6 +414,7 @@
     
     .nav-right {
         gap: 0.3rem !important;
+        justify-content: flex-end !important;
     }
     
     .nav-button {
@@ -424,31 +427,9 @@
     }
     
     .theme-toggle {
-        bottom: 1rem !important;
-        width: 4rem !important;
-        height: 2rem !important;
-    }
-    
-    .theme-option {
-        font-size: 0.8rem !important;
-        width: 2rem !important;
-        height: 2rem !important;
-    }
-    
-    .theme-slider {
-        width: 1.4rem !important;
-        height: 1.4rem !important;
-        transform: translate(-125%, -50%) !important; /* Center of left half */
-    }
-    
-    .theme-slider.dark {
-        transform: translate(25%, -50%) !important; /* Center of right half */
-    }
-    
-    .tool-button {
-        padding: 0.3rem 0.5rem;
-        font-size: 0.8rem;
-        gap: 0.3rem;
+        padding: 0 0.3rem !important;
+        gap: 0.3rem !important;
+        min-width: 2.6rem !important;
     }
 }
 
