@@ -144,7 +144,7 @@
     }
     
     .theme-slider.dark {
-        transform: translate(1.8rem, -50%) !important;
+        transform: translate(2.2rem, -50%) !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -351,13 +351,13 @@
     }
     
     .theme-slider {
-        width: 1.1rem !important;
-        height: 1.1rem !important;
+        width: 1.2rem !important;
+        height: 1.2rem !important;
         left: 1.2rem !important;
     }
     
     .theme-slider.dark {
-        transform: translate(1.6rem, -50%) !important;
+        transform: translate(1.9rem, -50%) !important;
     }
     
     /* Archive and Toolbox page specific */
@@ -461,7 +461,7 @@
     }
     
     .theme-slider.dark {
-        transform: translate(1.4rem, -50%) !important;
+        transform: translate(1.7rem, -50%) !important;
     }
     
     .tool-button {
