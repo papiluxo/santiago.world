@@ -144,7 +144,7 @@
     }
     
     .theme-slider.dark {
-        transform: translate(1.1rem, -50%) !important;
+        transform: translate(1.5rem, -50%) !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -358,7 +358,7 @@
     }
     
     .theme-slider.dark {
-        transform: translate(0.9rem, -50%) !important;
+        transform: translate(1.3rem, -50%) !important;
     }
     
     /* Archive and Toolbox page specific */
@@ -454,7 +454,7 @@
     }
     
     .theme-slider.dark {
-        transform: translate(0.9rem, -50%) !important;
+        transform: translate(1.3rem, -50%) !important;
     }
 }
 
