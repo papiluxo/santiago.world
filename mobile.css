@@ -1,7 +1,7 @@
 /* Mobile styles v1.7 */
 @media (max-width: 768px) {
     .container {
-        padding: 0 1.2rem !important;
+        padding: 0 !important;
         max-width: 100vw !important;
         overflow-x: hidden !important;
         margin: 0 !important;
@@ -22,7 +22,7 @@
         margin-bottom: 1rem !important;
         box-sizing: border-box !important;
         position: relative !important;
-        left: -0.1rem !important;
+        left: 0 !important;
     }
     
     .nav-buttons {
@@ -222,6 +222,7 @@
         font-size: 2.5rem !important;
         margin: 1rem 0.5rem 1.5rem !important;
         line-height: 1.2 !important;
+        padding: 0 0.7rem !important;
     }
     
     h2 {
@@ -289,6 +290,11 @@
     .tool-button svg {
         width: 14px;
         height: 14px;
+    }
+
+    /* Main content container padding */
+    .main-content {
+        padding: 0 1.2rem !important;
     }
 }
 
@@ -403,6 +409,12 @@
     h1 {
         font-size: 2.2rem !important;
         margin: 0.8rem 0.3rem 1.2rem !important;
+        padding: 0 0.5rem !important;
+    }
+
+    /* Main content container padding */
+    .main-content {
+        padding: 0 1rem !important;
     }
 }
 
