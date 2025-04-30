@@ -205,10 +205,7 @@
     
     /* Toggle button position */
     .toggle-button {
-        position: absolute;
-        top: 0.5rem;
-        right: 0;
-        padding: 0.35rem;
+        display: none !important;
     }
     
     /* Toolbox page specific adjustments */
@@ -311,6 +308,8 @@
         border: none;
         margin: 0;
         justify-content: space-between;
+        position: relative;
+        width: 100%;
     }
 
     .project-thumbnail {
@@ -347,8 +346,6 @@
 
     .project-content {
         display: none;
-        padding: 0;
-        border-top: 1px solid rgba(128, 128, 128, 0.2);
     }
 
     .project-content.active {
