@@ -126,7 +126,7 @@
     
     .theme-option:last-child {
         margin: 0 !important;
-        transform: translateX(-0.3rem) !important;
+        transform: translateX(-0.5rem) !important;
     }
     
     .theme-slider {
@@ -144,7 +144,7 @@
     }
     
     .theme-slider.dark {
-        transform: translate(1.3rem, -50%) !important;
+        transform: translate(1.1rem, -50%) !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -348,7 +348,7 @@
     
     .theme-option:last-child {
         margin: 0 !important;
-        transform: translateX(-0.3rem) !important;
+        transform: translateX(-0.5rem) !important;
     }
     
     .theme-slider {
@@ -358,7 +358,7 @@
     }
     
     .theme-slider.dark {
-        transform: translate(1.1rem, -50%) !important;
+        transform: translate(0.9rem, -50%) !important;
     }
     
     /* Archive and Toolbox page specific */
@@ -444,7 +444,7 @@
     
     .theme-option:last-child {
         margin: 0 !important;
-        transform: translateX(-0.3rem) !important;
+        transform: translateX(-0.5rem) !important;
     }
     
     .theme-slider {
@@ -454,7 +454,7 @@
     }
     
     .theme-slider.dark {
-        transform: translate(1.1rem, -50%) !important;
+        transform: translate(0.9rem, -50%) !important;
     }
 }
 
