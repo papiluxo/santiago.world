@@ -81,7 +81,7 @@
         display: none !important;
     }
     
-    /* Theme toggle - completely revised implementation */
+    /* Theme toggle - simplified implementation */
     .theme-toggle {
         position: fixed !important;
         bottom: 1.5rem !important;
@@ -124,7 +124,7 @@
         text-align: center !important;
     }
     
-    /* Carefully positioned red dot that aligns with symbols */
+    /* Red dot positioned exactly at the center of each half */
     .theme-slider {
         width: 1.8rem !important;
         height: 1.8rem !important;
@@ -135,13 +135,13 @@
         margin: 0 !important;
         padding: 0 !important;
         top: 50% !important;
-        transform: translate(0.45rem, -50%) !important; /* Adjusted to center on sun */
-        left: 0 !important;
+        left: 50% !important;
+        transform: translate(-125%, -50%) !important; /* Center of left half */
     }
     
-    /* Move precisely to second symbol center */
+    /* Move precisely to center of right half */
     .theme-slider.dark {
-        transform: translate(2.75rem, -50%) !important; /* Adjusted to center on moon */
+        transform: translate(25%, -50%) !important; /* Center of right half */
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -342,11 +342,11 @@
     .theme-slider {
         width: 1.6rem !important;
         height: 1.6rem !important;
-        transform: translate(0.4rem, -50%) !important; /* Adjusted for small screens */
+        transform: translate(-125%, -50%) !important; /* Center of left half */
     }
     
     .theme-slider.dark {
-        transform: translate(2.45rem, -50%) !important; /* Adjusted for small screens */
+        transform: translate(25%, -50%) !important; /* Center of right half */
     }
     
     /* Archive and Toolbox page specific */
@@ -438,11 +438,11 @@
     .theme-slider {
         width: 1.4rem !important;
         height: 1.4rem !important;
-        transform: translate(0.35rem, -50%) !important; /* Adjusted for extra small screens */
+        transform: translate(-125%, -50%) !important; /* Center of left half */
     }
     
     .theme-slider.dark {
-        transform: translate(2.25rem, -50%) !important; /* Adjusted for extra small screens */
+        transform: translate(25%, -50%) !important; /* Center of right half */
     }
     
     .tool-button {
