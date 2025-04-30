@@ -225,7 +225,7 @@
         font-size: 2.5rem !important;
         margin: 1rem 0.5rem 1.5rem !important;
         line-height: 1.2 !important;
-        padding: 0 1.5rem !important;
+        padding: 0 0.5rem !important;
     }
     
     h2 {
@@ -401,7 +401,7 @@
     h1 {
         font-size: 2.2rem !important;
         margin: 0.8rem 0.3rem 1.2rem !important;
-        padding: 0 1.2rem !important;
+        padding: 0 0.3rem !important;
     }
 
     /* Main content container padding */
@@ -460,7 +460,7 @@
     h1 {
         font-size: 2.2rem !important;
         margin: 0.8rem 0.3rem 1.2rem !important;
-        padding: 0 1.2rem !important;
+        padding: 0 0.3rem !important;
     }
 }
 
