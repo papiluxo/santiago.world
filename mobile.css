@@ -97,7 +97,7 @@
         margin: 0 !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: space-between !important; /* Create precise positioning */
+        justify-content: space-between !important;
         border: 1px solid rgba(128, 128, 128, 0.2) !important;
         overflow: hidden !important;
         backdrop-filter: blur(8px) !important;
@@ -135,13 +135,13 @@
         margin: 0 !important;
         padding: 0 !important;
         top: 50% !important;
-        transform: translate(0.35rem, -50%) !important; /* Precisely center on first symbol */
+        transform: translate(0.45rem, -50%) !important; /* Adjusted to center on sun */
         left: 0 !important;
     }
     
     /* Move precisely to second symbol center */
     .theme-slider.dark {
-        transform: translate(2.85rem, -50%) !important; /* Exact distance to second symbol */
+        transform: translate(2.75rem, -50%) !important; /* Adjusted to center on moon */
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -335,18 +335,18 @@
     
     .theme-option {
         font-size: 0.9rem !important;
-        width: 2.25rem !important; /* Exactly half the toggle width */
+        width: 2.25rem !important;
         height: 2.2rem !important;
     }
     
     .theme-slider {
         width: 1.6rem !important;
         height: 1.6rem !important;
-        transform: translate(0.35rem, -50%) !important; /* Precisely center on first symbol */
+        transform: translate(0.4rem, -50%) !important; /* Adjusted for small screens */
     }
     
     .theme-slider.dark {
-        transform: translate(2.55rem, -50%) !important; /* Exact distance to second symbol */
+        transform: translate(2.45rem, -50%) !important; /* Adjusted for small screens */
     }
     
     /* Archive and Toolbox page specific */
@@ -431,18 +431,18 @@
     
     .theme-option {
         font-size: 0.8rem !important;
-        width: 2rem !important; /* Exactly half the toggle width */
+        width: 2rem !important;
         height: 2rem !important;
     }
     
     .theme-slider {
         width: 1.4rem !important;
         height: 1.4rem !important;
-        transform: translate(0.3rem, -50%) !important; /* Precisely center on first symbol */
+        transform: translate(0.35rem, -50%) !important; /* Adjusted for extra small screens */
     }
     
     .theme-slider.dark {
-        transform: translate(2.3rem, -50%) !important; /* Exact distance to second symbol */
+        transform: translate(2.25rem, -50%) !important; /* Adjusted for extra small screens */
     }
     
     .tool-button {
