@@ -81,7 +81,7 @@
         display: none !important;
     }
     
-    /* Override theme toggle styles to match clock height exactly */
+    /* Theme toggle - completely revised implementation */
     .theme-toggle {
         position: fixed !important;
         bottom: 1.5rem !important;
@@ -91,60 +91,58 @@
         background: var(--background-color, #ffffff) !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
         border-radius: 20px !important;
-        padding: 0.5rem 1.4rem !important;
-        min-width: 4rem !important;
+        padding: 0 !important;
+        width: 5rem !important;
         height: 2.5rem !important;
-        min-height: 2.5rem !important;
         margin: 0 !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: space-between !important;
-        gap: 1.8rem !important;
+        justify-content: space-around !important; /* Evenly space the symbols */
         border: 1px solid rgba(128, 128, 128, 0.2) !important;
         overflow: hidden !important;
         backdrop-filter: blur(8px) !important;
         -webkit-backdrop-filter: blur(8px) !important;
         background-color: rgba(255, 255, 255, 0.9) !important;
-        width: auto !important;
-        right: auto !important;
-        top: auto !important;
+        position: relative !important;
     }
     
     [data-theme="dark"] .theme-toggle {
         background-color: rgba(0, 0, 0, 0.9) !important;
     }
     
+    /* Center each symbol in its container with no padding */
     .theme-option {
-        font-size: 0.9rem !important;
-        width: 1.2rem !important;
-        height: 1.2rem !important;
-        display: inline-flex !important;
+        font-size: 1rem !important;
+        width: 2.5rem !important; /* Take half the toggle width */
+        height: 2.5rem !important;
+        display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         padding: 0 !important;
         margin: 0 !important;
         z-index: 2 !important;
-        line-height: 1 !important;
         position: relative !important;
-        transform: translateY(0.05rem) !important;
+        text-align: center !important;
     }
     
+    /* Ensure the red dot is exactly positioned over the symbol centers */
     .theme-slider {
-        width: 1.2rem !important;
-        height: 1.2rem !important;
+        width: 1.8rem !important;
+        height: 1.8rem !important;
         border-radius: 50% !important;
         background: var(--accent-color, #ff0000) !important;
         position: absolute !important;
-        top: 50% !important;
-        left: 1.4rem !important;
-        transform: translateY(-50%) !important;
         transition: transform 0.3s ease !important;
         margin: 0 !important;
         padding: 0 !important;
+        top: 50% !important;
+        transform: translate(calc(-50% + 1.25rem), -50%) !important; /* Center on first symbol */
+        left: 0 !important;
     }
     
-    .theme-slider.dark {
-        transform: translate(2.2rem, -50%) !important;
+    /* Move to second symbol center with precision */
+    [data-theme="dark"] .theme-slider {
+        transform: translate(calc(-50% + 3.75rem), -50%) !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -332,32 +330,28 @@
     
     .theme-toggle {
         bottom: 1.2rem !important;
-        min-width: 3.5rem !important;
+        width: 4.5rem !important;
         height: 2.2rem !important;
-        min-height: 2.2rem !important;
-        padding: 0.4rem 1.2rem !important;
-        gap: 1.6rem !important;
-    }
-    
-    [data-theme="dark"] .theme-toggle {
-        background-color: rgba(0, 0, 0, 0.9) !important;
     }
     
     .theme-option {
-        font-size: 0.8rem !important;
-        width: 1.1rem !important;
-        height: 1.1rem !important;
-        transform: translateY(0.05rem) !important;
+        font-size: 0.9rem !important;
+        width: 2.25rem !important;
+        height: 2.2rem !important;
     }
     
     .theme-slider {
-        width: 1.2rem !important;
-        height: 1.2rem !important;
-        left: 1.2rem !important;
+        width: 1.6rem !important;
+        height: 1.6rem !important;
     }
     
-    .theme-slider.dark {
-        transform: translate(1.9rem, -50%) !important;
+    /* Precise positioning for small mobile screens */
+    .theme-slider {
+        transform: translate(calc(-50% + 1.125rem), -50%) !important;
+    }
+    
+    [data-theme="dark"] .theme-slider {
+        transform: translate(calc(-50% + 3.375rem), -50%) !important;
     }
     
     /* Archive and Toolbox page specific */
@@ -436,32 +430,28 @@
     
     .theme-toggle {
         bottom: 1rem !important;
-        min-width: 3.2rem !important;
+        width: 4rem !important;
         height: 2rem !important;
-        min-height: 2rem !important;
-        padding: 0.3rem 1rem !important;
-        gap: 1.4rem !important;
-    }
-    
-    [data-theme="dark"] .theme-toggle {
-        background-color: rgba(0, 0, 0, 0.9) !important;
     }
     
     .theme-option {
-        font-size: 0.75rem !important;
-        width: 1rem !important;
-        height: 1rem !important;
-        transform: translateY(0.05rem) !important;
+        font-size: 0.8rem !important;
+        width: 2rem !important;
+        height: 2rem !important;
     }
     
     .theme-slider {
-        width: 1rem !important;
-        height: 1rem !important;
-        left: 1rem !important;
+        width: 1.4rem !important;
+        height: 1.4rem !important;
     }
     
-    .theme-slider.dark {
-        transform: translate(1.7rem, -50%) !important;
+    /* Precise positioning for extra small mobile screens */
+    .theme-slider {
+        transform: translate(calc(-50% + 1rem), -50%) !important;
+    }
+    
+    [data-theme="dark"] .theme-slider {
+        transform: translate(calc(-50% + 3rem), -50%) !important;
     }
     
     .tool-button {
