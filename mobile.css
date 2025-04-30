@@ -103,7 +103,6 @@
         backdrop-filter: blur(8px) !important;
         -webkit-backdrop-filter: blur(8px) !important;
         background-color: rgba(255, 255, 255, 0.9) !important;
-        position: relative !important;
     }
     
     [data-theme="dark"] .theme-toggle {
@@ -136,13 +135,13 @@
         margin: 0 !important;
         padding: 0 !important;
         top: 50% !important;
-        transform: translate(calc(-50% + 1.25rem), -50%) !important; /* Center on first symbol */
-        left: 0 !important;
+        left: 0.85rem !important; /* Position for first icon */
+        transform: translateY(-50%) !important;
     }
     
     /* Move to second symbol center with precision */
-    [data-theme="dark"] .theme-slider {
-        transform: translate(calc(-50% + 3.75rem), -50%) !important;
+    .theme-slider.dark {
+        transform: translateX(2.5rem) translateY(-50%) !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -343,15 +342,11 @@
     .theme-slider {
         width: 1.6rem !important;
         height: 1.6rem !important;
+        left: 0.75rem !important;
     }
     
-    /* Precise positioning for small mobile screens */
-    .theme-slider {
-        transform: translate(calc(-50% + 1.125rem), -50%) !important;
-    }
-    
-    [data-theme="dark"] .theme-slider {
-        transform: translate(calc(-50% + 3.375rem), -50%) !important;
+    .theme-slider.dark {
+        transform: translateX(2.3rem) translateY(-50%) !important;
     }
     
     /* Archive and Toolbox page specific */
@@ -443,15 +438,11 @@
     .theme-slider {
         width: 1.4rem !important;
         height: 1.4rem !important;
+        left: 0.65rem !important;
     }
     
-    /* Precise positioning for extra small mobile screens */
-    .theme-slider {
-        transform: translate(calc(-50% + 1rem), -50%) !important;
-    }
-    
-    [data-theme="dark"] .theme-slider {
-        transform: translate(calc(-50% + 3rem), -50%) !important;
+    .theme-slider.dark {
+        transform: translateX(2.05rem) translateY(-50%) !important;
     }
     
     .tool-button {
