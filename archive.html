@@ -182,79 +182,158 @@
         }
         
         .project-item {
-            border-bottom: 1px solid var(--border);
-            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0;
             transition: all 0.2s ease;
-            margin: 0 -1rem;
+            margin: 0 0 1.5rem 0;
             position: relative;
+            overflow: hidden;
+            background: var(--background);
         }
         
         .project-item:hover {
-            box-shadow: none;
-            background: none;
-            border-bottom: 1px solid var(--border);
+            border-color: var(--accent);
         }
 
-        .project-item:hover .project-title::after {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .project-card {
             cursor: pointer;
-            padding: 0.5rem 0;
-            gap: 1rem;
+            padding: 0;
         }
-        
-        .project-title-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            flex: 1;
-        }
-        
+
         .project-thumbnail {
-            width: 120px;
-            height: 80px;
+            width: 100%;
+            height: 240px;
             flex-shrink: 0;
-            border: 1px solid var(--text);
-            border-radius: 4px;
             overflow: hidden;
-            transition: all 0.2s;
-        }
-        
-        .project-thumbnail:hover {
-            border-color: var(--accent);
+            position: relative;
+            border-radius: 8px 8px 0 0;
+            border: none;
         }
         
         .project-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .project-title-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
         }
         
         .project-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text);
+            font-size: 1.25rem;
+            font-weight: 500;
             margin: 0;
+            color: var(--text);
         }
-        
+
+        .project-content {
+            display: none;
+            padding: 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .project-content.active {
+            display: block;
+        }
+
+        .project-slider {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .slider-image {
+            flex: 0 0 100%;
+            height: 100%;
+        }
+
+        .slider-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slider-dot.active {
+            background: var(--accent);
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: all 0.2s ease;
+        }
+
+        .slider-button:hover {
+            background: var(--accent);
+        }
+
+        .slider-prev {
+            left: 1rem;
+        }
+
+        .slider-next {
+            right: 1rem;
+        }
+
+        .project-description {
+            padding: 1.5rem;
+            line-height: 1.6;
+            border-bottom: 1px solid var(--border);
+        }
+
         .project-tags {
+            padding: 1rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-        
+
         .tag {
             display: inline-block;
             padding: 0.25rem 0.5rem;
@@ -270,6 +349,26 @@
             background-color: var(--accent);
             color: var(--background);
         }
+
+        @media (max-width: 768px) {
+            .project-thumbnail {
+                height: 180px;
+            }
+
+            .project-slider {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-thumbnail {
+                height: 160px;
+            }
+
+            .project-slider {
+                height: 240px;
+            }
+        }
         
         .toggle-button {
             background: none;
@@ -282,39 +381,6 @@
         
         .toggle-button:hover {
             color: var(--accent);
-        }
-        
-        .project-content {
-            display: none;
-            padding: 1rem 0;
-        }
-        
-        .project-content.active {
-            display: block;
-        }
-        
-        .project-description {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        
-        .project-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-        
-        .project-image {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border: 1px solid var(--border);
-            transition: transform 0.2s ease;
-        }
-        
-        .project-image:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .project-link {
@@ -534,29 +600,42 @@
         <div class="project-list">
             
                 <div class="project-item" data-project="ad_barnes_nature_reserve">
-                    <div class="project-header" onclick="toggleProject('ad_barnes_nature_reserve')">
+                    <div class="project-card" onclick="toggleProject('ad_barnes_nature_reserve')">
+                        <div class="project-thumbnail">
+                            <img src="archive/ad_barnes_nature_reserve/thumbnail.jpg" alt="A.D. Barnes Nature Reserve">
+                        </div>
                         <div class="project-title-container">
                             <h2 class="project-title">ad_barnes_nature_reserve</h2>
-                            <div class="project-tags">
-                                <span class="tag" data-tag="team">team</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="fall '23">fall '23</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="arc604">arc604</span>
-                            </div>
                         </div>
-                        <div class="project-thumbnail">
-                            <img src="archive/ad_barnes_nature_reserve/render.jpg" alt="ad_barnes_nature_reserve thumbnail">
-                        </div>
-                        <button class="toggle-button">
-                            <svg width="24" height="24" viewBox="0 0 16 16">
-                                <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
-                            </svg>
-                        </button>
                     </div>
                     <div class="project-content" id="content-ad_barnes_nature_reserve">
+                        <div class="project-slider">
+                            <div class="slider-container" id="slider-ad_barnes_nature_reserve">
+                                <div class="slider-image">
+                                    <img src="archive/ad_barnes_nature_reserve/01.jpg" alt="A.D. Barnes Nature Reserve">
+                                </div>
+                                <div class="slider-image">
+                                    <img src="archive/ad_barnes_nature_reserve/02.jpg" alt="A.D. Barnes Nature Reserve">
+                                </div>
+                                <div class="slider-image">
+                                    <img src="archive/ad_barnes_nature_reserve/03.jpg" alt="A.D. Barnes Nature Reserve">
+                                </div>
+                            </div>
+                            <button class="slider-button slider-prev" onclick="prevSlide('ad_barnes_nature_reserve')">←</button>
+                            <button class="slider-button slider-next" onclick="nextSlide('ad_barnes_nature_reserve')">→</button>
+                            <div class="slider-nav" id="slider-nav-ad_barnes_nature_reserve"></div>
+                        </div>
                         <div class="project-description">
                             nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).
                         </div>
-                        <div class="project-images">
-                            <img src="archive/ad_barnes_nature_reserve/site_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/floor_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/structural_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/exploded_iso_diagram.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/render.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy">
+                        <div class="project-tags">
+                            <span class="tag" data-tag="team">team</span>
+                            <span class="tag" data-tag="rhino">rhino</span>
+                            <span class="tag" data-tag="fall '23">fall '23</span>
+                            <span class="tag" data-tag="miami, fl">miami, fl</span>
+                            <span class="tag" data-tag="arc604">arc604</span>
                         </div>
+                    </div>
                 </div>
             </div>
                 <div class="project-item" data-project="cannabis_farm">
@@ -1215,6 +1294,82 @@
                 }
             }
         });
+
+        // Project slider functionality
+        const sliders = {};
+
+        function initializeSlider(projectId) {
+            const slider = document.getElementById(`slider-${projectId}`);
+            const images = slider.querySelectorAll('.slider-image');
+            const nav = document.getElementById(`slider-nav-${projectId}`);
+            
+            // Create navigation dots
+            nav.innerHTML = '';
+            images.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = `slider-dot${index === 0 ? ' active' : ''}`;
+                dot.onclick = () => goToSlide(projectId, index);
+                nav.appendChild(dot);
+            });
+
+            // Initialize slider state
+            sliders[projectId] = {
+                currentSlide: 0,
+                totalSlides: images.length
+            };
+
+            updateSlider(projectId);
+        }
+
+        function updateSlider(projectId) {
+            const slider = document.getElementById(`slider-${projectId}`);
+            const nav = document.getElementById(`slider-nav-${projectId}`);
+            const dots = nav.querySelectorAll('.slider-dot');
+            const { currentSlide } = sliders[projectId];
+
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide(projectId) {
+            const { currentSlide, totalSlides } = sliders[projectId];
+            sliders[projectId].currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider(projectId);
+        }
+
+        function prevSlide(projectId) {
+            const { currentSlide, totalSlides } = sliders[projectId];
+            sliders[projectId].currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider(projectId);
+        }
+
+        function goToSlide(projectId, index) {
+            sliders[projectId].currentSlide = index;
+            updateSlider(projectId);
+        }
+
+        function toggleProject(projectId) {
+            const content = document.getElementById(`content-${projectId}`);
+            const wasActive = content.classList.contains('active');
+            
+            // Close all other open projects
+            document.querySelectorAll('.project-content.active').forEach(el => {
+                if (el.id !== `content-${projectId}`) {
+                    el.classList.remove('active');
+                }
+            });
+
+            // Toggle current project
+            content.classList.toggle('active');
+
+            // Initialize slider if opening
+            if (!wasActive) {
+                initializeSlider(projectId);
+                content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
     </script>
 </body>
 </html>
