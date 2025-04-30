@@ -124,6 +124,11 @@
         margin: 0 !important;
     }
     
+    .theme-option:last-child {
+        margin: 0 !important;
+        transform: translateX(-0.075rem) !important;
+    }
+    
     .theme-slider {
         width: 1rem !important;
         height: 1rem !important;
@@ -341,6 +346,11 @@
         transform: translateY(0.1rem) !important;
     }
     
+    .theme-option:last-child {
+        margin: 0 !important;
+        transform: translateX(-0.075rem) !important;
+    }
+    
     .theme-slider {
         width: 0.9rem !important;
         height: 0.9rem !important;
@@ -430,6 +440,11 @@
         padding: 0 0.3rem !important;
         gap: 0.3rem !important;
         min-width: 2.6rem !important;
+    }
+    
+    .theme-option:last-child {
+        margin: 0 !important;
+        transform: translateX(-0.075rem) !important;
     }
     
     .theme-slider {
