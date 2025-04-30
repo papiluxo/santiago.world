@@ -97,7 +97,7 @@
         margin: 0 !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: space-around !important; /* Evenly space the symbols */
+        justify-content: space-between !important; /* Create precise positioning */
         border: 1px solid rgba(128, 128, 128, 0.2) !important;
         overflow: hidden !important;
         backdrop-filter: blur(8px) !important;
@@ -112,7 +112,7 @@
     /* Center each symbol in its container with no padding */
     .theme-option {
         font-size: 1rem !important;
-        width: 2.5rem !important; /* Take half the toggle width */
+        width: 2.5rem !important; /* Exactly half the toggle width */
         height: 2.5rem !important;
         display: flex !important;
         align-items: center !important;
@@ -124,7 +124,7 @@
         text-align: center !important;
     }
     
-    /* Ensure the red dot is exactly positioned over the symbol centers */
+    /* Carefully positioned red dot that aligns with symbols */
     .theme-slider {
         width: 1.8rem !important;
         height: 1.8rem !important;
@@ -135,13 +135,13 @@
         margin: 0 !important;
         padding: 0 !important;
         top: 50% !important;
-        left: 0.85rem !important; /* Position for first icon */
-        transform: translateY(-50%) !important;
+        transform: translate(0.35rem, -50%) !important; /* Precisely center on first symbol */
+        left: 0 !important;
     }
     
-    /* Move to second symbol center with precision */
+    /* Move precisely to second symbol center */
     .theme-slider.dark {
-        transform: translateX(2.5rem) translateY(-50%) !important;
+        transform: translate(2.85rem, -50%) !important; /* Exact distance to second symbol */
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -335,18 +335,18 @@
     
     .theme-option {
         font-size: 0.9rem !important;
-        width: 2.25rem !important;
+        width: 2.25rem !important; /* Exactly half the toggle width */
         height: 2.2rem !important;
     }
     
     .theme-slider {
         width: 1.6rem !important;
         height: 1.6rem !important;
-        left: 0.75rem !important;
+        transform: translate(0.35rem, -50%) !important; /* Precisely center on first symbol */
     }
     
     .theme-slider.dark {
-        transform: translateX(2.3rem) translateY(-50%) !important;
+        transform: translate(2.55rem, -50%) !important; /* Exact distance to second symbol */
     }
     
     /* Archive and Toolbox page specific */
@@ -431,18 +431,18 @@
     
     .theme-option {
         font-size: 0.8rem !important;
-        width: 2rem !important;
+        width: 2rem !important; /* Exactly half the toggle width */
         height: 2rem !important;
     }
     
     .theme-slider {
         width: 1.4rem !important;
         height: 1.4rem !important;
-        left: 0.65rem !important;
+        transform: translate(0.3rem, -50%) !important; /* Precisely center on first symbol */
     }
     
     .theme-slider.dark {
-        transform: translateX(2.05rem) translateY(-50%) !important;
+        transform: translate(2.3rem, -50%) !important; /* Exact distance to second symbol */
     }
     
     .tool-button {
