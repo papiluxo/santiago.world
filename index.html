@@ -191,15 +191,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text);
         }
         
         .theme-option.active {
-            color: var(--accent);
+            color: var(--background);
         }
         
         .theme-slider {
-            display: none;
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            width: 50px;
+            background-color: var(--accent);
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-slider.dark {
+            transform: translateX(52px);
         }
     </style>
     <div class="nav-container">
@@ -210,6 +220,7 @@
             <div class="theme-toggle">
                 <div class="theme-option light active" onclick="toggleTheme('light')">☀</div>
                 <div class="theme-option dark" onclick="toggleTheme('dark')">☾</div>
+                <div class="theme-slider"></div>
             </div>
             <div id="clock" class="clock"></div>
         </div>
