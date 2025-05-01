@@ -116,17 +116,16 @@
         z-index: 2 !important;
         line-height: 1 !important;
         position: relative !important;
-        transform: translateY(0.1rem) !important;
     }
     
-    .theme-option:first-child,
-    .theme-option:last-child {
+    .theme-option:first-child {
         margin: 0 !important;
+        transform: translateX(0.1rem) !important;
     }
     
     .theme-option:last-child {
         margin: 0 !important;
-        transform: translateX(-0.5rem) !important;
+        transform: translateX(-0.4rem) !important;
     }
     
     .theme-slider {
@@ -480,12 +479,14 @@
         font-size: 0.65rem !important;
         width: 0.9rem !important;
         height: 0.9rem !important;
-        transform: translateY(0.1rem) !important;
+    }
+    
+    .theme-option:first-child {
+        transform: translateX(0.1rem) !important;
     }
     
     .theme-option:last-child {
-        margin: 0 !important;
-        transform: translateX(-0.5rem) !important;
+        transform: translateX(-0.4rem) !important;
     }
     
     .theme-slider {
@@ -636,12 +637,14 @@
         font-size: 0.6rem !important;
         width: 0.8rem !important;
         height: 0.8rem !important;
-        transform: translateY(0.1rem) !important;
+    }
+    
+    .theme-option:first-child {
+        transform: translateX(0.1rem) !important;
     }
     
     .theme-option:last-child {
-        margin: 0 !important;
-        transform: translateX(-0.4rem) !important;
+        transform: translateX(-0.3rem) !important;
     }
     
     .theme-slider {
