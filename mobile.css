@@ -244,6 +244,12 @@
         margin: 1rem 0.5rem 1.5rem !important;
         line-height: 1.2 !important;
         padding: 0 0rem !important;
+        display: inline-block !important;
+    }
+    
+    .title-period {
+        color: var(--accent-color, #ff0000) !important;
+        margin-left: -0.1em !important;
     }
     
     h2 {
