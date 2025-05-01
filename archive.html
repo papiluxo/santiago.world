@@ -196,14 +196,7 @@
         }
 
         .project-item:hover .project-title::after {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            margin-left: 8px;
-            vertical-align: middle;
+            display: none;
         }
         
         .project-header {
@@ -243,16 +236,23 @@
         }
         
         .project-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text);
+            font-size: 1.1rem;
             margin: 0;
+            padding: 0;
+            line-height: 1.2;
+            color: var(--text);
+            transition: color 0.2s ease;
+        }
+
+        .project-item:hover .project-title {
+            color: var(--accent);
         }
         
         .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            margin-top: 0.5rem;
         }
         
         .tag {
