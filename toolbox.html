@@ -422,8 +422,8 @@
 
         /* Base cursor styles for desktop */
         @media (min-width: 769px) {
-            body {
-                cursor: none;
+            * {
+                cursor: none !important;
             }
 
             .custom-cursor {
@@ -440,11 +440,6 @@
 
             .custom-cursor.hover {
                 transform: translate(-50%, -50%) scale(1.5);
-            }
-
-            /* Hide cursor on all interactive elements */
-            a, button, .nav-button, .theme-toggle, .tool-button, .project-header, .tool-header, .tag, .theme-option, .project-link {
-                cursor: none !important;
             }
         }
     </style>
