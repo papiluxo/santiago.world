@@ -751,3 +751,31 @@
     border-color: var(--accent-color, #ff0000);
     color: var(--accent-color, #ff0000);
 }
+
+/* Base cursor styles for desktop */
+@media (min-width: 769px) {
+    body {
+        cursor: none;
+    }
+
+    .custom-cursor {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-color, #ff0000);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+        transform: translate(-50%, -50%);
+    }
+
+    .custom-cursor.hover {
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    /* Hide cursor on interactive elements */
+    a, button, .nav-button, .theme-toggle, .tool-button, .project-header, .tool-header {
+        cursor: none;
+    }
+}
