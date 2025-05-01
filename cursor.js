@@ -22,13 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            // Add hover effect
+            // Add hover effect only for non-tag interactive elements
             const interactiveElements = document.querySelectorAll('a, button, .nav-button, .theme-toggle, .tool-button, .project-header, .tool-header');
             interactiveElements.forEach(element => {
                 element.addEventListener('mouseenter', () => {
                     cursor.classList.add('hover');
                 });
                 element.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                });
+            });
+
+            // Keep cursor as red dot for tags
+            const tagElements = document.querySelectorAll('.tag');
+            tagElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
                     cursor.classList.remove('hover');
                 });
             });
