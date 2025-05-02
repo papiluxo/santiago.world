@@ -753,8 +753,10 @@
         position: fixed;
         pointer-events: none;
         z-index: 9999;
-        transition: transform 0.1s ease;
+        will-change: transform;
         transform: translate(-50%, -50%);
+        transition: transform 0.1s ease, opacity 0.2s ease;
+        opacity: 1;
     }
 
     .custom-cursor.hover {
