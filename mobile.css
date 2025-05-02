@@ -84,7 +84,7 @@
     
     /* Override theme toggle styles to match clock height exactly */
     .theme-toggle {
-        padding: 0 !important;
+        padding: 0 0.5rem !important;
         font-size: 0.8rem !important;
         line-height: 1 !important;
         height: 1.8rem !important;
@@ -101,12 +101,13 @@
         overflow: hidden !important;
         box-sizing: border-box !important;
         margin: 0 !important;
+        gap: 0.5rem !important;
     }
     
     .theme-option {
         font-size: 0.7rem !important;
-        width: 1.5rem !important;
-        height: 100% !important;
+        width: 1rem !important;
+        height: 1rem !important;
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -115,6 +116,9 @@
         z-index: 2 !important;
         line-height: 1 !important;
         position: relative !important;
+        transform: translateY(0.1rem) !important;
+        color: inherit !important;
+        transition: none !important;
     }
     
     .theme-option:first-child,
@@ -122,20 +126,31 @@
         margin: 0 !important;
     }
     
-    .theme-slider {
-        width: 50% !important;
-        height: 100% !important;
-        background: var(--accent-color, #ff0000) !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        transition: transform 0.3s ease !important;
+    .theme-option:last-child {
         margin: 0 !important;
-        padding: 0 !important;
+        transform: translateX(-0.5rem) !important;
     }
     
-    .theme-slider.dark {
-        transform: translateX(100%) !important;
+    .theme-option.active {
+        color: var(--accent-color, #ff0000) !important;
+    }
+    
+    .theme-slider {
+        display: none !important;
+    }
+    
+    /* Optimize theme transitions */
+    body {
+        transition: none !important;
+    }
+    
+    .nav-button, .nav-container, .container, .main-content {
+        transition: none !important;
+    }
+    
+    /* Only apply transitions to specific elements that need them */
+    .project-title, .tool-name, .tag, .tool-button {
+        transition: color 0.15s ease !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -460,7 +475,8 @@
     }
     
     .theme-toggle {
-        padding: 0 !important;
+        padding: 0 0.4rem !important;
+        gap: 0.4rem !important;
         min-width: 2.8rem !important;
         height: 1.5rem !important;
         min-height: 1.5rem !important;
@@ -468,7 +484,10 @@
     
     .theme-option {
         font-size: 0.65rem !important;
-        width: 1.4rem !important;
+        width: 0.9rem !important;
+        height: 0.9rem !important;
+        transform: translateY(0.1rem) !important;
+        transition: none !important;
     }
     
     .theme-option:last-child {
@@ -613,7 +632,8 @@
     }
     
     .theme-toggle {
-        padding: 0 !important;
+        padding: 0 0.3rem !important;
+        gap: 0.3rem !important;
         min-width: 2.6rem !important;
     }
     
