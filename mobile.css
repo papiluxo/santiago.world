@@ -84,7 +84,7 @@
     
     /* Override theme toggle styles to match clock height exactly */
     .theme-toggle {
-        padding: 0 0.5rem !important;
+        padding: 0 !important;
         font-size: 0.8rem !important;
         line-height: 1 !important;
         height: 1.8rem !important;
@@ -101,13 +101,12 @@
         overflow: hidden !important;
         box-sizing: border-box !important;
         margin: 0 !important;
-        gap: 0.5rem !important;
     }
     
     .theme-option {
         font-size: 0.7rem !important;
-        width: 1rem !important;
-        height: 1rem !important;
+        width: 1.5rem !important;
+        height: 100% !important;
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -116,7 +115,6 @@
         z-index: 2 !important;
         line-height: 1 !important;
         position: relative !important;
-        transform: translateY(0.1rem) !important;
     }
     
     .theme-option:first-child,
@@ -124,27 +122,20 @@
         margin: 0 !important;
     }
     
-    .theme-option:last-child {
-        margin: 0 !important;
-        transform: translateX(-0.5rem) !important;
-    }
-    
     .theme-slider {
-        width: 1rem !important;
-        height: 1rem !important;
-        border-radius: 50% !important;
+        width: 50% !important;
+        height: 100% !important;
         background: var(--accent-color, #ff0000) !important;
         position: absolute !important;
-        top: 50% !important;
-        left: 0.4rem !important;
-        transform: translateY(-50%) !important;
+        top: 0 !important;
+        left: 0 !important;
         transition: transform 0.3s ease !important;
         margin: 0 !important;
         padding: 0 !important;
     }
     
     .theme-slider.dark {
-        transform: translate(1.4rem, -50%) !important;
+        transform: translateX(100%) !important;
     }
     
     /* Project and tool items restructuring - Instagram feed style */
@@ -216,13 +207,13 @@
         gap: 0.75rem;
         border-bottom: none;
     }
-
+    
     .tool-title-container {
         width: 100%;
         padding: 0;
         margin: 0;
     }
-
+    
     .tool-name {
         text-align: left;
         margin: 0;
@@ -469,8 +460,7 @@
     }
     
     .theme-toggle {
-        padding: 0 0.4rem !important;
-        gap: 0.4rem !important;
+        padding: 0 !important;
         min-width: 2.8rem !important;
         height: 1.5rem !important;
         min-height: 1.5rem !important;
@@ -478,9 +468,7 @@
     
     .theme-option {
         font-size: 0.65rem !important;
-        width: 0.9rem !important;
-        height: 0.9rem !important;
-        transform: translateY(0.1rem) !important;
+        width: 1.4rem !important;
     }
     
     .theme-option:last-child {
@@ -625,8 +613,7 @@
     }
     
     .theme-toggle {
-        padding: 0 0.3rem !important;
-        gap: 0.3rem !important;
+        padding: 0 !important;
         min-width: 2.6rem !important;
     }
     
