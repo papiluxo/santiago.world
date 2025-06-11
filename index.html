@@ -10,7 +10,26 @@
     
     <!-- LogRocket -->
     <script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
-    <script>window.LogRocket && window.LogRocket.init('8wbldc/portfolio');</script>
+    <script>
+        if (window.LogRocket) {
+            window.LogRocket.init('8wbldc/portfolio');
+            
+            // Generate or retrieve anonymous user ID
+            let userId = localStorage.getItem('lr_user_id');
+            if (!userId) {
+                userId = 'visitor_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('lr_user_id', userId);
+            }
+            
+            // Identify user for LogRocket
+            window.LogRocket.identify(userId, {
+                name: 'Portfolio Visitor',
+                page: 'home',
+                userType: 'anonymous',
+                visitTime: new Date().toISOString()
+            });
+        }
+    </script>
     <style>
         :root {
             /* Light theme (default) */
