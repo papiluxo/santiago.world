@@ -24,7 +24,7 @@ OUTPUT_DIR = SITE_ROOT
 # Projects data
 projects = {
     'ad_barnes_nature_reserve': {
-        'tags': ['team', 'rhino', 'blender', 'fall \'23', 'miami, fl', 'arc604'],
+        'tags': ['team', 'rhino', 'fall \'23', 'miami, fl', 'arc604'],
         'description': 'nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).'
     },
     'cannabis_farm': {
@@ -32,8 +32,8 @@ projects = {
         'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.'
     },
     'chil_bookshelf': {
-        'tags': ['individual', 'rhino', 'blender', 'spring \'24', 'miami, fl', 'chil'],
-        'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. built shelf comprised of 13 aluminum pieces.'
+        'tags': ['individual', 'rhino', 'spring \'24', 'miami, fl', 'chil'],
+        'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. comprised of 13 aluminum pieces.'
     },
     'icosahedron_explosion': {
         'tags': ['individual', 'rhino', 'fall \'23', 'arc611'],
@@ -692,13 +692,11 @@ def generate_archive_html():
             'flexbrick_composition_diagram.jpg'
         ],
         'chil_bookshelf': [
-            'render_3.png',
-            'render_2.png',
-            'con_doc.jpg',
             'render.jpg',
+            'con_doc.jpg',
             'diagram.jpg',
-            'built.JPG',
             'view_2.jpg',
+            'built.JPG',
             'view_1.jpeg',
             'compositions.GIF'
         ]
@@ -724,12 +722,12 @@ def generate_archive_html():
             
             # Get thumbnail image - use specific images for certain projects
             if project_name == 'chil_bookshelf':
-                # Set thumbnail to render_3.png
-                thumbnail = next((img for img in project_images if 'render_3.png' in img), project_images[0] if project_images else None)
+                # Set thumbnail to render.jpg
+                thumbnail = next((img for img in project_images if 'render.jpg' in img), project_images[0] if project_images else None)
                 
                 # Explicitly order images for chil_bookshelf
                 ordered_images = []
-                for img_name in ['render_3.png', 'render_2.png', 'con_doc.jpg', 'render.jpg', 'diagram.jpg', 'built.JPG', 'view_2.jpg', 'view_1.jpeg', 'compositions.GIF']:
+                for img_name in ['con_doc.jpg', 'render.jpg', 'diagram.jpg', 'view_2.jpg', 'built.JPG', 'view_1.jpeg', 'compositions.GIF']:
                     matching_img = next((img for img in project_images if img.endswith(img_name)), None)
                     if matching_img:
                         ordered_images.append(matching_img)

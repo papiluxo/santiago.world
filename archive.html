@@ -6,6 +6,34 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
     <title>archive - santiago martínez-oropeza</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="mobile.css">
+    
+    <!-- LogRocket -->
+    <script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
+    <script>
+        // Initialize LogRocket first
+        window.LogRocket && window.LogRocket.init('8wbldc/portfolio');
+        
+        // Wait for LogRocket to be ready, then identify user
+        setTimeout(() => {
+            if (window.LogRocket) {
+                // Generate or retrieve anonymous user ID
+                let userId = localStorage.getItem('lr_user_id');
+                if (!userId) {
+                    userId = 'visitor_' + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('lr_user_id', userId);
+                }
+                
+                // Identify user for LogRocket
+                window.LogRocket.identify(userId, {
+                    name: 'Portfolio Visitor',
+                    page: 'archive',
+                    userType: 'anonymous',
+                    visitTime: new Date().toISOString()
+                });
+            }
+        }, 100);
+    </script>
     <style>
         :root {
             /* Light theme (default) */
@@ -195,14 +223,7 @@
         }
 
         .project-item:hover .project-title::after {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            margin-left: 8px;
-            vertical-align: middle;
+            display: none;
         }
         
         .project-header {
@@ -242,16 +263,23 @@
         }
         
         .project-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text);
+            font-size: 1.1rem;
             margin: 0;
+            padding: 0;
+            line-height: 1.2;
+            color: var(--text);
+            transition: color 0.2s ease;
+        }
+
+        .project-item:hover .project-title {
+            color: var(--accent);
         }
         
         .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            margin-top: 0.5rem;
         }
         
         .tag {
@@ -462,6 +490,28 @@
             border-radius: 2px;
         }
     
+        /* Base cursor styles for desktop */
+        @media (min-width: 769px) {
+            * {
+                cursor: none !important;
+            }
+
+            .custom-cursor {
+                width: 8px;
+                height: 8px;
+                background-color: var(--accent);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.1s ease;
+                transform: translate(-50%, -50%);
+            }
+
+            .custom-cursor.hover {
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
     </style>
 </head>
 <body>
@@ -527,16 +577,16 @@
             <div id="clock" class="clock"></div>
         </div>
     </div>
+    <div class="main-content">
         <h1>archive</h1>
         <div class="active-filters" id="activeFilters"></div>
         <div class="project-list">
-            
                 <div class="project-item" data-project="ad_barnes_nature_reserve">
                     <div class="project-header" onclick="toggleProject('ad_barnes_nature_reserve')">
                         <div class="project-title-container">
                             <h2 class="project-title">ad_barnes_nature_reserve</h2>
                             <div class="project-tags">
-                                <span class="tag" data-tag="team">team</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="blender">blender</span><span class="tag" data-tag="fall '23">fall '23</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="arc604">arc604</span>
+                                <span class="tag" data-tag="team">team</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="fall '23">fall '23</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="arc604">arc604</span>
                             </div>
                         </div>
                         <div class="project-thumbnail">
@@ -556,6 +606,32 @@
                             <img src="archive/ad_barnes_nature_reserve/site_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/floor_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/structural_plan.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/exploded_iso_diagram.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy"><img src="archive/ad_barnes_nature_reserve/render.jpg" alt="ad_barnes_nature_reserve image" class="project-image" loading="lazy">
                         </div>
                 </div>
+            </div>
+            <div class="project-item" data-project="brush_club">
+                <div class="project-header" onclick="toggleProject('brush_club')">
+                    <div class="project-title-container">
+                        <h2 class="project-title">brush_club</h2>
+                        <div class="project-tags">
+                            <span class="tag" data-tag="packaging">packaging</span><span class="tag" data-tag="brand id">brand id</span><span class="tag" data-tag="illustrator">illustrator</span><span class="tag" data-tag="photoshop">photoshop</span><span class="tag" data-tag="premiere pro">premiere pro</span><span class="tag" data-tag="brush club">brush club</span>
+                        </div>
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="archive/brush_club/brush_club_6.png" alt="brush_club thumbnail">
+                    </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="project-content" id="content-brush_club">
+                    <div class="project-description">
+                        branding and packaging development for eco-friendly dental care company.
+                    </div>
+                    <div class="project-images">
+                        <img src="archive/brush_club/brush_club_0.png" alt="brush_club image" class="project-image" loading="lazy"><img src="archive/brush_club/brush_club_2.png" alt="brush_club image" class="project-image" loading="lazy"><img src="archive/brush_club/brush_club_5.png" alt="brush_club image" class="project-image" loading="lazy"><img src="archive/brush_club/brush_club_1.png" alt="brush_club image" class="project-image" loading="lazy"><img src="archive/brush_club/brush_club_3.png" alt="brush_club image" class="project-image" loading="lazy"><img src="archive/brush_club/brush_club_4.png" alt="brush_club image" class="project-image" loading="lazy"><img src="archive/brush_club/brush_club_6.png" alt="brush_club image" class="project-image" loading="lazy"><video src="archive/brush_club/brush_club_reel.mp4" alt="brush_club image" class="project-image" loading="lazy" controls></video>
+                    </div>
+            </div>
             </div>
                 <div class="project-item" data-project="cannabis_farm">
                     <div class="project-header" onclick="toggleProject('cannabis_farm')">
@@ -588,11 +664,11 @@
                         <div class="project-title-container">
                             <h2 class="project-title">chil_bookshelf</h2>
                             <div class="project-tags">
-                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="blender">blender</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="chil">chil</span>
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="miami, fl">miami, fl</span><span class="tag" data-tag="chil">chil</span>
                             </div>
                         </div>
                         <div class="project-thumbnail">
-                            <img src="archive/chil_bookshelf/render_3.png" alt="chil_bookshelf thumbnail">
+                            <img src="archive/chil_bookshelf/render.jpg" alt="chil_bookshelf thumbnail">
                         </div>
                         <button class="toggle-button">
                             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -602,12 +678,72 @@
                     </div>
                     <div class="project-content" id="content-chil_bookshelf">
                         <div class="project-description">
-                            modular bookshelf for chil (community, housing and identity lab) studio space. built shelf comprised of 13 aluminum pieces.
+                            modular bookshelf for chil (community, housing and identity lab) studio space. comprised of 13 aluminum pieces.
                         </div>
                         <div class="project-images">
-                            <img src="archive/chil_bookshelf/render_3.png" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/render_2.png" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/con_doc.jpg?t=1750098723" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/render.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/diagram.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/built.JPG" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/view_2.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/view_1.jpeg?t=1750098723" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/compositions.GIF" alt="chil_bookshelf image" class="project-image" loading="lazy">
+                            <img src="archive/chil_bookshelf/con_doc.jpg?t=1745608482" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/render.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/diagram.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/view_2.jpg" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/built.JPG" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/view_1.jpeg?t=1745608482" alt="chil_bookshelf image" class="project-image" loading="lazy"><img src="archive/chil_bookshelf/compositions.GIF" alt="chil_bookshelf image" class="project-image" loading="lazy">
                         </div>
                 </div>
+            </div>
+            <div class="project-item" data-project="color_pools">
+                <div class="project-header" onclick="toggleProject('color_pools')">
+                    <div class="project-title-container">
+                        <h2 class="project-title">color_pools</h2>
+                        <div class="project-tags">
+                            <span class="tag" data-tag="exhibition">exhibition</span><span class="tag" data-tag="illustrator">illustrator</span><span class="tag" data-tag="photoshop">photoshop</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="imago">imago</span>
+                        </div>
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="archive/color_pools/color_pools_2.jpg" alt="color_pools thumbnail">
+                    </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="project-content" id="content-color_pools">
+                    <div class="project-description">
+                        graphic identity for carmen smith's solo exhibition @ imago's art gallery, curated by katherine chacón.
+                    </div>
+                    <div class="project-images">
+                        <img src="archive/color_pools/color_pools_2.jpg" alt="color_pools image" class="project-image" loading="lazy">
+                        <img src="archive/color_pools/color_pools_3.jpg" alt="color_pools image" class="project-image" loading="lazy">
+                        <img src="archive/color_pools/color_pools_4.jpg" alt="color_pools image" class="project-image" loading="lazy">
+                        <img src="archive/color_pools/color_pools_1.jpg" alt="color_pools image" class="project-image" loading="lazy">
+                        <img src="archive/color_pools/color_pools_flyer.jpg" alt="color_pools image" class="project-image" loading="lazy">
+                    </div>
+            </div>
+            </div>
+            <div class="project-item" data-project="geometricas">
+                <div class="project-header" onclick="toggleProject('geometricas')">
+                    <div class="project-title-container">
+                        <h2 class="project-title">geometricas</h2>
+                        <div class="project-tags">
+                            <span class="tag" data-tag="exhibition">exhibition</span><span class="tag" data-tag="illustrator">illustrator</span><span class="tag" data-tag="photoshop">photoshop</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="imago">imago</span>
+                        </div>
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="archive/geometricas/geometricas_2.jpg" alt="geometricas thumbnail">
+                    </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="project-content" id="content-geometricas">
+                    <div class="project-description">
+                        graphic identity for mariana copello and luisa duarte's joint exhibition @ imago's art gallery, curated by katherine chacón.
+                    </div>
+                    <div class="project-images">
+                        <img src="archive/geometricas/geometricas_2.jpg" alt="geometricas image" class="project-image" loading="lazy">
+                        <img src="archive/geometricas/geometricas_3.jpg" alt="geometricas image" class="project-image" loading="lazy">
+                        <img src="archive/geometricas/geometricas_4.jpg" alt="geometricas image" class="project-image" loading="lazy">
+                        <img src="archive/geometricas/geometricas_1.jpg" alt="geometricas image" class="project-image" loading="lazy">
+                        <img src="archive/geometricas/geometricas_flyers.jpg" alt="geometricas image" class="project-image" loading="lazy">
+                    </div>
+            </div>
             </div>
                 <div class="project-item" data-project="icosahedron_explosion">
                     <div class="project-header" onclick="toggleProject('icosahedron_explosion')">
@@ -618,7 +754,7 @@
                             </div>
                         </div>
                         <div class="project-thumbnail">
-                            <img src="archive/icosahedron_explosion/previews/icosahedron_explosion_001.png" alt="icosahedron_explosion thumbnail">
+                        <img src="archive/icosahedron_explosion/icosahedron_explosion.png" alt="icosahedron_explosion thumbnail">
                         </div>
                         <button class="toggle-button">
                             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -631,7 +767,7 @@
                             geometrical exploration of an icosahedron, a 20 face polyhedron.
                         </div>
                         <div class="project-images">
-                            <img src="archive/icosahedron_explosion/previews/icosahedron_explosion_001.png" alt="icosahedron_explosion image" class="project-image" loading="lazy">
+                        <img src="archive/icosahedron_explosion/icosahedron_explosion.png" alt="icosahedron_explosion image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -661,6 +797,32 @@
                         </div>
                 </div>
             </div>
+            <div class="project-item" data-project="in_and_out">
+                <div class="project-header" onclick="toggleProject('in_and_out')">
+                    <div class="project-title-container">
+                        <h2 class="project-title">in_and_out</h2>
+                        <div class="project-tags">
+                            <span class="tag" data-tag="exhibition">exhibition</span><span class="tag" data-tag="illustrator">illustrator</span><span class="tag" data-tag="photoshop">photoshop</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="imago">imago</span>
+                        </div>
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="archive/in_and_out/in_and_out_2.jpg" alt="in_and_out thumbnail">
+                    </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="project-content" id="content-in_and_out">
+                    <div class="project-description">
+                        graphic identity for kk bicalho's solo exhibition @ imago's art gallery, curated by katherine chacón.
+                    </div>
+                    <div class="project-images">
+                        <img src="archive/in_and_out/in_and_out_1.jpg" alt="in_and_out image" class="project-image" loading="lazy"><img src="archive/in_and_out/in_and_out_2.jpg" alt="in_and_out image" class="project-image" loading="lazy"><img src="archive/in_and_out/in_and_out_3.jpg" alt="in_and_out image" class="project-image" loading="lazy"><img src="archive/in_and_out/in_and_out_4.jpg" alt="in_and_out image" class="project-image" loading="lazy"><img src="archive/in_and_out/in_and_out_flyers.jpg" alt="in_and_out image" class="project-image" loading="lazy">
+                    </div>
+            </div>
+            </div>
                 <div class="project-item" data-project="janus_house">
                     <div class="project-header" onclick="toggleProject('janus_house')">
                         <div class="project-title-container">
@@ -683,7 +845,7 @@
                             precedent study of studio sean canty's conceptual janus house.
                         </div>
                         <div class="project-images">
-                            <img src="archive/janus_house/cover.jpeg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/dogtrot_diagram.jpg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/form_diagram.jpeg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/unrolled_diagram.jpg?t=1750098723" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/floor_plan.jpg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/section.jpg" alt="janus_house image" class="project-image" loading="lazy">
+                            <img src="archive/janus_house/cover.jpeg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/dogtrot_diagram.jpg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/form_diagram.jpeg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/unrolled_diagram.jpg?t=1745608482" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/floor_plan.jpg" alt="janus_house image" class="project-image" loading="lazy"><img src="archive/janus_house/section.jpg" alt="janus_house image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -739,16 +901,42 @@
                         </div>
                 </div>
             </div>
+            <div class="project-item" data-project="mourning_flowers">
+                <div class="project-header" onclick="toggleProject('mourning_flowers')">
+                    <div class="project-title-container">
+                        <h2 class="project-title">mourning_flowers</h2>
+                        <div class="project-tags">
+                            <span class="tag" data-tag="exhibition">exhibition</span><span class="tag" data-tag="illustrator">illustrator</span><span class="tag" data-tag="photoshop">photoshop</span><span class="tag" data-tag="spring '25">spring '25</span><span class="tag" data-tag="imago">imago</span>
+                        </div>
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="archive/mourning_flowers/mourning_flowers_1.jpg" alt="mourning_flowers thumbnail">
+                    </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="project-content" id="content-mourning_flowers">
+                    <div class="project-description">
+                        graphic identity for margarita boulton's solo exhibition @ imago's art gallery, curated by katherine chacón.
+                    </div>
+                    <div class="project-images">
+                        <img src="archive/mourning_flowers/mourning_flowers_1.jpg" alt="mourning_flowers image" class="project-image" loading="lazy"><img src="archive/mourning_flowers/mourning_flowers_flyers.jpg" alt="mourning_flowers image" class="project-image" loading="lazy">
+                    </div>
+            </div>
+            </div>
                 <div class="project-item" data-project="nervi_dome">
                     <div class="project-header" onclick="toggleProject('nervi_dome')">
                         <div class="project-title-container">
                             <h2 class="project-title">nervi_dome</h2>
                             <div class="project-tags">
-                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="turin, it">turin, it</span><span class="tag" data-tag="arc656">arc656</span>
+                            <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="turin, it">turin, it</span><span class="tag" data-tag="arc656">arc656</span>
                             </div>
                         </div>
                         <div class="project-thumbnail">
-                            <img src="archive/nervi_dome/previews/nervi_dome_001.png" alt="nervi_dome thumbnail">
+                        <img src="archive/nervi_dome/nervi_dome.png" alt="nervi_dome thumbnail">
                         </div>
                         <button class="toggle-button">
                             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -758,10 +946,10 @@
                     </div>
                     <div class="project-content" id="content-nervi_dome">
                         <div class="project-description">
-                            <a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, 'nervi_dome')">form study</a> of pier luigi nervi's palazzetto dello sport, in turin, italy.
+                        form study of pier luigi nervi's palazzetto dello sport, in turin, italy.
                         </div>
                         <div class="project-images">
-                            <img src="archive/nervi_dome/previews/nervi_dome_001.png" alt="nervi_dome image" class="project-image" loading="lazy">
+                        <img src="archive/nervi_dome/nervi_dome.png" alt="nervi_dome image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -774,7 +962,7 @@
                             </div>
                         </div>
                         <div class="project-thumbnail">
-                            <img src="archive/parametric_cup/previews/diagram_001.png" alt="parametric_cup thumbnail">
+                        <img src="archive/parametric_cup/preview.png" alt="parametric_cup thumbnail">
                         </div>
                         <button class="toggle-button">
                             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -787,7 +975,7 @@
                             <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, 'parametric_cup')">form exploration</a> of a cup/glass.
                         </div>
                         <div class="project-images">
-                            <img src="archive/parametric_cup/previews/diagram_001.png" alt="parametric_cup image" class="project-image" loading="lazy">
+                        <img src="archive/parametric_cup/diagram.png" alt="parametric_cup image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -839,7 +1027,11 @@
                             bus stop proposal for university of miami's campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, 'parametric_cup')">scripted form definition</a>.
                         </div>
                         <div class="project-images">
-                            <img src="archive/parametric_stop/index_diagram.jpeg" alt="parametric_stop image" class="project-image" loading="lazy"><img src="archive/parametric_stop/site_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy"><img src="archive/parametric_stop/floor_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy"><img src="archive/parametric_stop/section.jpeg" alt="parametric_stop image" class="project-image" loading="lazy"><img src="archive/parametric_stop/perspective.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                        <img src="archive/parametric_stop/index_diagram.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                        <img src="archive/parametric_stop/site_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                        <img src="archive/parametric_stop/floor_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                        <img src="archive/parametric_stop/section.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                        <img src="archive/parametric_stop/perspective.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -852,7 +1044,7 @@
                             </div>
                         </div>
                         <div class="project-thumbnail">
-                            <img src="archive/remote_research_center/previews/remote_research_center_presentation_001.png" alt="remote_research_center thumbnail">
+                        <img src="archive/remote_research_center/preview.png" alt="remote_research_center thumbnail">
                         </div>
                         <button class="toggle-button">
                             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -865,7 +1057,12 @@
                             off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, 'thermal_study')">thermal study</a> and passive systems.
                         </div>
                         <div class="project-images">
-                            <img src="archive/remote_research_center/previews/remote_research_center_presentation_001.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_002.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_003.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_004.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_005.png" alt="remote_research_center image" class="project-image" loading="lazy"><img src="archive/remote_research_center/previews/remote_research_center_presentation_006.png" alt="remote_research_center image" class="project-image" loading="lazy">
+                        <img src="archive/remote_research_center/previews/remote_research_center_presentation_001.png" alt="remote_research_center image" class="project-image" loading="lazy">
+                        <img src="archive/remote_research_center/previews/remote_research_center_presentation_002.png" alt="remote_research_center image" class="project-image" loading="lazy">
+                        <img src="archive/remote_research_center/previews/remote_research_center_presentation_003.png" alt="remote_research_center image" class="project-image" loading="lazy">
+                        <img src="archive/remote_research_center/previews/remote_research_center_presentation_004.png" alt="remote_research_center image" class="project-image" loading="lazy">
+                        <img src="archive/remote_research_center/previews/remote_research_center_presentation_005.png" alt="remote_research_center image" class="project-image" loading="lazy">
+                        <img src="archive/remote_research_center/previews/remote_research_center_presentation_006.png" alt="remote_research_center image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -878,7 +1075,7 @@
                             </div>
                         </div>
                         <div class="project-thumbnail">
-                            <img src="archive/renault_center/previews/renault_presentation_001.png" alt="renault_center thumbnail">
+                        <img src="archive/renault_center/preview.png" alt="renault_center thumbnail">
                         </div>
                         <button class="toggle-button">
                             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -891,7 +1088,11 @@
                             precedent study of foster + partners' renault center, in swindon, uk.
                         </div>
                         <div class="project-images">
-                            <img src="archive/renault_center/previews/renault_presentation_001.png" alt="renault_center image" class="project-image" loading="lazy"><img src="archive/renault_center/previews/renault_presentation_002.png" alt="renault_center image" class="project-image" loading="lazy"><img src="archive/renault_center/previews/renault_presentation_003.png" alt="renault_center image" class="project-image" loading="lazy"><img src="archive/renault_center/previews/renault_presentation_004.png" alt="renault_center image" class="project-image" loading="lazy"><img src="archive/renault_center/previews/renault_presentation_005.png" alt="renault_center image" class="project-image" loading="lazy">
+                        <img src="archive/renault_center/previews/renault_presentation_001.png" alt="renault_center image" class="project-image" loading="lazy">
+                        <img src="archive/renault_center/previews/renault_presentation_002.png" alt="renault_center image" class="project-image" loading="lazy">
+                        <img src="archive/renault_center/previews/renault_presentation_003.png" alt="renault_center image" class="project-image" loading="lazy">
+                        <img src="archive/renault_center/previews/renault_presentation_004.png" alt="renault_center image" class="project-image" loading="lazy">
+                        <img src="archive/renault_center/previews/renault_presentation_005.png" alt="renault_center image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -904,7 +1105,7 @@
                             </div>
                         </div>
                         <div class="project-thumbnail">
-                            <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-01.png" alt="rome_artist_residence thumbnail">
+                        <img src="archive/rome_artist_residence/preview.png" alt="rome_artist_residence thumbnail">
                         </div>
                         <button class="toggle-button">
                             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -917,7 +1118,69 @@
                             adaptive reuse proposal for post-office in rome, italy to be adapted to a residential building for artists.
                         </div>
                         <div class="project-images">
-                            <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-01.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-02.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-03.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-04.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-05.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-06.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-07.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-08.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-09.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-10.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-11.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-12.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-13.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-14.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-15.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-16.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-17.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-18.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-19.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-20.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-21.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-22.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-23.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-24.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-25.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-26.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-27.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-28.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-29.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-30.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-31.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-32.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-33.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-34.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-35.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-36.png" alt="rome_artist_residence image" class="project-image" loading="lazy"><img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-37.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-01.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-02.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-03.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-04.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-05.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-06.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-07.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-08.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-09.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-10.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-11.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-12.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-13.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-14.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-15.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-16.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-17.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-18.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-19.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-20.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-21.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-22.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-23.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-24.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-25.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-26.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-27.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-28.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-29.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-30.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-31.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-32.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-33.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-34.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-35.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-36.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                        <img src="archive/rome_artist_residence/preview/rome_artist_residence_presentation-37.png" alt="rome_artist_residence image" class="project-image" loading="lazy">
+                    </div>
+            </div>
+            </div>
+            <div class="project-item" data-project="velvet_ii">
+                <div class="project-header" onclick="toggleProject('velvet_ii')">
+                    <div class="project-title-container">
+                        <h2 class="project-title">velvet_ii</h2>
+                        <div class="project-tags">
+                            <span class="tag" data-tag="exhibition">exhibition</span><span class="tag" data-tag="illustrator">illustrator</span><span class="tag" data-tag="photoshop">photoshop</span><span class="tag" data-tag="spring '24">spring '24</span><span class="tag" data-tag="imago">imago</span>
+                        </div>
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="archive/velvet_ii/velvet_ii_1.jpg" alt="velvet_ii thumbnail">
+                    </div>
+                    <button class="toggle-button">
+                        <svg width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M8 4.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zM4.5 8a.5.5 0 01.5-.5h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="project-content" id="content-velvet_ii">
+                    <div class="project-description">
+                        graphic identity for felix carmelo's solo exhibition @ imago's art gallery, curated by katherine chacón.
+                    </div>
+                    <div class="project-images">
+                        <img src="archive/velvet_ii/velvet_ii_1.jpg" alt="velvet_ii image" class="project-image" loading="lazy"><img src="archive/velvet_ii/velvet_ii_flyers.jpg" alt="velvet_ii image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -933,8 +1196,129 @@
     </div>
     
     <script>
-        const projects = {'ad_barnes_nature_reserve': {'tags': ['team', 'rhino', 'blender', "fall '23", 'miami, fl', 'arc604'], 'description': 'nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).'}, 'cannabis_farm': {'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'arc605'], 'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.'}, 'chil_bookshelf': {'tags': ['individual', 'rhino', 'blender', "spring '24", 'miami, fl', 'chil'], 'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. built shelf comprised of 13 aluminum pieces.'}, 'icosahedron_explosion': {'tags': ['individual', 'rhino', "fall '23", 'arc611'], 'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.'}, 'illinois_institute_of_technology_dorms': {'tags': ['individual', 'rhino', 'grasshopper', 'kangaroo', "fall '24", 'chicago, il'], 'link': 'grasshopper', 'description': 'residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.'}, 'janus_house': {'tags': ['individual', 'rhino', "spring '24", 'precedent', 'arc605'], 'description': "precedent study of studio sean canty's conceptual janus house."}, 'lego_bridge': {'tags': ['individual', 'rhino', 'grasshopper', 'wasp', "fall '24", 'miami, fl', 'arc656'], 'link': 'grasshopper', 'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.'}, 'moca_playhouse': {'tags': ['team', 'rhino', "summer '24", 'miami, fl', 'chil'], 'description': "community activation with temporary install of a lumber house, in moca (museum of contemporary art, miami), inspired by miami's shotgun house vernacular."}, 'nervi_dome': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'turin, it', 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.'}, 'parametric_cup': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.'}, 'parametric_remapping': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.'}, 'parametric_stop': {'tags': ['individual', 'rhino', 'grasshopper', "spring '24", 'arc613'], 'link': 'grasshopper', 'description': 'bus stop proposal for university of miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.'}, 'remote_research_center': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'la tortuga, venezuela', 'arc662'], 'link': 'thermal_study', 'description': 'off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.'}, 'renault_center': {'tags': ['individual', 'rhino', "fall '24", 'swindon, uk', 'precedent', 'arc607'], 'description': "precedent study of foster + partners' renault center, in swindon, uk."}, 'rome_artist_residence': {'tags': ['team', 'rhino', "summer '24", 'rome, it', 'arc606'], 'description': 'adaptive reuse proposal for post-office in rome, italy to be adapted to a residential building for artists.'}};  // Make projects data available
-        const tools = {'lego_bridge_aggregation': {'description': 'lego block aggregation using wasp plugin to form bridge across lake osceola in university of miami campus', 'tags': ['grasshopper', 'wasp']}, 'parametric_remapping': {'description': "numeric range (circle radius) resized proportional to the circle's distance to a moving point", 'tags': ['grasshopper']}, 'parametric_cup': {'description': 'cup formed along set of lines defined by points', 'tags': ['grasshopper']}, 'thermal_study': {'description': 'wind and temperature analysis on façade of building based on coordinate location', 'tags': ['grasshopper']}, 'nervi_dome': {'description': "form definition of pier luigi nervi's palazzetto dello sport", 'tags': ['grasshopper']}, 'illinois_institute_of_technology_truss_system': {'description': 'parametric structural truss system for a proposed student housing project in iit', 'tags': ['grasshopper', 'kangaroo']}, 'parametric_stop': {'description': 'bus stop proposal for the university of miami wth parametric form', 'tags': ['grasshopper']}};  // Make tools data available
+        const projects = {
+            'ad_barnes_nature_reserve': {
+                'tags': ['team', 'rhino', "fall '23", 'miami, fl', 'arc604'],
+                'description': 'nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).'
+            },
+            'cannabis_farm': {
+                'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'arc605'],
+                'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.'
+            },
+            'brush_club': {
+                'tags': ['packaging', 'brand id', 'illustrator', 'photoshop', 'premiere pro', 'brush club'],
+                'description': 'branding and packaging development for eco-friendly dental care company.'
+            },
+            'chil_bookshelf': {
+                'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'chil'],
+                'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. comprised of 13 aluminum pieces.'
+            },
+            'color_pools': {
+                'tags': ['exhibition', 'illustrator', 'photoshop', "spring '24", 'imago'],
+                'description': 'graphic identity for carmen smith\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.'
+            },
+            'geometricas': {
+                'tags': ['exhibition', 'illustrator', 'photoshop', "fall '24", 'imago'],
+                'description': 'graphic identity for mariana copello and luisa duarte\'s joint exhibition @ imago\'s art gallery, curated by katherine chacón.'
+            },
+            'icosahedron_explosion': {
+                'tags': ['individual', 'rhino', "fall '23", 'arc611'],
+                'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.'
+            },
+            'illinois_institute_of_technology_dorms': {
+                'tags': ['individual', 'rhino', 'grasshopper', 'kangaroo', "fall '24", 'chicago, il'],
+                'link': 'grasshopper',
+                'description': 'residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.'
+            },
+            'in_and_out': {
+                'tags': ['exhibition', 'illustrator', 'photoshop', "spring '24", 'imago'],
+                'description': 'graphic identity for kk bicalho\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.'
+            },
+            'janus_house': {
+                'tags': ['individual', 'rhino', "spring '24", 'precedent', 'arc605'],
+                'description': 'precedent study of studio sean canty\'s conceptual janus house.'
+            },
+            'lego_bridge': {
+                'tags': ['individual', 'rhino', 'grasshopper', 'wasp', "fall '24", 'miami, fl', 'arc656'],
+                'link': 'grasshopper',
+                'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.'
+            },
+            'moca_playhouse': {
+                'tags': ['team', 'rhino', "summer '24", 'miami, fl', 'chil'],
+                'description': 'community activation with temporary install of a lumber house, in moca (museum of contemporary art, miami), inspired by miami\'s shotgun house vernacular.'
+            },
+            'mourning_flowers': {
+                'tags': ['exhibition', 'illustrator', 'photoshop', "spring '25", 'imago'],
+                'description': 'graphic identity for margarita boulton\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.'
+            },
+            'nervi_dome': {
+                'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'turin, it', 'arc656'],
+                'link': 'grasshopper',
+                'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.'
+            },
+            'parametric_cup': {
+                'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'],
+                'link': 'grasshopper',
+                'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.'
+            },
+            'parametric_remapping': {
+                'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'],
+                'link': 'grasshopper',
+                'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.'
+            },
+            'parametric_stop': {
+                'tags': ['individual', 'rhino', 'grasshopper', "spring '24", 'arc613'],
+                'link': 'grasshopper',
+                'description': 'bus stop proposal for university of miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.'
+            },
+            'remote_research_center': {
+                'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'la tortuga, venezuela', 'arc662'],
+                'link': 'thermal_study',
+                'description': 'off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.'
+            },
+            'renault_center': {
+                'tags': ['individual', 'rhino', "fall '24", 'swindon, uk', 'precedent', 'arc607'],
+                'description': 'precedent study of foster + partners\' renault center, in swindon, uk.'
+            },
+            'rome_artist_residence': {
+                'tags': ['team', 'rhino', "summer '24", 'rome, it', 'arc606'],
+                'description': 'adaptive reuse proposal for post-office in rome, italy to be adapted to a residential building for artists.'
+            },
+            'velvet_ii': {
+                'tags': ['exhibition', 'illustrator', 'photoshop', "spring '24", 'imago'],
+                'description': 'graphic identity for felix carmelo\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.'
+            }
+        };  // Make projects data available
+        const tools = {
+            'lego_bridge_aggregation': {
+                'description': 'lego block aggregation using wasp plugin to form bridge across lake osceola in university of miami campus',
+                'tags': ['grasshopper', 'wasp']
+            },
+            'parametric_remapping': {
+                'description': 'numeric range (circle radius) resized proportional to the circle\'s distance to a moving point',
+                'tags': ['grasshopper']
+            },
+            'parametric_cup': {
+                'description': 'cup formed along set of lines defined by points',
+                'tags': ['grasshopper']
+            },
+            'thermal_study': {
+                'description': 'wind and temperature analysis on façade of building based on coordinate location',
+                'tags': ['grasshopper']
+            },
+            'nervi_dome': {
+                'description': 'form definition of pier luigi nervi\'s palazzetto dello sport',
+                'tags': ['grasshopper']
+            },
+            'illinois_institute_of_technology_truss_system': {
+                'description': 'parametric structural truss system for a proposed student housing project in iit',
+                'tags': ['grasshopper', 'kangaroo']
+            },
+            'parametric_stop': {
+                'description': 'bus stop proposal for the university of miami wth parametric form',
+                'tags': ['grasshopper']
+            }
+        };  // Make tools data available
         
         // Initialize the set for active tags
         const activeTags = new Set();
@@ -1214,5 +1598,6 @@
             }
         });
     </script>
+    <script src="cursor.js"></script>
 </body>
 </html>
