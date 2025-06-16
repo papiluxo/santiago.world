@@ -6,34 +6,6 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
     <title>toolbox - santiago martínez-oropeza</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="mobile.css">
-    
-    <!-- LogRocket -->
-    <script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
-    <script>
-        // Initialize LogRocket first
-        window.LogRocket && window.LogRocket.init('8wbldc/portfolio');
-        
-        // Wait for LogRocket to be ready, then identify user
-        setTimeout(() => {
-            if (window.LogRocket) {
-                // Generate or retrieve anonymous user ID
-                let userId = localStorage.getItem('lr_user_id');
-                if (!userId) {
-                    userId = 'visitor_' + Math.random().toString(36).substr(2, 9);
-                    localStorage.setItem('lr_user_id', userId);
-                }
-                
-                // Identify user for LogRocket
-                window.LogRocket.identify(userId, {
-                    name: 'Portfolio Visitor',
-                    page: 'toolbox',
-                    userType: 'anonymous',
-                    visitTime: new Date().toISOString()
-                });
-            }
-        }, 100);
-    </script>
     <style>
         :root {
             /* Light theme (default) */
@@ -223,7 +195,14 @@
         }
 
         .tool-item:hover .tool-name::after {
-            display: none;
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-left: 8px;
+            vertical-align: middle;
         }
         
         .tool-header {
@@ -241,23 +220,16 @@
         }
         
         .tool-name {
-            font-size: 1.1rem;
-            margin: 0;
-            padding: 0;
-            line-height: 1.2;
+            font-size: 1.5rem;
+            font-weight: 600;
             color: var(--text);
-            transition: color 0.2s ease;
-        }
-        
-        .tool-item:hover .tool-name {
-            color: var(--accent);
+            margin: 0;
         }
         
         .tool-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 0.5rem;
         }
         
         .tag {
@@ -313,23 +285,15 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.4rem 0.8rem;
+            padding: 0.5rem 1rem;
             font-size: 0.9rem;
             color: var(--text);
-            background-color: transparent;
+            background: transparent;
             border: 1px solid var(--border);
             border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.2s ease;
             cursor: pointer;
-            white-space: nowrap;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
-        
-        .tool-button svg {
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
+            text-decoration: none;
+            transition: all 0.2s;
         }
         
         .tool-button:hover {
@@ -360,28 +324,6 @@
         @media (max-width: 768px) {
             .tool-actions {
                 flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .tool-button {
-                width: 100%;
-                justify-content: center;
-                padding: 0.35rem 0.6rem;
-                font-size: 0.85rem;
-                gap: 0.4rem;
-            }
-            
-            .tool-button svg {
-                width: 14px;
-                height: 14px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .tool-button {
-                padding: 0.3rem 0.5rem;
-                font-size: 0.8rem;
-                gap: 0.3rem;
             }
         }
         
@@ -447,28 +389,6 @@
             border-radius: 2px;
         }
     
-        /* Base cursor styles for desktop */
-        @media (min-width: 769px) {
-            * {
-                cursor: none !important;
-            }
-
-            .custom-cursor {
-                width: 8px;
-                height: 8px;
-                background-color: var(--accent);
-                border-radius: 50%;
-                position: fixed;
-                pointer-events: none;
-                z-index: 9999;
-                transition: transform 0.1s ease;
-                transform: translate(-50%, -50%);
-            }
-
-            .custom-cursor.hover {
-                transform: translate(-50%, -50%) scale(1.5);
-            }
-        }
     </style>
 </head>
 <body>
@@ -534,7 +454,6 @@
             <div id="clock" class="clock"></div>
         </div>
     </div>
-    <div class="main-content">
         <h1>toolbox</h1>
         <div class="active-filters" id="activeFilters"></div>
         <div class="tool-list">
@@ -558,7 +477,7 @@
                 <div class="tool-actions">
                         <button class="tool-button" onclick="toggleCode('illinois_institute_of_technology_truss_system')">
                         <svg width="16" height="16" viewBox="0 0 16 16">
-                            <path fill="currentColor" d="M4.5 3.5L1.5 8l3 4.5L5.8 11 3.3 8l2.5-3L4.5 3.5zm7 0L10.2 5l2.5 3-2.5 3 1.3 1.5L14.5 8l-3-4.5z"/>
+                            <path fill="currentColor" d="M4.72 3.22a.75.75 0 001.06 1.06L2.06 8l3.72 3.72a.75.75 0 10-1.06 1.06L.47 8.53a.75.75 0 000-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
                         </svg>
                             view code
                     </button>
@@ -787,9 +706,8 @@
         </div>
     </div>
     
-    <script src="cursor.js"></script>
     <script>
-        const projects = {'ad_barnes_nature_reserve': {'tags': ['team', 'rhino', "fall '23", 'miami, fl', 'arc604'], 'description': 'nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).'}, 'cannabis_farm': {'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'arc605'], 'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.'}, 'chil_bookshelf': {'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'chil'], 'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. comprised of 13 aluminum pieces.'}, 'icosahedron_explosion': {'tags': ['individual', 'rhino', "fall '23", 'arc611'], 'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.'}, 'illinois_institute_of_technology_dorms': {'tags': ['individual', 'rhino', 'grasshopper', 'kangaroo', "fall '24", 'chicago, il'], 'link': 'grasshopper', 'description': 'residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.'}, 'janus_house': {'tags': ['individual', 'rhino', "spring '24", 'precedent', 'arc605'], 'description': "precedent study of studio sean canty's conceptual janus house."}, 'lego_bridge': {'tags': ['individual', 'rhino', 'grasshopper', 'wasp', "fall '24", 'miami, fl', 'arc656'], 'link': 'grasshopper', 'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.'}, 'moca_playhouse': {'tags': ['team', 'rhino', "summer '24", 'miami, fl', 'chil'], 'description': "community activation with temporary install of a lumber house, in moca (museum of contemporary art, miami), inspired by miami's shotgun house vernacular."}, 'nervi_dome': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'turin, it', 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.'}, 'parametric_cup': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.'}, 'parametric_remapping': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.'}, 'parametric_stop': {'tags': ['individual', 'rhino', 'grasshopper', "spring '24", 'arc613'], 'link': 'grasshopper', 'description': 'bus stop proposal for university of miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.'}, 'remote_research_center': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'la tortuga, venezuela', 'arc662'], 'link': 'thermal_study', 'description': 'off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.'}, 'renault_center': {'tags': ['individual', 'rhino', "fall '24", 'swindon, uk', 'precedent', 'arc607'], 'description': "precedent study of foster + partners' renault center, in swindon, uk."}, 'rome_artist_residence': {'tags': ['team', 'rhino', "summer '24", 'rome, it', 'arc606'], 'description': 'adaptive reuse proposal for post-office in rome, italy to be adapted to a residential building for artists.'}};  // Make projects data available
+        const projects = {'ad_barnes_nature_reserve': {'tags': ['team', 'rhino', 'blender', "fall '23", 'miami, fl', 'arc604'], 'description': 'nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).'}, 'cannabis_farm': {'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'arc605'], 'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.'}, 'chil_bookshelf': {'tags': ['individual', 'rhino', 'blender', "spring '24", 'miami, fl', 'chil'], 'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. built shelf comprised of 13 aluminum pieces.'}, 'icosahedron_explosion': {'tags': ['individual', 'rhino', "fall '23", 'arc611'], 'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.'}, 'illinois_institute_of_technology_dorms': {'tags': ['individual', 'rhino', 'grasshopper', 'kangaroo', "fall '24", 'chicago, il'], 'link': 'grasshopper', 'description': 'residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.'}, 'janus_house': {'tags': ['individual', 'rhino', "spring '24", 'precedent', 'arc605'], 'description': "precedent study of studio sean canty's conceptual janus house."}, 'lego_bridge': {'tags': ['individual', 'rhino', 'grasshopper', 'wasp', "fall '24", 'miami, fl', 'arc656'], 'link': 'grasshopper', 'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.'}, 'moca_playhouse': {'tags': ['team', 'rhino', "summer '24", 'miami, fl', 'chil'], 'description': "community activation with temporary install of a lumber house, in moca (museum of contemporary art, miami), inspired by miami's shotgun house vernacular."}, 'nervi_dome': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'turin, it', 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.'}, 'parametric_cup': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.'}, 'parametric_remapping': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'], 'link': 'grasshopper', 'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.'}, 'parametric_stop': {'tags': ['individual', 'rhino', 'grasshopper', "spring '24", 'arc613'], 'link': 'grasshopper', 'description': 'bus stop proposal for university of miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.'}, 'remote_research_center': {'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'la tortuga, venezuela', 'arc662'], 'link': 'thermal_study', 'description': 'off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.'}, 'renault_center': {'tags': ['individual', 'rhino', "fall '24", 'swindon, uk', 'precedent', 'arc607'], 'description': "precedent study of foster + partners' renault center, in swindon, uk."}, 'rome_artist_residence': {'tags': ['team', 'rhino', "summer '24", 'rome, it', 'arc606'], 'description': 'adaptive reuse proposal for post-office in rome, italy to be adapted to a residential building for artists.'}};  // Make projects data available
         const tools = {'lego_bridge_aggregation': {'description': 'lego block aggregation using wasp plugin to form bridge across lake osceola in university of miami campus', 'tags': ['grasshopper', 'wasp']}, 'parametric_remapping': {'description': "numeric range (circle radius) resized proportional to the circle's distance to a moving point", 'tags': ['grasshopper']}, 'parametric_cup': {'description': 'cup formed along set of lines defined by points', 'tags': ['grasshopper']}, 'thermal_study': {'description': 'wind and temperature analysis on façade of building based on coordinate location', 'tags': ['grasshopper']}, 'nervi_dome': {'description': "form definition of pier luigi nervi's palazzetto dello sport", 'tags': ['grasshopper']}, 'illinois_institute_of_technology_truss_system': {'description': 'parametric structural truss system for a proposed student housing project in iit', 'tags': ['grasshopper', 'kangaroo']}, 'parametric_stop': {'description': 'bus stop proposal for the university of miami wth parametric form', 'tags': ['grasshopper']}};  // Make tools data available
         
         // Initialize the set for active tags
@@ -897,18 +815,23 @@
             const viewCodeButton = document.querySelector(`#content-${toolName} .tool-button[onclick="toggleCode('${toolName}')"]`);
             const isVisible = codePreview.style.display === 'block';
             
-            // Update button text and icon immediately
-                viewCodeButton.innerHTML = `
-                    <svg width="16" height="16" viewBox="0 0 16 16">
-                    <path fill="currentColor" d="M4.5 3.5L1.5 8l3 4.5L5.8 11 3.3 8l2.5-3L4.5 3.5zm7 0L10.2 5l2.5 3-2.5 3 1.3 1.5L14.5 8l-3-4.5z"/>
-                    </svg>
-                ${isVisible ? 'view code' : 'close'}
-                `;
-            
             if (isVisible) {
                 codePreview.style.display = 'none';
+                viewCodeButton.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 16 16">
+                        <path fill="currentColor" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                    </svg>
+                    view code
+                `;
                 return;
             }
+            
+            viewCodeButton.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                    <path fill="currentColor" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"/>
+                </svg>
+                close
+            `;
             
             try {
                 loadingElement.style.display = 'block';
@@ -1052,18 +975,6 @@
                 if (tag) {
                     toggleTag(tag);
                 }
-            }
-        });
-
-        // Replace all view code button SVGs
-        document.querySelectorAll('.tool-button').forEach(button => {
-            if (button.textContent.includes('view code')) {
-                button.innerHTML = `
-                    <svg width="16" height="16" viewBox="0 0 16 16">
-                        <path fill="currentColor" d="M4.5 3.5L1.5 8l3 4.5L5.8 11 3.3 8l2.5-3L4.5 3.5zm7 0L10.2 5l2.5 3-2.5 3 1.3 1.5L14.5 8l-3-4.5z"/>
-                    </svg>
-                    view code
-                `;
             }
         });
     </script>
