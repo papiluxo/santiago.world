@@ -552,6 +552,16 @@
                 overflow-x: auto;
             }
             
+            .clear-filters {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.65rem;
+                margin-left: 0.25rem;
+                width: auto;
+                margin-top: 0;
+                flex: none;
+                white-space: nowrap;
+                display: none;
+            }
             
             .project-item {
                 padding: 0.75rem;
@@ -686,6 +696,10 @@
                 padding: 0.15rem 0.3rem;
                 font-size: 0.65rem;
             }
+            
+            .clear-filters {
+                display: none;
+            }
         }
         
         .search-results {
@@ -779,7 +793,20 @@
             border-color: var(--accent);
         }
         
+        .clear-filters {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: var(--text);
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            margin-left: auto;
+        }
         
+        .clear-filters:hover {
             color: var(--accent);
             border-color: var(--accent);
         }
@@ -855,6 +882,7 @@
             <button class="category-button" data-category="experimental" onclick="filterByCategory('experimental')">experimental</button>
             <button class="category-button" data-category="proposal" onclick="filterByCategory('proposal')">proposal</button>
             <button class="category-button" data-category="built" onclick="filterByCategory('built')">built</button>
+            <button class="clear-filters" onclick="clearAllFilters()" style="display: none;">clear filters</button>
         </div>
         <div class="active-filters" id="activeFilters"></div>
         <div class="project-list">
@@ -1682,6 +1710,7 @@
             }
             updateActiveFilters();
             filterProjects();
+            updateClearFiltersButton();
         }
         
         function updateActiveFilters() {
@@ -1771,8 +1800,17 @@
             });
             
             // Update clear filters button visibility
+            updateClearFiltersButton();
         }
         
+        function clearAllFilters() {
+            activeCategory = 'all';
+            activeTags.clear();
+            
+            // Update button states
+            document.querySelectorAll('.category-button').forEach(button => {
+                button.classList.remove('active');
+            });
             document.querySelector('[data-category="all"]').classList.add('active');
             
             // Clear active filters display
@@ -1782,8 +1820,14 @@
             filterProjects();
             
             // Hide clear filters button
+            document.querySelector('.clear-filters').style.display = 'none';
         }
         
+        function updateClearFiltersButton() {
+            const clearButton = document.querySelector('.clear-filters');
+            const hasActiveFilters = activeCategory !== 'all' || activeTags.size > 0;
+            clearButton.style.display = hasActiveFilters ? 'block' : 'none';
+        }
         
         function updateClock() {
             const now = new Date();
