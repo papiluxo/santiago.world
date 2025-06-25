@@ -479,10 +479,11 @@
                 padding: 0.15rem 0.3rem;
                 font-size: 0.65rem;
                 min-width: auto;
-                flex: 1;
+                flex: none;
                 text-align: center;
                 height: auto;
                 display: inline-block;
+                white-space: nowrap;
             }
             
             /* Enhanced mobile optimizations */
@@ -544,20 +545,22 @@
             }
             
             .category-filters {
-                gap: 0.5rem;
+                gap: 0.25rem;
                 margin-bottom: 1.5rem;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
                 justify-content: center;
+                overflow-x: auto;
             }
             
             .category-button {
                 padding: 0.15rem 0.3rem;
                 font-size: 0.65rem;
                 min-width: auto;
-                flex: 1;
+                flex: none;
                 text-align: center;
                 height: auto;
                 display: inline-block;
+                white-space: nowrap;
             }
             
             .clear-filters {
@@ -586,8 +589,15 @@
             .project-thumbnail {
                 order: 2;
                 width: 100%;
-                height: 120px;
+                height: auto;
+                max-height: 200px;
                 align-self: center;
+            }
+            
+            .project-thumbnail img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
             }
             
             .toggle-button {
@@ -608,7 +618,7 @@
             }
             
             .project-tags {
-                justify-content: center;
+                justify-content: flex-start;
                 gap: 0.25rem;
                 margin-top: 0.25rem;
             }
@@ -672,7 +682,14 @@
             }
             
             .project-thumbnail {
-                height: 100px;
+                height: auto;
+                max-height: 150px;
+            }
+            
+            .project-thumbnail img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
             }
             
             .tag {
