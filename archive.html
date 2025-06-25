@@ -208,6 +208,49 @@
             line-height: 1;
         }
         
+        .category-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: var(--text);
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .category-button:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .category-button.active {
+            color: var(--background);
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.7rem;
+            color: var(--background);
+            background-color: var(--accent);
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
         .project-item {
             border-bottom: 1px solid var(--border);
             padding: 1rem;
@@ -423,6 +466,21 @@
         }
         
         @media (max-width: 768px) {
+            .project-images {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-filters {
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .category-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Enhanced mobile optimizations */
             .container {
                 padding: 1rem;
             }
@@ -488,33 +546,19 @@
             }
             
             .category-button {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-                border-width: 1px;
-                border-style: solid;
-                border-color: var(--border);
-                height: 2.5rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
                 min-width: auto;
                 flex: 1;
                 text-align: center;
             }
             
             .clear-filters {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-                border-width: 1px;
-                border-style: solid;
-                border-color: var(--border);
-                height: 2.5rem;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
                 margin-left: 0;
                 width: 100%;
                 margin-top: 0.5rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
             
             .project-item {
@@ -577,6 +621,11 @@
                 margin-bottom: 0.75rem;
             }
             
+            .project-images {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
             .project-image {
                 border-radius: 4px;
             }
@@ -607,15 +656,8 @@
             }
             
             .category-button {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-                height: 2.25rem;
-            }
-            
-            .clear-filters {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-                height: 2.25rem;
+                padding: 0.4rem 0.6rem;
+                font-size: 0.75rem;
             }
             
             .project-title {
@@ -716,6 +758,30 @@
                 transform: translate(-50%, -50%) scale(1.5);
             }
         }
+        
+        .category-button.active {
+            color: var(--background);
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .clear-filters {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: var(--text);
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            margin-left: auto;
+        }
+        
+        .clear-filters:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -783,6 +849,13 @@
     </div>
     <div class="main-content">
         <h1>archive</h1>
+        <div class="category-filters">
+            <button class="category-button active" data-category="all" onclick="filterByCategory('all')">all</button>
+            <button class="category-button" data-category="experimental" onclick="filterByCategory('experimental')">experimental</button>
+            <button class="category-button" data-category="proposal" onclick="filterByCategory('proposal')">proposal</button>
+            <button class="category-button" data-category="built" onclick="filterByCategory('built')">built</button>
+            <button class="clear-filters" onclick="clearAllFilters()" style="display: none;">clear filters</button>
+        </div>
         <div class="active-filters" id="activeFilters"></div>
         <div class="project-list">
                 <div class="project-item" data-project="ad_barnes_nature_reserve">
@@ -988,7 +1061,7 @@
                         <div class="project-title-container">
                             <h2 class="project-title">illinois_institute_of_technology_dorms</h2>
                             <div class="project-tags">
-                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="blender">blender</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="kangaroo">kangaroo</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="chicago, il">chicago, il</span>
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="kangaroo">kangaroo</span><span class="tag" data-tag="blender">blender</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="chicago, il">chicago, il</span>
                             </div>
                         </div>
                         <div class="project-thumbnail">
@@ -1411,94 +1484,115 @@
         const projects = {
             'ad_barnes_nature_reserve': {
                 'tags': ['team', 'rhino', 'blender', "fall '23", 'miami, fl', 'arc604'],
-                'description': 'nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).'
+                'description': 'nature reserve proposal for public park, a.d. (doug) barnes, with offices, exhibit gallery (discovery room), auditorium and public congregation (resiliency room).',
+                'category': 'proposal'
             },
             'cannabis_farm': {
                 'tags': ['individual', 'rhino', "spring '24", 'miami, fl', 'arc605'],
-                'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.'
+                'description': 'cannabis farm proposal equipped with flower cultivation and processing facilities, and public program for education.',
+                'category': 'proposal'
             },
             'brush_club': {
                 'tags': ['packaging', 'brand id', 'illustrator', 'photoshop', 'premiere pro', 'brush club'],
-                'description': 'branding and packaging development for eco-friendly dental care company.'
+                'description': 'branding and packaging development for eco-friendly dental care company.',
+                'category': 'built'
             },
             'chil_bookshelf': {
                 'tags': ['individual', 'rhino', 'blender', "spring '24", 'miami, fl', 'chil'],
-                'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. built shelf is the bottom section of the entire design, comprised of 13 aluminum pieces.'
+                'description': 'modular bookshelf for chil (community, housing and identity lab) studio space. built shelf is the bottom section of the entire design, comprised of 13 aluminum pieces.',
+                'category': 'built'
             },
             'color_pools': {
                 'tags': ['exhibition', 'illustrator', 'photoshop', "spring '24", 'imago'],
-                'description': 'graphic identity for carmen smith\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.'
+                'description': 'graphic identity for carmen smith\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.',
+                'category': 'built'
             },
             'geometricas': {
                 'tags': ['exhibition', 'illustrator', 'photoshop', "fall '24", 'imago'],
-                'description': 'graphic identity for mariana copello and luisa duarte\'s joint exhibition @ imago\'s art gallery, curated by katherine chacón.'
+                'description': 'graphic identity for mariana copello and luisa duarte\'s joint exhibition @ imago\'s art gallery, curated by katherine chacón.',
+                'category': 'built'
             },
             'icosahedron_explosion': {
                 'tags': ['individual', 'rhino', "fall '23", 'arc611'],
-                'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.'
+                'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.',
+                'category': 'experimental'
             },
             'illinois_institute_of_technology_dorms': {
-                'tags': ['individual', 'rhino', 'blender', 'grasshopper', 'kangaroo', "fall '24", 'chicago, il'],
+                'tags': ['individual', 'rhino', 'grasshopper', 'kangaroo', 'blender', "fall '24", 'chicago, il'],
                 'link': 'grasshopper',
-                'description': 'residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.'
+                'description': 'residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.',
+                'category': 'proposal'
             },
             'in_and_out': {
                 'tags': ['exhibition', 'illustrator', 'photoshop', "spring '24", 'imago'],
-                'description': 'graphic identity for kk bicalho\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.'
+                'description': 'graphic identity for kk bicalho\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.',
+                'category': 'built'
             },
             'janus_house': {
                 'tags': ['individual', 'rhino', "spring '24", 'precedent', 'arc605'],
-                'description': 'precedent study of studio sean canty\'s conceptual janus house.'
+                'description': 'precedent study of studio sean canty\'s conceptual janus house.',
+                'category': 'experimental'
             },
             'lego_bridge': {
                 'tags': ['individual', 'rhino', 'grasshopper', 'wasp', "fall '24", 'miami, fl', 'arc656'],
                 'link': 'grasshopper',
-                'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.'
+                'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.',
+                'category': 'experimental'
             },
             'moca_playhouse': {
                 'tags': ['team', 'rhino', "summer '24", 'miami, fl', 'chil'],
-                'description': 'community activation with temporary install of a lumber house, in moca (museum of contemporary art, miami), inspired by miami\'s shotgun house vernacular.'
+                'description': 'community activation with temporary install of a lumber house, in moca (museum of contemporary art, miami), inspired by miami\'s shotgun house vernacular.',
+                'category': 'built'
             },
             'mourning_flowers': {
                 'tags': ['exhibition', 'illustrator', 'photoshop', "spring '25", 'imago'],
-                'description': 'graphic identity for margarita boulton\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.'
+                'description': 'graphic identity for margarita boulton\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.',
+                'category': 'built'
             },
             'nervi_dome': {
                 'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'turin, it', 'arc656'],
                 'link': 'grasshopper',
-                'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.'
+                'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.',
+                'category': 'experimental'
             },
             'parametric_cup': {
                 'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'],
                 'link': 'grasshopper',
-                'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.'
+                'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.',
+                'category': 'experimental'
             },
             'parametric_remapping': {
                 'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'],
                 'link': 'grasshopper',
-                'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.'
+                'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.',
+                'category': 'experimental'
             },
             'parametric_stop': {
                 'tags': ['individual', 'rhino', 'grasshopper', "spring '24", 'arc613'],
                 'link': 'grasshopper',
-                'description': 'bus stop proposal for university of miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.'
+                'description': 'bus stop proposal for university of miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.',
+                'category': 'proposal'
             },
             'remote_research_center': {
                 'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'la tortuga, venezuela', 'arc662'],
                 'link': 'thermal_study',
-                'description': 'off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.'
+                'description': 'off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.',
+                'category': 'proposal'
             },
             'renault_center': {
                 'tags': ['individual', 'rhino', "fall '24", 'swindon, uk', 'precedent', 'arc607'],
-                'description': 'precedent study of foster + partners\' renault center, in swindon, uk.'
+                'description': 'precedent study of foster + partners\' renault center, in swindon, uk.',
+                'category': 'experimental'
             },
             'rome_artist_residence': {
                 'tags': ['team', 'rhino', "summer '24", 'rome, it', 'arc606'],
-                'description': 'adaptive reuse proposal for post-office in rome, italy to be adapted to a residential building for artists.'
+                'description': 'adaptive reuse proposal for post-office in rome, italy to be adapted to a residential building for artists.',
+                'category': 'proposal'
             },
             'velvet_ii': {
                 'tags': ['exhibition', 'illustrator', 'photoshop', "spring '24", 'imago'],
-                'description': 'graphic identity for felix carmelo\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.'
+                'description': 'graphic identity for felix carmelo\'s solo exhibition @ imago\'s art gallery, curated by katherine chacón.',
+                'category': 'built'
             }
         };  // Make projects data available
         const tools = {
@@ -1535,6 +1629,8 @@
         // Initialize the set for active tags
         const activeTags = new Set();
         
+        // Initialize active category
+        let activeCategory = 'all';
         
     // Check if user has a preferred theme stored
     let currentTheme = localStorage.getItem('theme') || 'light';
@@ -1586,6 +1682,7 @@
             }
             updateActiveFilters();
             filterProjects();
+            updateClearFiltersButton();
         }
         
         function updateActiveFilters() {
@@ -1624,9 +1721,84 @@
                     const projectTags = new Set(projectData.tags);
                     const hasActiveTags = activeTags.size === 0 || 
                         Array.from(activeTags).every(tag => projectTags.has(tag));
-                    item.style.display = hasActiveTags ? 'block' : 'none';
+                    const hasActiveCategory = activeCategory === 'all' || 
+                        projectData.category === activeCategory;
+                    item.style.display = (hasActiveTags && hasActiveCategory) ? 'block' : 'none';
                 }
             });
+            
+            // Update category counts to show visible projects
+            updateVisibleCategoryCounts();
+        }
+        
+        function filterByCategory(category) {
+            activeCategory = category;
+            
+            // Update button states
+            document.querySelectorAll('.category-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            
+            // Apply filters
+            filterProjects();
+            
+            // Update category counts to show visible projects
+            updateVisibleCategoryCounts();
+        }
+        
+        function updateVisibleCategoryCounts() {
+            const categoryCounts = {
+                'all': Object.keys(projects).length,
+                'experimental': 0,
+                'proposal': 0,
+                'built': 0
+            };
+            
+            // Count total projects in each category
+            Object.values(projects).forEach(project => {
+                if (project.category) {
+                    categoryCounts[project.category]++;
+                }
+            });
+            
+            // Update button labels with total counts
+            Object.keys(categoryCounts).forEach(category => {
+                const button = document.querySelector(`[data-category="${category}"]`);
+                if (button) {
+                    const baseText = category === 'all' ? 'all' : category;
+                    button.textContent = `${baseText} (${categoryCounts[category]})`;
+                }
+            });
+            
+            // Update clear filters button visibility
+            updateClearFiltersButton();
+        }
+        
+        function clearAllFilters() {
+            activeCategory = 'all';
+            activeTags.clear();
+            
+            // Update button states
+            document.querySelectorAll('.category-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelector('[data-category="all"]').classList.add('active');
+            
+            // Clear active filters display
+            updateActiveFilters();
+            
+            // Apply filters
+            filterProjects();
+            
+            // Hide clear filters button
+            document.querySelector('.clear-filters').style.display = 'none';
+        }
+        
+        function updateClearFiltersButton() {
+            const clearButton = document.querySelector('.clear-filters');
+            const hasActiveFilters = activeCategory !== 'all' || activeTags.size > 0;
+            clearButton.style.display = hasActiveFilters ? 'block' : 'none';
         }
         
         function updateClock() {
@@ -1809,6 +1981,54 @@
                 }
             }
         });
+        
+        // Add category badges to project items
+        function addCategoryBadges() {
+            const projectItems = document.querySelectorAll('.project-item');
+            projectItems.forEach(item => {
+                const projectName = item.dataset.project;
+                const projectData = projects[projectName];
+                if (projectData && projectData.category) {
+                    const titleElement = item.querySelector('.project-title');
+                    if (titleElement && !titleElement.querySelector('.category-badge')) {
+                        const badge = document.createElement('span');
+                        badge.className = 'category-badge';
+                        badge.textContent = projectData.category;
+                        titleElement.appendChild(badge);
+                    }
+                }
+            });
+        }
+        
+        // Call addCategoryBadges when the page loads
+        document.addEventListener('DOMContentLoaded', addCategoryBadges);
+        
+        // Update category button labels with project counts
+        function updateCategoryCounts() {
+            const categoryCounts = {
+                'all': Object.keys(projects).length,
+                'experimental': 0,
+                'proposal': 0,
+                'built': 0
+            };
+            
+            Object.values(projects).forEach(project => {
+                if (project.category) {
+                    categoryCounts[project.category]++;
+                }
+            });
+            
+            // Update button labels
+            Object.keys(categoryCounts).forEach(category => {
+                const button = document.querySelector(`[data-category="${category}"]`);
+                if (button) {
+                    button.textContent = `${category} (${categoryCounts[category]})`;
+                }
+            });
+        }
+        
+        // Call updateCategoryCounts when the page loads
+        document.addEventListener('DOMContentLoaded', updateCategoryCounts);
     </script>
     <script src="cursor.js"></script>
 </body>
