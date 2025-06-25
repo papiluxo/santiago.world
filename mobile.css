@@ -436,11 +436,35 @@
     }
 
     .tool-description {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         line-height: 1.4;
-        padding: 0 0.75rem;
-        margin: 0;
-        border-top: none;
+        margin-bottom: 1rem;
+        color: var(--text);
+    }
+
+    /* Grasshopper functionality mobile styles */
+    .grasshopper-actions {
+        width: 100%;
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .grasshopper-button {
+        flex: 1;
+        justify-content: center;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        gap: 0.3rem;
+    }
+    
+    .code-preview {
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        font-size: 0.8rem;
+        max-height: 300px;
     }
 }
 
@@ -603,6 +627,37 @@
         line-height: 1.3;
         border-top: none;
     }
+
+    .tool-description {
+        font-size: 0.8rem;
+        line-height: 1.3;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Grasshopper functionality mobile styles */
+    .grasshopper-actions {
+        width: 100%;
+        display: flex;
+        gap: 0.4rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .grasshopper-button {
+        flex: 1;
+        justify-content: center;
+        padding: 0.35rem 0.5rem;
+        font-size: 0.75rem;
+        gap: 0.25rem;
+    }
+    
+    .code-preview {
+        width: 100%;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+        padding: 0.6rem;
+        font-size: 0.75rem;
+        max-height: 250px;
+    }
 }
 
 /* Extra small mobile styles - for very narrow screens like iPhone 13 mini */
@@ -702,10 +757,36 @@
     }
 
     .project-description {
-        padding: 0.5rem;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         line-height: 1.3;
-        border-top: none;
+        margin-bottom: 0.75rem;
+        padding: 0 0.5rem;
+    }
+    
+    /* Grasshopper functionality mobile styles */
+    .grasshopper-actions {
+        width: 100%;
+        display: flex;
+        gap: 0.3rem;
+        margin-bottom: 0.75rem;
+        padding: 0 0.5rem;
+    }
+    
+    .grasshopper-button {
+        flex: 1;
+        justify-content: center;
+        padding: 0.3rem 0.4rem;
+        font-size: 0.7rem;
+        gap: 0.2rem;
+    }
+    
+    .code-preview {
+        width: 100%;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+        padding: 0.5rem;
+        font-size: 0.7rem;
+        max-height: 200px;
     }
 }
 
