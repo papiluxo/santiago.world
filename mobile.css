@@ -448,6 +448,7 @@
         display: flex;
         gap: 0.5rem;
         margin-bottom: 1rem;
+        padding: 0 0.75rem;
     }
     
     .grasshopper-button {
@@ -465,6 +466,12 @@
         padding: 0.75rem;
         font-size: 0.8rem;
         max-height: 300px;
+        box-sizing: border-box;
+    }
+
+    /* Category button mobile styles to match nav buttons */
+    .category-button {
+        border: 1px solid rgba(128, 128, 128, 0.3) !important;
     }
 }
 
@@ -640,6 +647,7 @@
         display: flex;
         gap: 0.4rem;
         margin-bottom: 0.75rem;
+        padding: 0 0.6rem;
     }
     
     .grasshopper-button {
@@ -657,6 +665,12 @@
         padding: 0.6rem;
         font-size: 0.75rem;
         max-height: 250px;
+        box-sizing: border-box;
+    }
+
+    /* Category button mobile styles to match nav buttons */
+    .category-button {
+        border: 1px solid rgba(128, 128, 128, 0.3) !important;
     }
 }
 
@@ -787,6 +801,12 @@
         padding: 0.5rem;
         font-size: 0.7rem;
         max-height: 200px;
+        box-sizing: border-box;
+    }
+
+    /* Category button mobile styles to match nav buttons */
+    .category-button {
+        border: 1px solid rgba(128, 128, 128, 0.3) !important;
     }
 }
 
