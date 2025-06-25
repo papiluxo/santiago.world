@@ -193,6 +193,11 @@
         border-radius: 4px;
     }
     
+    /* Hide thumbnail when project is expanded on mobile */
+    .project-item:has(.project-content.active) .project-thumbnail {
+        display: none !important;
+    }
+    
     /* Project tags at bottom */
     .project-tags, .tool-tags {
         order: 3;
@@ -472,6 +477,8 @@
     /* Category button mobile styles to match nav buttons */
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        padding: 0.2rem 0.4rem !important;
+        font-size: 0.75rem !important;
     }
     
     /* Hide "all" category button on mobile */
@@ -676,6 +683,8 @@
     /* Category button mobile styles to match nav buttons */
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        padding: 0.2rem 0.4rem !important;
+        font-size: 0.75rem !important;
     }
     
     /* Hide "all" category button on mobile */
@@ -817,6 +826,8 @@
     /* Category button mobile styles to match nav buttons */
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        padding: 0.1rem 0.25rem !important;
+        font-size: 0.65rem !important;
     }
     
     /* Hide "all" category button on mobile */
