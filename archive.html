@@ -1807,6 +1807,7 @@
         
         // Initialize active category
         let activeCategory = 'all';
+        let activeCategories = new Set(); // For mobile multiple category selection
         
     // Check if user has a preferred theme stored
     let currentTheme = localStorage.getItem('theme') || 'light';
@@ -1897,8 +1898,19 @@
                     const projectTags = new Set(projectData.tags);
                     const hasActiveTags = activeTags.size === 0 || 
                         Array.from(activeTags).every(tag => projectTags.has(tag));
-                    const hasActiveCategory = activeCategory === 'all' || 
-                        projectData.category === activeCategory;
+                    
+                    // Handle category filtering for both desktop and mobile
+                    let hasActiveCategory;
+                    if (window.innerWidth <= 768) {
+                        // Mobile: show projects that match any of the selected categories
+                        hasActiveCategory = activeCategories.size === 0 || 
+                            activeCategories.has(projectData.category);
+                    } else {
+                        // Desktop: show projects that match the single selected category
+                        hasActiveCategory = activeCategory === 'all' || 
+                            projectData.category === activeCategory;
+                    }
+                    
                     item.style.display = (hasActiveTags && hasActiveCategory) ? 'block' : 'none';
                 }
             });
@@ -1908,13 +1920,39 @@
         }
         
         function filterByCategory(category) {
-            activeCategory = category;
-            
-            // Update button states
-            document.querySelectorAll('.category-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            // On mobile, toggle categories on/off instead of single selection
+            if (window.innerWidth <= 768) {
+                const button = document.querySelector(`[data-category="${category}"]`);
+                const isActive = button.classList.contains('active');
+                
+                if (isActive) {
+                    // Remove category from active selection
+                    button.classList.remove('active');
+                    activeCategories.delete(category);
+                } else {
+                    // Add category to active selection
+                    button.classList.add('active');
+                    activeCategories.add(category);
+                }
+                
+                // If no categories are selected, show all projects
+                if (activeCategories.size === 0) {
+                    activeCategory = 'all';
+                } else {
+                    activeCategory = 'multiple';
+                }
+            } else {
+                // Desktop behavior: single category selection
+                activeCategory = category;
+                activeCategories.clear();
+                activeCategories.add(category);
+                
+                // Update button states
+                document.querySelectorAll('.category-button').forEach(button => {
+                    button.classList.remove('active');
+                });
+                document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            }
             
             // Apply filters
             filterProjects();
@@ -1954,12 +1992,17 @@
         function clearAllFilters() {
             activeCategory = 'all';
             activeTags.clear();
+            activeCategories.clear(); // Clear mobile category selection
             
             // Update button states
             document.querySelectorAll('.category-button').forEach(button => {
                 button.classList.remove('active');
             });
-            document.querySelector('[data-category="all"]').classList.add('active');
+            
+            // Only show "all" as active on desktop
+            if (window.innerWidth > 768) {
+                document.querySelector('[data-category="all"]').classList.add('active');
+            }
             
             // Clear active filters display
             updateActiveFilters();
@@ -1973,7 +2016,16 @@
         
         function updateClearFiltersButton() {
             const clearButton = document.querySelector('.clear-filters');
-            const hasActiveFilters = activeCategory !== 'all' || activeTags.size > 0;
+            let hasActiveFilters;
+            
+            if (window.innerWidth <= 768) {
+                // Mobile: check if any categories or tags are active
+                hasActiveFilters = activeCategories.size > 0 || activeTags.size > 0;
+            } else {
+                // Desktop: check if category is not 'all' or tags are active
+                hasActiveFilters = activeCategory !== 'all' || activeTags.size > 0;
+            }
+            
             if (window.innerWidth <= 768) {
                 clearButton.style.display = 'none';
             } else {
@@ -2267,6 +2319,38 @@
                 loadingElement.style.display = 'none';
             }
         }
+        
+        // Handle window resize to switch between mobile and desktop filtering modes
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                // Switching to mobile mode
+                if (activeCategory !== 'all' && activeCategories.size === 0) {
+                    // If we have a single category selected on desktop, add it to mobile selection
+                    activeCategories.add(activeCategory);
+                    const button = document.querySelector(`[data-category="${activeCategory}"]`);
+                    if (button) {
+                        button.classList.add('active');
+                    }
+                }
+            } else {
+                // Switching to desktop mode
+                if (activeCategories.size === 1) {
+                    // If only one category is selected on mobile, use it as single selection
+                    const category = Array.from(activeCategories)[0];
+                    activeCategory = category;
+                    activeCategories.clear();
+                } else if (activeCategories.size === 0) {
+                    // If no categories selected, show all
+                    activeCategory = 'all';
+                }
+                // Clear mobile selection
+                activeCategories.clear();
+            }
+            
+            // Update filters and counts
+            filterProjects();
+            updateVisibleCategoryCounts();
+        });
     </script>
     <script src="cursor.js"></script>
 </body>

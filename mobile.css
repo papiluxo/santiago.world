@@ -473,6 +473,11 @@
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
     }
+    
+    /* Hide "all" category button on mobile */
+    .category-button[data-category="all"] {
+        display: none !important;
+    }
 }
 
 /* Small mobile styles */
@@ -672,6 +677,11 @@
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
     }
+    
+    /* Hide "all" category button on mobile */
+    .category-button[data-category="all"] {
+        display: none !important;
+    }
 }
 
 /* Extra small mobile styles - for very narrow screens like iPhone 13 mini */
@@ -807,6 +817,11 @@
     /* Category button mobile styles to match nav buttons */
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
+    }
+    
+    /* Hide "all" category button on mobile */
+    .category-button[data-category="all"] {
+        display: none !important;
     }
 }
 
