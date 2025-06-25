@@ -656,6 +656,28 @@
             .active-filter button {
                 font-size: 0.75rem;
             }
+            
+            .clear-filters {
+                display: none;
+            }
+            
+            .grasshopper-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .grasshopper-button {
+                width: 100%;
+                justify-content: center;
+                padding: 0.35rem 0.6rem;
+                font-size: 0.85rem;
+                gap: 0.4rem;
+            }
+            
+            .grasshopper-button svg {
+                width: 14px;
+                height: 14px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -699,6 +721,12 @@
             
             .clear-filters {
                 display: none;
+            }
+            
+            .grasshopper-button {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.8rem;
+                gap: 0.3rem;
             }
         }
         
@@ -810,6 +838,62 @@
             color: var(--accent);
             border-color: var(--accent);
         }
+        
+        /* Grasshopper functionality styles */
+        .grasshopper-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .grasshopper-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        .grasshopper-button svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+        
+        .grasshopper-button:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .code-preview {
+            display: none;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            white-space: pre;
+            overflow-x: auto;
+            max-height: 400px;
+        }
+        
+        .loading {
+            margin-top: 1rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -864,7 +948,8 @@
     </style>
     <div class="nav-container">
         <div class="nav-buttons">
-            <a href="index.html" class="nav-button">home</a><a href="archive.html" class="nav-button active">archive</a><a href="toolbox.html" class="nav-button">toolbox</a>
+            <a href="index.html" class="nav-button">home</a>
+            <a href="archive.html" class="nav-button active">archive</a>
         </div>
         <div class="nav-right">
             <div class="theme-toggle">
@@ -1103,8 +1188,18 @@
                     </div>
                     <div class="project-content" id="content-illinois_institute_of_technology_dorms">
                         <div class="project-description">
-                            residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, 'illinois_institute_of_technology_truss_system')">parametric truss system</a>.
+                            residential college building proposal for iit campus, with <a href="#" class="project-link" onclick="triggerCodePreview(event, 'illinois_institute_of_technology_truss_system')">parametric truss system</a>.
                         </div>
+                        <div class="grasshopper-actions">
+                            <button class="grasshopper-button" onclick="toggleCode('illinois_institute_of_technology_truss_system')">
+                                view .ghx definition
+                            </button>
+                            <a href="ghx_content/illinois_institute_of_technology_truss_system.ghx" class="grasshopper-button" download>
+                                download .ghx
+                            </a>
+                        </div>
+                        <pre id="code-illinois_institute_of_technology_truss_system" class="code-preview"></pre>
+                        <div id="loading-illinois_institute_of_technology_truss_system" class="loading" style="display: none;">Loading...</div>
                         <div class="project-images">
                             <img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_001.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_002.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_003.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_004.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_005.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_006.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_007.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/illinois_institute_of_technology_presentation_008.png" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy"><img src="archive/illinois_institute_of_technology_dorms/previews/render_1.jpg" alt="illinois_institute_of_technology_dorms image" class="project-image" loading="lazy">
                         </div>
@@ -1181,8 +1276,18 @@
                     </div>
                     <div class="project-content" id="content-lego_bridge">
                         <div class="project-description">
-                            bridge proposal, only using lego blocks, to go over lake osceola in the university of miami's campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, 'lego_bridge_aggregation')">computational aggregation</a> used to develop form and path.
+                            bridge proposal, only using lego blocks, to go over lake osceola in the university of miami's campus. <a href="#" class="project-link" onclick="triggerCodePreview(event, 'lego_bridge_aggregation')">computational aggregation</a> used to develop form and path.
                         </div>
+                        <div class="grasshopper-actions">
+                            <button class="grasshopper-button" onclick="toggleCode('lego_bridge_aggregation')">
+                                view .ghx definition
+                            </button>
+                            <a href="ghx_content/lego_bridge_aggregation.ghx" class="grasshopper-button" download>
+                                download .ghx
+                            </a>
+                        </div>
+                        <pre id="code-lego_bridge_aggregation" class="code-preview"></pre>
+                        <div id="loading-lego_bridge_aggregation" class="loading" style="display: none;">Loading...</div>
                         <div class="project-images">
                             <img src="archive/lego_bridge/previews/lego_bridge_presentation_001.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_002.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_003.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_004.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_005.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_006.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_007.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_008.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_009.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_010.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_011.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_012.png" alt="lego_bridge image" class="project-image" loading="lazy"><img src="archive/lego_bridge/previews/lego_bridge_presentation_013.png" alt="lego_bridge image" class="project-image" loading="lazy">
                         </div>
@@ -1259,8 +1364,18 @@
                     </div>
                     <div class="project-content" id="content-nervi_dome">
                         <div class="project-description">
-                        form study of pier luigi nervi's palazzetto dello sport, in turin, italy.
+                        <a href="#" class="project-link" onclick="triggerCodePreview(event, 'nervi_dome')">form study</a> of pier luigi nervi's palazzetto dello sport, in turin, italy.
                         </div>
+                        <div class="grasshopper-actions">
+                            <button class="grasshopper-button" onclick="toggleCode('nervi_dome')">
+                                view .ghx definition
+                            </button>
+                            <a href="ghx_content/nervi_dome.ghx" class="grasshopper-button" download>
+                                download .ghx
+                            </a>
+                        </div>
+                        <pre id="code-nervi_dome" class="code-preview"></pre>
+                        <div id="loading-nervi_dome" class="loading" style="display: none;">Loading...</div>
                         <div class="project-images">
                         <img src="archive/nervi_dome/nervi_dome.png" alt="nervi_dome image" class="project-image" loading="lazy">
                         </div>
@@ -1285,10 +1400,20 @@
                     </div>
                     <div class="project-content" id="content-parametric_cup">
                         <div class="project-description">
-                            <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, 'parametric_cup')">form exploration</a> of a cup/glass.
+                            <a href="#" class="project-link" onclick="triggerCodePreview(event, 'parametric_cup')">form exploration</a> of a cup/glass.
                         </div>
+                        <div class="grasshopper-actions">
+                            <button class="grasshopper-button" onclick="toggleCode('parametric_cup')">
+                                view .ghx definition
+                            </button>
+                            <a href="ghx_content/parametric_cup.ghx" class="grasshopper-button" download>
+                                download .ghx
+                            </a>
+                        </div>
+                        <pre id="code-parametric_cup" class="code-preview"></pre>
+                        <div id="loading-parametric_cup" class="loading" style="display: none;">Loading...</div>
                         <div class="project-images">
-                        <img src="archive/parametric_cup/diagram.png" alt="parametric_cup image" class="project-image" loading="lazy">
+                            <img src="archive/parametric_cup/preview.png" alt="parametric_cup image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -1311,10 +1436,20 @@
                     </div>
                     <div class="project-content" id="content-parametric_remapping">
                         <div class="project-description">
-                            automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, 'parametric_remapping')">remapping exercise</a>.
+                            automated shape <a href="#" class="project-link" onclick="triggerCodePreview(event, 'parametric_remapping')">remapping exercise</a>.
                         </div>
+                        <div class="grasshopper-actions">
+                            <button class="grasshopper-button" onclick="toggleCode('parametric_remapping')">
+                                view .ghx definition
+                            </button>
+                            <a href="ghx_content/parametric_remapping.ghx" class="grasshopper-button" download>
+                                download .ghx
+                            </a>
+                        </div>
+                        <pre id="code-parametric_remapping" class="code-preview"></pre>
+                        <div id="loading-parametric_remapping" class="loading" style="display: none;">Loading...</div>
                         <div class="project-images">
-                            <img src="archive/parametric_remapping/diagram.gif" alt="parametric_remapping image" class="project-image" loading="lazy">
+                        <img src="archive/parametric_remapping/diagram.gif" alt="parametric_remapping image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -1337,14 +1472,24 @@
                     </div>
                     <div class="project-content" id="content-parametric_stop">
                         <div class="project-description">
-                            bus stop proposal for university of miami's campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, 'parametric_cup')">scripted form definition</a>.
+                            bus stop proposal for university of miami's campus with <a href="#" class="project-link" onclick="triggerCodePreview(event, 'parametric_stop')">scripted form definition</a>.
                         </div>
+                        <div class="grasshopper-actions">
+                            <button class="grasshopper-button" onclick="toggleCode('parametric_stop')">
+                                view .ghx definition
+                            </button>
+                            <a href="ghx_content/parametric_stop.ghx" class="grasshopper-button" download>
+                                download .ghx
+                            </a>
+                        </div>
+                        <pre id="code-parametric_stop" class="code-preview"></pre>
+                        <div id="loading-parametric_stop" class="loading" style="display: none;">Loading...</div>
                         <div class="project-images">
-                        <img src="archive/parametric_stop/index_diagram.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
-                        <img src="archive/parametric_stop/site_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
-                        <img src="archive/parametric_stop/floor_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
-                        <img src="archive/parametric_stop/section.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
-                        <img src="archive/parametric_stop/perspective.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                            <img src="archive/parametric_stop/index_diagram.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                            <img src="archive/parametric_stop/site_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                            <img src="archive/parametric_stop/floor_plan.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                            <img src="archive/parametric_stop/section.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
+                            <img src="archive/parametric_stop/perspective.jpeg" alt="parametric_stop image" class="project-image" loading="lazy">
                         </div>
                 </div>
             </div>
@@ -1353,11 +1498,11 @@
                         <div class="project-title-container">
                             <h2 class="project-title">remote_research_center</h2>
                             <div class="project-tags">
-                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="la tortuga, venezuela">la tortuga, venezuela</span><span class="tag" data-tag="arc662">arc662</span>
+                                <span class="tag" data-tag="individual">individual</span><span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="grasshopper">grasshopper</span><span class="tag" data-tag="kangaroo">kangaroo</span><span class="tag" data-tag="blender">blender</span><span class="tag" data-tag="fall '24">fall '24</span><span class="tag" data-tag="chicago, il">chicago, il</span>
                             </div>
                         </div>
                         <div class="project-thumbnail">
-                        <img src="archive/remote_research_center/preview.png" alt="remote_research_center thumbnail">
+                            <img src="archive/remote_research_center/previews/remote_research_center_presentation_001.png" alt="remote_research_center thumbnail">
                         </div>
                         <button class="toggle-button">
                             <svg width="24" height="24" viewBox="0 0 16 16">
@@ -1496,10 +1641,6 @@
                         <img src="archive/velvet_ii/velvet_ii_1.jpg" alt="velvet_ii image" class="project-image" loading="lazy"><img src="archive/velvet_ii/velvet_ii_flyers.jpg" alt="velvet_ii image" class="project-image" loading="lazy">
                         </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    
     <!-- Modal for expanded images -->
     <div class="modal" id="imageModal">
         <button class="modal-close" id="modalClose">×</button>
@@ -1548,6 +1689,7 @@
             'illinois_institute_of_technology_dorms': {
                 'tags': ['individual', 'rhino', 'grasshopper', 'kangaroo', 'blender', "fall '24", 'chicago, il'],
                 'link': 'grasshopper',
+                'grasshopper_file': 'illinois_institute_of_technology_truss_system',
                 'description': 'residential college building proposal for iit campus, with <a href="toolbox.html#illinois_institute_of_technology_truss_system" class="project-link" onclick="expandToolboxProject(event, \'illinois_institute_of_technology_truss_system\')">parametric truss system</a>.',
                 'category': 'proposal'
             },
@@ -1564,7 +1706,8 @@
             'lego_bridge': {
                 'tags': ['individual', 'rhino', 'grasshopper', 'wasp', "fall '24", 'miami, fl', 'arc656'],
                 'link': 'grasshopper',
-                'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="toolbox.html#lego_bridge_aggregation" class="project-link" onclick="expandToolboxProject(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.',
+                'grasshopper_file': 'lego_bridge_aggregation',
+                'description': 'bridge proposal, only using lego blocks, to go over lake osceola in the university of miami\'s campus. <a href="#" class="project-link" onclick="triggerCodePreview(event, \'lego_bridge_aggregation\')">computational aggregation</a> used to develop form and path.',
                 'category': 'experimental'
             },
             'moca_playhouse': {
@@ -1580,30 +1723,35 @@
             'nervi_dome': {
                 'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'turin, it', 'arc656'],
                 'link': 'grasshopper',
-                'description': '<a href="toolbox.html#nervi_dome" class="project-link" onclick="expandToolboxProject(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.',
+                'grasshopper_file': 'nervi_dome',
+                'description': '<a href="#" class="project-link" onclick="triggerCodePreview(event, \'nervi_dome\')">form study</a> of pier luigi nervi\'s palazzetto dello sport, in turin, italy.',
                 'category': 'experimental'
             },
             'parametric_cup': {
                 'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'],
                 'link': 'grasshopper',
-                'description': '<a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">form exploration</a> of a cup/glass.',
+                'grasshopper_file': 'parametric_cup',
+                'description': '<a href="#" class="project-link" onclick="triggerCodePreview(event, \'parametric_cup\')">form exploration</a> of a cup/glass.',
                 'category': 'experimental'
             },
             'parametric_remapping': {
                 'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'arc656'],
                 'link': 'grasshopper',
-                'description': 'automated shape <a href="toolbox.html#parametric_remapping" class="project-link" onclick="expandToolboxProject(event, \'parametric_remapping\')">remapping exercise</a>.',
+                'grasshopper_file': 'parametric_remapping',
+                'description': 'automated shape <a href="#" class="project-link" onclick="triggerCodePreview(event, \'parametric_remapping\')">remapping exercise</a>.',
                 'category': 'experimental'
             },
             'parametric_stop': {
                 'tags': ['individual', 'rhino', 'grasshopper', "spring '24", 'arc613'],
                 'link': 'grasshopper',
-                'description': 'bus stop proposal for university of miami\'s campus with <a href="toolbox.html#parametric_cup" class="project-link" onclick="expandToolboxProject(event, \'parametric_cup\')">scripted form definition</a>.',
+                'grasshopper_file': 'parametric_stop',
+                'description': 'bus stop proposal for university of miami\'s campus with <a href="#" class="project-link" onclick="triggerCodePreview(event, \'parametric_stop\')">scripted form definition</a>.',
                 'category': 'proposal'
             },
             'remote_research_center': {
                 'tags': ['individual', 'rhino', 'grasshopper', "fall '24", 'la tortuga, venezuela', 'arc662'],
                 'link': 'thermal_study',
+                'grasshopper_file': 'thermal_study',
                 'description': 'off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, \'thermal_study\')">thermal study</a> and passive systems.',
                 'category': 'proposal'
             },
@@ -2061,6 +2209,64 @@
         
         // Call updateCategoryCounts when the page loads
         document.addEventListener('DOMContentLoaded', updateCategoryCounts);
+        
+        // Function to trigger code preview from project links
+        function triggerCodePreview(event, projectName) {
+            event.preventDefault();
+            
+            // Find the project item that contains this link
+            const projectItem = event.target.closest('.project-item');
+            if (!projectItem) return;
+            
+            // Expand the project content if it's not already expanded
+            const projectContent = projectItem.querySelector('.project-content');
+            if (projectContent.style.display !== 'block') {
+                const projectNameAttr = projectItem.dataset.project;
+                toggleProject(projectNameAttr);
+            }
+            
+            // Trigger the code preview
+            toggleCode(projectName);
+            
+            // Scroll to the code preview area
+            const codePreview = document.getElementById(`code-${projectName}`);
+            if (codePreview) {
+                setTimeout(() => {
+                    codePreview.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+        
+        // Grasshopper code viewing functionality
+        async function toggleCode(projectName) {
+            const codePreview = document.getElementById(`code-${projectName}`);
+            const loadingElement = document.getElementById(`loading-${projectName}`);
+            const viewCodeButton = document.querySelector(`[onclick="toggleCode('${projectName}')"]`);
+            const isVisible = codePreview.style.display === 'block';
+            
+            // Update button text and icon immediately
+            viewCodeButton.innerHTML = isVisible ? 'view .ghx definition' : 'close';
+            
+            if (isVisible) {
+                codePreview.style.display = 'none';
+                return;
+            }
+            
+            try {
+                loadingElement.style.display = 'block';
+                const response = await fetch(`ghx_content/${projectName}.ghx`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const content = await response.text();
+                codePreview.textContent = content;
+                codePreview.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading code:', error);
+                codePreview.textContent = 'Error loading code content.';
+                codePreview.style.display = 'block';
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
     </script>
     <script src="cursor.js"></script>
 </body>

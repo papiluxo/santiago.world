@@ -1,1 +1,0 @@
-bus stop proposal for the University of Miami wth parametric form 

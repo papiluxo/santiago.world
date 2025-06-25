@@ -1,1 +1,0 @@
-cup formed along set of lines defined by points 

@@ -1,1 +1,0 @@
-wind and temperature analysis on façade of building based on coordinate location
