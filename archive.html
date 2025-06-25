@@ -588,15 +588,19 @@
             .project-thumbnail {
                 order: 2;
                 width: 100%;
-                height: auto;
-                max-height: 200px;
+                height: 0;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+                position: relative;
                 align-self: center;
             }
             
             .project-thumbnail img {
+                position: absolute;
+                top: 0;
+                left: 0;
                 width: 100%;
-                height: auto;
-                object-fit: contain;
+                height: 100%;
+                object-fit: cover;
             }
             
             .toggle-button {
@@ -681,14 +685,18 @@
             }
             
             .project-thumbnail {
-                height: auto;
-                max-height: 150px;
+                height: 0;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+                position: relative;
             }
             
             .project-thumbnail img {
+                position: absolute;
+                top: 0;
+                left: 0;
                 width: 100%;
-                height: auto;
-                object-fit: contain;
+                height: 100%;
+                object-fit: cover;
             }
             
             .tag {
