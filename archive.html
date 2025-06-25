@@ -1826,7 +1826,14 @@
         function updateClearFiltersButton() {
             const clearButton = document.querySelector('.clear-filters');
             const hasActiveFilters = activeCategory !== 'all' || activeTags.size > 0;
-            clearButton.style.display = hasActiveFilters ? 'block' : 'none';
+            const isMobile = window.innerWidth <= 768;
+            
+            // Don't show clear filters button on mobile
+            if (isMobile) {
+                clearButton.style.display = 'none';
+            } else {
+                clearButton.style.display = hasActiveFilters ? 'block' : 'none';
+            }
         }
         
         function updateClock() {
@@ -1997,6 +2004,9 @@
         // Call this function when the page loads and when the hash changes
         document.addEventListener('DOMContentLoaded', highlightSearchResults);
         window.addEventListener('hashchange', highlightSearchResults);
+        
+        // Update clear filters button visibility on window resize
+        window.addEventListener('resize', updateClearFiltersButton);
     
         
         // Add event delegation for tag clicks
