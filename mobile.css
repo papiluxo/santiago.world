@@ -465,7 +465,7 @@
     }
     
     .code-preview {
-        width: 95%;
+        width: 100%;
         margin-top: 1rem;
         margin-bottom: 1rem;
         padding: 0.75rem;
@@ -477,8 +477,13 @@
     /* Category button mobile styles to match nav buttons */
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
-        padding: 0.2rem 0.4rem !important;
+        padding: 0.25rem 0.5rem !important;
         font-size: 0.75rem !important;
+    }
+    
+    /* Hide "all" category button on mobile */
+    .category-button[data-category="all"] {
+        display: none !important;
     }
 }
 
@@ -666,7 +671,7 @@
     }
     
     .code-preview {
-        width: 95%;
+        width: 100%;
         margin-top: 0.75rem;
         margin-bottom: 0.75rem;
         padding: 0.6rem;
@@ -678,8 +683,13 @@
     /* Category button mobile styles to match nav buttons */
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
-        padding: 0.1rem 0.3rem !important;
-        font-size: 0.75rem !important;
+        padding: 0.18rem 0.35rem !important;
+        font-size: 0.65rem !important;
+    }
+    
+    /* Hide "all" category button on mobile */
+    .category-button[data-category="all"] {
+        display: none !important;
     }
 }
 
@@ -804,7 +814,7 @@
     }
     
     .code-preview {
-        width: 95%;
+        width: 100%;
         margin-top: 0.75rem;
         margin-bottom: 0.75rem;
         padding: 0.5rem;
@@ -816,8 +826,13 @@
     /* Category button mobile styles to match nav buttons */
     .category-button {
         border: 1px solid rgba(128, 128, 128, 0.3) !important;
-        padding: 0.1rem 0.25rem !important;
-        font-size: 0.75rem !important;
+        padding: 0.15rem 0.3rem !important;
+        font-size: 0.65rem !important;
+    }
+    
+    /* Hide "all" category button on mobile */
+    .category-button[data-category="all"] {
+        display: none !important;
     }
 }
 
