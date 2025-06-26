@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.lgrckt-in.com; style-src 'self' 'unsafe-inline';">
     <title>archive - santiago martínez-oropeza</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="mobile.css">
@@ -418,7 +418,10 @@
         .modal-content {
             max-width: 90%;
             max-height: 90%;
+            width: auto;
+            height: auto;
             object-fit: contain;
+            display: block;
         }
         
         .modal-nav {
@@ -1512,8 +1515,18 @@
                     </div>
                     <div class="project-content" id="content-remote_research_center">
                         <div class="project-description">
-                            off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="toolbox.html#thermal_study" class="project-link" onclick="expandToolboxProject(event, 'thermal_study')">thermal study</a> and passive systems.
+                            off-grid marine biology research center proposal located in isla la tortuga, venezuela. environmental/comfort efficiency achieved through <a href="#" class="project-link" onclick="triggerCodePreview(event, 'thermal_study')">thermal study</a> and passive systems.
                         </div>
+                        <div class="grasshopper-actions">
+                            <button class="grasshopper-button" onclick="toggleCode('thermal_study')">
+                                view .ghx definition
+                            </button>
+                            <a href="ghx_content/thermal_study.ghx" class="grasshopper-button" download>
+                                download .ghx
+                            </a>
+                        </div>
+                        <pre id="code-thermal_study" class="code-preview"></pre>
+                        <div id="loading-thermal_study" class="loading" style="display: none;">Loading...</div>
                         <div class="project-images">
                         <img src="archive/remote_research_center/previews/remote_research_center_presentation_001.png" alt="remote_research_center image" class="project-image" loading="lazy">
                         <img src="archive/remote_research_center/previews/remote_research_center_presentation_002.png" alt="remote_research_center image" class="project-image" loading="lazy">
@@ -2050,70 +2063,274 @@
         
         // Add image modal functionality
         const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
+        let modalImg = document.getElementById('modalImage'); // Changed to let so we can reassign it
         const modalClose = document.getElementById('modalClose');
         const modalPrev = document.getElementById('modalPrev');
         const modalNext = document.getElementById('modalNext');
         let currentProjectImages = [];
         let currentImageIndex = 0;
         
-        // Add click handlers to all project images
-        document.querySelectorAll('.project-image').forEach(img => {
-            img.addEventListener('click', () => {
-                // Get all images in the current project
+        // Use event delegation for modal functionality - attach to document body
+        document.body.addEventListener('click', function(event) {
+            // Check if clicked element is a project image
+            if (event.target.classList.contains('project-image')) {
+                const img = event.target;
                 const projectItem = img.closest('.project-item');
-                currentProjectImages = Array.from(projectItem.querySelectorAll('.project-image'));
-                currentImageIndex = currentProjectImages.indexOf(img);
                 
-                modalImg.src = img.src;
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        
-        function showImage(index) {
-            if (index >= 0 && index < currentProjectImages.length) {
-                currentImageIndex = index;
-                modalImg.src = currentProjectImages[index].src;
-            }
-        }
-        
-        // Navigation handlers
-        modalPrev.addEventListener('click', () => {
-            showImage(currentImageIndex - 1);
-        });
-        
-        modalNext.addEventListener('click', () => {
-            showImage(currentImageIndex + 1);
-        });
-        
-        // Close modal when clicking the close button
-        modalClose.addEventListener('click', () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        // Close modal when clicking outside the image
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-        
-        // Keyboard controls
-        document.addEventListener('keydown', (e) => {
-            if (modal.classList.contains('active')) {
-                if (e.key === 'Escape') {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = '';
-                } else if (e.key === 'ArrowLeft') {
-                    showImage(currentImageIndex - 1);
-                } else if (e.key === 'ArrowRight') {
-                    showImage(currentImageIndex + 1);
+                // Only proceed if the project item is visible (not filtered out)
+                if (projectItem && projectItem.style.display !== 'none') {
+                    // Get all images in the current project for navigation
+                    const allProjectImages = Array.from(projectItem.querySelectorAll('.project-image'));
+                    const currentImageIndex = allProjectImages.indexOf(img);
+                    
+                    // Remove any existing custom modal
+                    const existingCustomModal = document.getElementById('customImageModal');
+                    if (existingCustomModal) {
+                        existingCustomModal.remove();
+                    }
+                    
+                    // Create a completely new modal container
+                    const customModal = document.createElement('div');
+                    customModal.id = 'customImageModal';
+                    customModal.style.cssText = `
+                        position: fixed !important;
+                        top: 0 !important;
+                        left: 0 !important;
+                        width: 100vw !important;
+                        height: 100vh !important;
+                        background-color: rgba(0, 0, 0, 0.9) !important;
+                        z-index: 99999 !important;
+                        display: flex !important;
+                        justify-content: center !important;
+                        align-items: center !important;
+                        box-sizing: border-box !important;
+                    `;
+                    
+                    // Create close button (X)
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = 'close';
+                    closeButton.style.cssText = `
+                        position: absolute !important;
+                        top: 20px !important;
+                        right: 30px !important;
+                        background: none !important;
+                        border: 1px solid white !important;
+                        border-radius: 4px !important;
+                        color: white !important;
+                        font-family: inherit !important;
+                        font-size: 14px !important;
+                        cursor: pointer !important;
+                        z-index: 100000 !important;
+                        padding: 8px 16px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        transition: all 0.3s ease !important;
+                        text-transform: lowercase !important;
+                        letter-spacing: 0.5px !important;
+                    `;
+                    
+                    closeButton.addEventListener('mouseover', function() {
+                        closeButton.style.backgroundColor = 'white';
+                        closeButton.style.color = 'black';
+                    });
+                    closeButton.addEventListener('mouseout', function() {
+                        closeButton.style.backgroundColor = 'transparent';
+                        closeButton.style.color = 'white';
+                    });
+                    
+                    // Create the image element
+                    const customImg = document.createElement('img');
+                    customImg.style.cssText = `
+                        max-width: 85vw !important;
+                        max-height: 80vh !important;
+                        width: auto !important;
+                        height: auto !important;
+                        object-fit: contain !important;
+                        display: block !important;
+                        margin: auto !important;
+                        opacity: 1 !important;
+                        visibility: visible !important;
+                        cursor: pointer !important;
+                    `;
+                    
+                    // Function to update the image
+                    function updateImage(index) {
+                        if (index >= 0 && index < allProjectImages.length) {
+                            customImg.src = allProjectImages[index].src;
+                            // Update navigation button states
+                            if (prevButton) {
+                                prevButton.style.opacity = index > 0 ? '1' : '0.3';
+                                prevButton.style.cursor = index > 0 ? 'pointer' : 'default';
+                            }
+                            if (nextButton) {
+                                nextButton.style.opacity = index < allProjectImages.length - 1 ? '1' : '0.3';
+                                nextButton.style.cursor = index < allProjectImages.length - 1 ? 'pointer' : 'default';
+                            }
+                        }
+                    }
+                    
+                    // Set the initial image source
+                    customImg.src = img.src;
+                    
+                    // Create navigation buttons only if there are multiple images
+                    let prevButton, nextButton;
+                    if (allProjectImages.length > 1) {
+                        // Create navigation container
+                        const navContainer = document.createElement('div');
+                        navContainer.style.cssText = `
+                            position: absolute !important;
+                            bottom: 30px !important;
+                            left: 50% !important;
+                            transform: translateX(-50%) !important;
+                            display: flex !important;
+                            gap: 20px !important;
+                            z-index: 100000 !important;
+                        `;
+                        
+                        // Previous button
+                        prevButton = document.createElement('button');
+                        prevButton.innerHTML = 'previous';
+                        prevButton.style.cssText = `
+                            background: none !important;
+                            border: 1px solid white !important;
+                            border-radius: 4px !important;
+                            color: white !important;
+                            font-family: inherit !important;
+                            font-size: 14px !important;
+                            cursor: pointer !important;
+                            padding: 8px 16px !important;
+                            display: flex !important;
+                            align-items: center !important;
+                            justify-content: center !important;
+                            transition: all 0.3s ease !important;
+                            text-transform: lowercase !important;
+                            letter-spacing: 0.5px !important;
+                        `;
+                        
+                        // Next button
+                        nextButton = document.createElement('button');
+                        nextButton.innerHTML = 'next';
+                        nextButton.style.cssText = `
+                            background: none !important;
+                            border: 1px solid white !important;
+                            border-radius: 4px !important;
+                            color: white !important;
+                            font-family: inherit !important;
+                            font-size: 14px !important;
+                            cursor: pointer !important;
+                            padding: 8px 16px !important;
+                            display: flex !important;
+                            align-items: center !important;
+                            justify-content: center !important;
+                            transition: all 0.3s ease !important;
+                            text-transform: lowercase !important;
+                            letter-spacing: 0.5px !important;
+                        `;
+                        
+                        // Add hover effects
+                        [prevButton, nextButton].forEach(button => {
+                            button.addEventListener('mouseover', function() {
+                                if (button.style.cursor === 'pointer') {
+                                    button.style.backgroundColor = 'white';
+                                    button.style.color = 'black';
+                                }
+                            });
+                            button.addEventListener('mouseout', function() {
+                                button.style.backgroundColor = 'transparent';
+                                button.style.color = 'white';
+                            });
+                        });
+                        
+                        // Add click handlers
+                        let currentIndex = currentImageIndex;
+                        
+                        prevButton.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            if (currentIndex > 0) {
+                                currentIndex--;
+                                updateImage(currentIndex);
+                            }
+                        });
+                        
+                        nextButton.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            if (currentIndex < allProjectImages.length - 1) {
+                                currentIndex++;
+                                updateImage(currentIndex);
+                            }
+                        });
+                        
+                        // Add keyboard navigation
+                        const keyHandler = function(e) {
+                            if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                                currentIndex--;
+                                updateImage(currentIndex);
+                            } else if (e.key === 'ArrowRight' && currentIndex < allProjectImages.length - 1) {
+                                currentIndex++;
+                                updateImage(currentIndex);
+                            }
+                        };
+                        document.addEventListener('keydown', keyHandler);
+                        
+                        // Store cleanup function
+                        customModal.keyHandler = keyHandler;
+                        
+                        navContainer.appendChild(prevButton);
+                        navContainer.appendChild(nextButton);
+                        customModal.appendChild(navContainer);
+                        
+                        // Set initial button states
+                        updateImage(currentIndex);
+                    }
+                    
+                    // Close button click handler
+                    closeButton.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        customModal.remove();
+                        document.body.style.overflow = '';
+                        if (customModal.keyHandler) {
+                            document.removeEventListener('keydown', customModal.keyHandler);
+                        }
+                    });
+                    
+                    // Add close functionality (click outside)
+                    customModal.addEventListener('click', function(e) {
+                        if (e.target === customModal) {
+                            customModal.remove();
+                            document.body.style.overflow = '';
+                            if (customModal.keyHandler) {
+                                document.removeEventListener('keydown', customModal.keyHandler);
+                            }
+                        }
+                    });
+                    
+                    // Add escape key functionality
+                    const escapeHandler = function(e) {
+                        if (e.key === 'Escape') {
+                            customModal.remove();
+                            document.body.style.overflow = '';
+                            document.removeEventListener('keydown', escapeHandler);
+                            if (customModal.keyHandler) {
+                                document.removeEventListener('keydown', customModal.keyHandler);
+                            }
+                        }
+                    };
+                    document.addEventListener('keydown', escapeHandler);
+                    
+                    // Add elements to modal and modal to body
+                    customModal.appendChild(closeButton);
+                    customModal.appendChild(customImg);
+                    document.body.appendChild(customModal);
+                    
+                    // Lock body scrolling
+                    document.body.style.overflow = 'hidden';
                 }
             }
         });
+        
+        // Note: The old modal navigation system has been replaced with a custom modal
+        // that works correctly with the filtering system
         
         // Function to expand toolbox project
         function expandToolboxProject(event, projectName) {

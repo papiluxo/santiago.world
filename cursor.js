@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Optimize hover effects with a single class toggle
-            const interactiveElements = document.querySelectorAll('a, button, .nav-button, .theme-toggle, .tool-button, .project-header, .tool-header');
+            const interactiveSelectors = 'a, button, .nav-button, .theme-toggle, .tool-button, .project-header, .tool-header';
             
             // Use event delegation for better performance
             document.addEventListener('mouseover', (e) => {
                 const target = e.target;
-                if (interactiveElements.contains(target) && !target.classList.contains('tag')) {
+                if (target.matches && target.matches(interactiveSelectors) && !target.classList.contains('tag')) {
                     isHovering = true;
                     cursor.classList.add('hover');
                 }
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.addEventListener('mouseout', (e) => {
                 const target = e.target;
-                if (interactiveElements.contains(target) && !target.classList.contains('tag')) {
+                if (target.matches && target.matches(interactiveSelectors) && !target.classList.contains('tag')) {
                     isHovering = false;
                     cursor.classList.remove('hover');
                 }
