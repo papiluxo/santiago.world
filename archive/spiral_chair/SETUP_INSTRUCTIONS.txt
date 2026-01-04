@@ -1,0 +1,29 @@
+# Spiral Chair Project - Setup Complete
+
+## What's been done:
+1. ✅ Created folder: `/archive/spiral_chair/`
+2. ✅ Added project entry to the JavaScript `projects` object in `archive.html`
+3. ✅ Added HTML markup for the project display in `archive.html`
+4. ✅ Created `readme.txt` in the project folder
+
+## What you need to do:
+Upload the 6 images from your design to the folder:
+`/Users/Johnsonpampers/Desktop/SANTIVERSE/santiago_temp/archive/spiral_chair/`
+
+Name them as:
+- `1.png` - Origin/Evolution/Rotation diagram (thumbnail)
+- `2.png` - Evolution grid with variations
+- `3.png` - REST render
+- `4.png` - ARMREST render
+- `5.png` - Rotation visualization
+- `6.png` - Interior scene render
+
+## Project details added:
+- **Name:** spiral_chair
+- **Description:** 2026 sit furinture design award entry, shaped from an individual steel tube.
+- **Tags:** individual, rhino, blender, fall '25, furniture design
+- **Category:** experimental
+- **Thumbnail:** 1.png
+
+Once you add the images, the project will be fully integrated into your portfolio archive!
+
