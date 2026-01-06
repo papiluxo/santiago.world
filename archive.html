@@ -1035,9 +1035,10 @@
         <h1>archive</h1>
         <div class="category-filters">
             <button class="category-button active" data-category="all" onclick="filterByCategory('all')">all</button>
-            <button class="category-button" data-category="experimental" onclick="filterByCategory('experimental')">experimental</button>
-            <button class="category-button" data-category="proposal" onclick="filterByCategory('proposal')">proposal</button>
-            <button class="category-button" data-category="built" onclick="filterByCategory('built')">built</button>
+            <button class="category-button" data-category="architecture" onclick="filterByCategory('architecture')">architecture</button>
+            <button class="category-button" data-category="furniture design" onclick="filterByCategory('furniture design')">furniture</button>
+            <button class="category-button" data-category="industrial design" onclick="filterByCategory('industrial design')">industrial</button>
+            <button class="category-button" data-category="graphic design" onclick="filterByCategory('graphic design')">graphic</button>
             <button class="clear-filters" onclick="clearAllFilters()" style="display: none;">clear filters</button>
         </div>
         <div class="active-filters" id="activeFilters"></div>
@@ -1245,7 +1246,7 @@
                         <div class="project-title-container">
                             <h2 class="project-title">icosahedron_explosion</h2>
                             <div class="project-tags">
-                                <span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="fall '23">fall '23</span>
+                                <span class="tag" data-tag="rhino">rhino</span><span class="tag" data-tag="fall '23">fall '23</span><span class="tag" data-tag="graphic design">graphic design</span>
                             </div>
                         </div>
                         <div class="project-thumbnail">
@@ -1821,7 +1822,7 @@
                 'category': 'built'
             },
             'icosahedron_explosion': {
-                'tags': ['rhino', "fall '23"],
+                'tags': ['rhino', "fall '23", 'graphic design'],
                 'description': 'geometrical exploration of an icosahedron, a 20 face polyhedron.',
                 'category': 'experimental'
             },
@@ -1907,7 +1908,7 @@
             'spiral_chair': {
                 'tags': ['rhino', 'blender', "fall '25", 'furniture design'],
                 'description': '2026 sit furinture design award entry, shaped from an individual steel tube.',
-                'category': 'experimental'
+                'category': 'proposal'
             },
             'velvet_ii': {
                 'tags': ['exhibition', 'illustrator', 'photoshop', "spring '24", 'imago', 'graphic design'],
@@ -2043,16 +2044,16 @@
                     const hasActiveTags = activeTags.size === 0 || 
                         Array.from(activeTags).every(tag => projectTags.has(tag));
                     
-                    // Handle category filtering for both desktop and mobile
+                    // Handle category filtering for both desktop and mobile - now filtering by tags
                     let hasActiveCategory;
                     if (window.innerWidth <= 768) {
-                        // Mobile: show projects that match any of the selected categories
+                        // Mobile: show projects that match any of the selected categories (tags)
                         hasActiveCategory = activeCategories.size === 0 || 
-                            activeCategories.has(projectData.category);
+                            Array.from(activeCategories).some(cat => projectTags.has(cat));
                     } else {
-                        // Desktop: show projects that match the single selected category
+                        // Desktop: show projects that match the single selected category (tag)
                         hasActiveCategory = activeCategory === 'all' || 
-                            projectData.category === activeCategory;
+                            projectTags.has(activeCategory);
                     }
                     
                     item.style.display = (hasActiveTags && hasActiveCategory) ? 'block' : 'none';
@@ -2108,23 +2109,35 @@
         function updateVisibleCategoryCounts() {
             const categoryCounts = {
                 'all': Object.keys(projects).length,
-                'experimental': 0,
-                'proposal': 0,
-                'built': 0
+                'architecture': 0,
+                'furniture design': 0,
+                'industrial design': 0,
+                'graphic design': 0
             };
             
-            // Count total projects in each category
+            // Count total projects that have each tag
             Object.values(projects).forEach(project => {
-                if (project.category) {
-                    categoryCounts[project.category]++;
+                if (project.tags) {
+                    if (project.tags.includes('architecture')) categoryCounts['architecture']++;
+                    if (project.tags.includes('furniture design')) categoryCounts['furniture design']++;
+                    if (project.tags.includes('industrial design')) categoryCounts['industrial design']++;
+                    if (project.tags.includes('graphic design')) categoryCounts['graphic design']++;
                 }
             });
             
             // Update button labels with total counts
+            const buttonLabels = {
+                'all': 'all',
+                'architecture': 'architecture',
+                'furniture design': 'furniture',
+                'industrial design': 'industrial',
+                'graphic design': 'graphic'
+            };
+            
             Object.keys(categoryCounts).forEach(category => {
                 const button = document.querySelector(`[data-category="${category}"]`);
                 if (button) {
-                    const baseText = category === 'all' ? 'all' : category;
+                    const baseText = buttonLabels[category];
                     button.textContent = `${baseText} (${categoryCounts[category]})`;
                 }
             });
@@ -2587,22 +2600,36 @@
         function updateCategoryCounts() {
             const categoryCounts = {
                 'all': Object.keys(projects).length,
-                'experimental': 0,
-                'proposal': 0,
-                'built': 0
+                'architecture': 0,
+                'furniture design': 0,
+                'industrial design': 0,
+                'graphic design': 0
             };
             
+            // Count total projects that have each tag
             Object.values(projects).forEach(project => {
-                if (project.category) {
-                    categoryCounts[project.category]++;
+                if (project.tags) {
+                    if (project.tags.includes('architecture')) categoryCounts['architecture']++;
+                    if (project.tags.includes('furniture design')) categoryCounts['furniture design']++;
+                    if (project.tags.includes('industrial design')) categoryCounts['industrial design']++;
+                    if (project.tags.includes('graphic design')) categoryCounts['graphic design']++;
                 }
             });
             
-            // Update button labels
+            // Update button labels with shortened names
+            const buttonLabels = {
+                'all': 'all',
+                'architecture': 'architecture',
+                'furniture design': 'furniture',
+                'industrial design': 'industrial',
+                'graphic design': 'graphic'
+            };
+            
             Object.keys(categoryCounts).forEach(category => {
                 const button = document.querySelector(`[data-category="${category}"]`);
                 if (button) {
-                    button.textContent = `${category} (${categoryCounts[category]})`;
+                    const baseText = buttonLabels[category];
+                    button.textContent = `${baseText} (${categoryCounts[category]})`;
                 }
             });
         }
