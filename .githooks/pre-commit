@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# gitleaks pre-commit hook — blocks commits that would introduce secrets.
+# Scans STAGED changes only (fast). Committed to the repo so it travels with it.
+#
+# Activate in a fresh clone (one time):
+#     git config core.hooksPath .githooks
+#
+# Requires gitleaks:  brew install gitleaks
+# Bypass once (discouraged):  git commit --no-verify
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  printf '\033[33m⚠ gitleaks not installed — secret scan skipped. Install with: brew install gitleaks\033[0m\n' >&2
+  exit 0
+fi
+
+if ! gitleaks git --staged --no-banner --redact; then
+  printf '\033[31m✖ gitleaks: potential secret detected in staged changes — commit blocked.\033[0m\n' >&2
+  printf '  Move secrets to env vars / .gitignore, then recommit.\n' >&2
+  printf '  To bypass intentionally (discouraged): git commit --no-verify\n' >&2
+  exit 1
+fi
+
+exit 0
